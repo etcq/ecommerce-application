@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Final task of stage 2 of RSSchool",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "tsc -b && vite build",
     "lint": "eslint . && npx stylelint ./src/**/*.scss",
     "format": "npx prettier . --write",
@@ -23,8 +23,12 @@
   },
   "homepage": "https://github.com/etcq/ecommerce-application#readme",
   "dependencies": {
+    "axios": "^1.9.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.1",
+    "react-router": "^7.5.3",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
