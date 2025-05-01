@@ -103,6 +103,8 @@ npm run preview
   6. `lint:fix` - to fix linting issues TS files with ESlint
   7. `format` - to lint TS and SCSS files with prettier and stylelint
   8. `format:fix` - to fix linting issues TS and SCSS file with prettier and stylelint
+  9. `test` - to run vitest testing mode
+  10. `coverage` - to run vitest coverage
 
 ## The following people were involved in the project
 
