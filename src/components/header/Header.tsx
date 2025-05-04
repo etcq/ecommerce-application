@@ -1,35 +1,36 @@
-import './_header.scss';
+import LoginMenu from './login-menu/LoginMenu';
+
+import styles from './header.module.scss';
 import logoImg from '../../assets/images/header/logo.png';
-import userImg from '../../assets/images/header/user.svg';
-import bucketImg from '../../assets/images/header/shape.svg';
+import { NavLink } from 'react-router';
 
 export default function Header(): React.JSX.Element {
   return (
     <div className="container">
-      <header className="header">
-        <div className="header__logo">
-          <img src={logoImg} className="header__logo-img" alt="SneakHub" />
-          <span className="header__logo-title">SNEAKHUB</span>
+      <header className={styles.header}>
+        <div className={styles.header__logo}>
+          <img src={logoImg} className={styles['header__logo-img']} alt="SneakHub" />
+          <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
-        <ul className="nav__menu">
-          <li className="nav__menu-item">
-            <a href="#">Home</a>
+        <ul className={styles['nav-menu']}>
+          <li className={styles['nav-menu-item']}>
+            <NavLink to="/">Home</NavLink>
+            <div className={styles.underline}></div>
           </li>
-          <li className="nav__menu-item">
-            <a href="#">Catalog</a>
+          <li className={styles['nav-menu-item']}>
+            <NavLink to="/product-list">Catalog</NavLink>
+            <div className={styles.underline}></div>
           </li>
-          <li className="nav__menu-item">
-            <a href="#">About Us</a>
+          <li className={styles['nav-menu-item']}>
+            <NavLink to="/about">About Us</NavLink>
+            <div className={styles.underline}></div>
           </li>
         </ul>
-        <div className="header__user">
-          <div className="header__user-login">
-            <img src={userImg}></img>
-          </div>
-          <div className="header__user-bucket">
-            <img src={bucketImg}></img>
-          </div>
+        <div className={styles.header__user}>
+          <div className={styles['header__user-login']}></div>
+          <div className={styles['header__user-bucket']}></div>
         </div>
+        <LoginMenu />
       </header>
     </div>
   );
