@@ -52,7 +52,7 @@ Built using modern **Single Page Application (SPA)** technologies, the platform 
 
 ## Setup Instructions
 
-1. Install Node.js
+1. Install Node.js v20.11.1
 
 2. Obtain the Project Files: you have two options for obtaining the project files:
 
@@ -93,6 +93,16 @@ npm run build
 ```
 npm run preview
 ```
+## Project architecture
+
+* assets - static and styles files
+* components - Ract components for creating pages
+* core - Interactions with APIs and data storage
+* interfaces - interfaces for Project
+* pages - page views
+* test - for testing files
+
+
 ## Scripts in project 
 
   1. `npm run dev` - to run develop mode
