@@ -69,24 +69,24 @@
     display: flex;
     gap: 30px;
 
-    &-login {
-      width: 30px;
-      height: 30px;
-
-      background-image: url('../../assets/images/header/user.svg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
+    &-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
     }
 
-    &-bucket {
-      width: 30px;
-      height: 30px;
+    &-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      background-image: url('../../assets/images/header/bucket.svg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
+      width: 43px;
+      height: 43px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
