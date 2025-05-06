@@ -11,7 +11,6 @@ $c-button-text-disabled: rgba($c-light-main, 0.5);
 
 .button {
   width: 100%;
-  max-width: 540px;
   height: 59px;
   border: 1px solid $c-button-main;
   border-radius: 50px;
@@ -22,6 +21,26 @@ $c-button-text-disabled: rgba($c-light-main, 0.5);
   background-color: $c-button-main;
 
   transition: 0.2s;
+
+  &.large {
+    max-width: 540px;
+  }
+
+  &.medium {
+    max-width: 300px;
+    height: 49px;
+  }
+
+  &.small {
+    max-width: 135px;
+    height: 49px;
+  }
+
+  &.x-small {
+    width: fit-content;
+    height: 32px;
+    padding: 4px 16px;
+  }
 
   &:hover {
     cursor: pointer;

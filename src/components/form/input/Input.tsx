@@ -7,21 +7,19 @@ interface IProps {
   id?: string;
   placeholder?: string;
   onChange?: () => void;
-  style?: (keyof typeof styles)[];
+  wrapperClassName: string;
 }
 
-const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, style }) => {
-  const classNames = style?.map((className) => styles[className]).join(' ');
-
+const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${styles[wrapperClassName]}`}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}
         </label>
       )}
 
-      <input className={classNames} type={type} id={id} placeholder={placeholder} onChange={onChange}></input>
+      <input className={styles.input} type={type} id={id} placeholder={placeholder} onChange={onChange}></input>
     </div>
   );
 };

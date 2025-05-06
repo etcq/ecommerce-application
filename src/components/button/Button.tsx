@@ -1,20 +1,14 @@
 import styles from './button.module.scss';
-import { FC } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 
-interface IProps {
-  title: string;
-  type?: 'submit' | 'reset' | 'button';
-  onClick?: () => void;
-  disabled?: boolean;
-  style?: (keyof typeof styles)[];
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: string;
 }
 
-const Button: FC<IProps> = ({ title, type = 'button', onClick, disabled, style }) => {
-  const classNames = style?.map((className) => styles[className]).join(' ');
-
+const Button: FC<IProps> = ({ type, variant, children, ...props }) => {
   return (
-    <button className={classNames} type={type} onClick={onClick} disabled={disabled}>
-      {title}
+    <button {...props} type={type} className={`${styles.button} ${styles[variant]}`}>
+      {children}
     </button>
   );
 };
