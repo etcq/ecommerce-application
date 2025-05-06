@@ -1,0 +1,15 @@
+@use '../../../node_modules/normalize.css/normalize.css';
+@use './fonts';
+
+* {
+  font-family: Oxygen, sans-serif;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none !important;
+}
