@@ -1,11 +1,11 @@
-@use './variables' as vars;
+@use './variables' as *;
 
 @mixin link-dark {
-  color: vars.$dark-main-color;
+  color: $c-dark-main;
   text-decoration: none;
 
   &:hover {
-    color: vars.$dark-hover-color;
+    color: $c-dark-hover;
     transition: 0.5s ease-in-out;
   }
 }

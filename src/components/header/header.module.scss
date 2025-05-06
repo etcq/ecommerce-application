@@ -1,9 +1,9 @@
 /* header */
 @use '../../assets/style/mixins' as *;
-@use '../../assets/style/variables' as *;
+@use '@assets/style/variables' as *;
 
-$c-header-main: $dark-main-color;
-$c-header-hover: $dark-hover-color;
+$c-header-main: $c-dark-main;
+$c-header-hover: $c-dark-hover;
 
 .underline {
   width: 0%;

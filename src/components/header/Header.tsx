@@ -6,7 +6,7 @@ import logoImg from '../../assets/images/header/logo.png';
 import styles from './header.module.scss';
 import userImg from '../../assets/images/header/user.svg';
 import bucketImg from '../../assets/images/header/bucket.svg';
-import { useLoginMenu } from '../../core/state/stateLoginMenu';
+import { useLoginMenu } from '../../core/stores/stateLoginMenu';
 
 export default function Header(): React.JSX.Element {
   const { toggleStatus } = useLoginMenu();
