@@ -2,12 +2,12 @@ import styles from './button.module.scss';
 import { ButtonHTMLAttributes, FC } from 'react';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: string;
+  size: 'large' | 'medium' | 'small' | 'x-small';
 }
 
-const Button: FC<IProps> = ({ type, variant, children, ...props }) => {
+const Button: FC<IProps> = ({ type, size, children, ...props }) => {
   return (
-    <button {...props} type={type} className={`${styles.button} ${styles[variant]}`}>
+    <button {...props} type={type} className={`${styles.button} ${styles[size]}`}>
       {children}
     </button>
   );
