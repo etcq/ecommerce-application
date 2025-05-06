@@ -2,7 +2,7 @@
 
 This is the final task of Stage 2 of the Rsschool programming school. The goal is to develop an online store that will help us to consolidate our teamwork skills and learn how to work with frameworks and task boards.
 
-## Table of contents
+## Table of contents 
 
 1. [Description](#description)
 1. [Technologies Used](#technologies-used)
@@ -52,7 +52,7 @@ Built using modern **Single Page Application (SPA)** technologies, the platform 
 
 ## Setup Instructions
 
-1. Install Node.js
+1. Install Node.js v20.11.1
 
 2. Obtain the Project Files: you have two options for obtaining the project files:
 
@@ -93,29 +93,38 @@ npm run build
 ```
 npm run preview
 ```
+## Project architecture
 
-## Scripts in project
+* assets - static and styles files
+* components - Ract components for creating pages
+* core - Interactions with APIs and data storage
+* interfaces - interfaces for Project
+* pages - page views
+* test - for testing files
 
-1. `npm run dev` - to run develop mode
-2. `npm run build` - to build project in `dist` folder
-3. `npm run preview` - to preview project
-4. `prepare` - init husky in project
-5. `lint` - to lint typescript and react components files with ESlint
-6. `lint:fix` - to fix linting issues TS files with ESlint
-7. `format` - to lint TS and SCSS files with prettier and stylelint
-8. `format:fix` - to fix linting issues TS and SCSS file with prettier and stylelint
-9. `test` - to run vitest testing mode
-10. `coverage` - to run vitest coverage
+
+## Scripts in project 
+
+  1. `npm run dev` - to run develop mode
+  2. `npm run build` - to build project in `dist` folder
+  3. `npm run preview` - to preview project
+  4. `prepare` - init husky in project
+  5. `lint` - to lint typescript and react components files with ESlint
+  6. `lint:fix` - to fix linting issues TS files with ESlint
+  7. `format` - to lint TS and SCSS files with prettier and stylelint
+  8. `format:fix` - to fix linting issues TS and SCSS file with prettier and stylelint
+  9. `test` - to run vitest testing mode
+  10. `coverage` - to run vitest coverage
 
 ## The following people were involved in the project
 
-### Authors
+  ### Authors
+  * [aQafresca](https://github.com/aQafresca)
+  * [turik777](https://github.com/turik777)
+  * [etcq](https://github.com/etcq)
 
-- [aQafresca](https://github.com/aQafresca)
-- [turik777](https://github.com/turik777)
-- [etcq](https://github.com/etcq)
+  ### Mentors
+  * [aleksey-drozdov](https://github.com/aleksey-drozdov)
+  * [micolka](https://github.com/micolka)
 
-### Mentors
-
-- [aleksey-drozdov](https://github.com/aleksey-drozdov)
-- [micolka](https://github.com/micolka)
+  
