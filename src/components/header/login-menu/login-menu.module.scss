@@ -16,7 +16,7 @@
   background-color: #fff;
   box-shadow: 0 0 20px -5px #000;
 
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.5s ease-out;
 
   &__head {
     position: absolute;
@@ -39,5 +39,6 @@
 }
 
 .close {
+  visibility: hidden;
   opacity: 0;
 }

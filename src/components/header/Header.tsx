@@ -6,23 +6,10 @@ import logoImg from '../../assets/images/header/logo.png';
 import styles from './header.module.scss';
 import userImg from '../../assets/images/header/user.svg';
 import bucketImg from '../../assets/images/header/bucket.svg';
-import { useState } from 'react';
+import { useLoginMenu } from '../../core/state/stateLoginMenu';
 
 export default function Header(): React.JSX.Element {
-  const [userMenuStatus, setUserMenuStatus] = useState(false);
-
-  // const closeLoginMenu = (event: React.MouseEvent<HTMLElement>) => {
-  //   console.log(event.target);
-  //   if (event.target instanceof HTMLElement) {
-  //     if (!event.target.classList.contains('login-menu')) {
-  //       setUserMenuStatus('close');
-  //     }
-  //   }
-  // };
-
-  const toggleLoginMenu = () => {
-    setUserMenuStatus(!userMenuStatus);
-  };
+  const { toggleStatus } = useLoginMenu();
 
   return (
     <div className="container">
@@ -47,10 +34,10 @@ export default function Header(): React.JSX.Element {
         </ul>
         <div className={styles.header__user}>
           <div className={styles['header__user-wrapper']}>
-            <div className={styles['header__user-icon']} onClick={() => toggleLoginMenu()}>
+            <div className={styles['header__user-icon']} onClick={() => toggleStatus()}>
               <img src={userImg} />
             </div>
-            <LoginMenu userMenuStatus={userMenuStatus} />
+            <LoginMenu />
           </div>
           <div className={styles['header__user-icon']}>
             <img src={bucketImg} />

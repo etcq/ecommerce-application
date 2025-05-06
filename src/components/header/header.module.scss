@@ -1,13 +1,16 @@
 /* header */
 @use '../../assets/style/mixins' as *;
-@use '../../assets/style/variables' as vars;
+@use '../../assets/style/variables' as *;
+
+$c-header-main: $dark-main-color;
+$c-header-hover: $dark-hover-color;
 
 .underline {
   width: 0%;
   height: 2px;
   margin-top: 3px;
 
-  background-color: vars.$dark-main-color;
+  background-color: $c-header-main;
 
   transition:
     width 0.5s ease-out,
@@ -22,7 +25,7 @@
 
   height: 101px;
   padding: 0 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $c-header-main;
 
   &__logo {
     display: flex;
@@ -59,7 +62,7 @@
       &:hover {
         .underline {
           width: 100%;
-          background-color: vars.$dark-hover-color;
+          background-color: $c-header-hover;
         }
       }
     }
