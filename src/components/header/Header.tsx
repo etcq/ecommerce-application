@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 import LoginMenu from './login-menu/LoginMenu';
 import logoImg from '../../assets/images/header/logo.png';
@@ -7,6 +7,7 @@ import styles from './header.module.scss';
 import userImg from '../../assets/images/header/user.svg';
 import bucketImg from '../../assets/images/header/bucket.svg';
 import { useLoginMenu } from '../../core/stores/stateLoginMenu';
+import { ROUTES } from '@/constants/constants';
 
 export default function Header(): React.JSX.Element {
   const { isOpen, toggleStatus } = useLoginMenu();
@@ -45,9 +46,9 @@ export default function Header(): React.JSX.Element {
             </div>
             <LoginMenu />
           </div>
-          <div className={styles['header__user-icon']}>
+          <Link to={ROUTES.BUCKET} className={styles['header__user-icon']}>
             <img src={bucketImg} />
-          </div>
+          </Link>
         </div>
       </header>
     </div>

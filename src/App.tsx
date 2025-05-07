@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import ProfilePage from './pages/user/profile/Profile';
 import RegistrationPage from './pages/user/registration/RegistrationPage';
 import { ROUTES } from './constants/constants';
+import Bucket from './pages/bucket/Bucket';
+
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +21,7 @@ function App() {
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
+          <Route path={ROUTES.BUCKET} element={<Bucket />} />
         </Routes>
       </>
     </BrowserRouter>
