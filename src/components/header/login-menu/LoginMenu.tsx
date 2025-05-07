@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import { useLoginMenu } from '../../../core/stores/stateLoginMenu';
 import styles from './login-menu.module.scss';
 import { useEffect, useRef } from 'react';
+import Button from '@/components/button/Button';
 
 export default function LoginMenu(): React.JSX.Element {
   const { isOpen, isLogged, toggleStatus } = useLoginMenu();
@@ -32,52 +33,52 @@ export default function LoginMenu(): React.JSX.Element {
           <div className={styles['login-menu__title']}>
             <h3>Hello, User</h3>
           </div>
-          <button
+          <Button
+            size="medium"
             type="button"
+            children="Profile"
             className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/profile');
             }}
-          >
-            Profile
-          </button>
-          <button
+          />
+          <Button
             type="button"
+            size="medium"
+            children="Log Out"
             className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/');
             }}
-          >
-            Logout
-          </button>
+          />
         </>
       ) : (
         <>
           <div className={styles['login-menu__title']}>
             <h3>Login please</h3>
           </div>
-          <button
+          <Button
+            size="medium"
+            children="Log In"
             type="button"
             className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/login');
             }}
-          >
-            Login
-          </button>
-          <button
+          />
+          <Button
+            size="medium"
+            children="Registration"
             type="button"
             className="login-menu__register"
             onClick={() => {
               toggleStatus();
               void navigate('/registration');
             }}
-          >
-            Registration
-          </button>
+          />
         </>
       )}
     </div>
