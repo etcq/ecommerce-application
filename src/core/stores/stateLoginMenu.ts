@@ -8,6 +8,6 @@ interface LoginState {
 
 export const useLoginMenu = create<LoginState>((set) => ({
   isOpen: false,
-  isLogged: true,
+  isLogged: false,
   toggleStatus: () => set((state) => ({ isOpen: !state.isOpen })),
 }));

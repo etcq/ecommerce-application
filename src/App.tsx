@@ -4,7 +4,9 @@ import ProductList from './pages/products/product-list/ProductList';
 import Header from './components/header/Header';
 import LoginPage from './pages/user/login/LoginPage';
 import { BrowserRouter, Routes, Route } from 'react-router';
-
+import ProfilePage from './pages/user/profile/Profile';
+import RegistrationPage from './pages/user/registration/RegistrationPage';
+import { ROUTES } from './constants/constants';
 function App() {
   return (
     <BrowserRouter>
@@ -12,9 +14,11 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<MainPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="product-list" element={<ProductList />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+          <Route path={ROUTES.PRODUCT_LIST} element={<ProductList />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+          <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
         </Routes>
       </>
     </BrowserRouter>

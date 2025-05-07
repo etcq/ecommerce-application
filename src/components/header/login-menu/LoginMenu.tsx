@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { useLoginMenu } from '../../../core/stores/stateLoginMenu';
 import styles from './login-menu.module.scss';
 import { useEffect, useRef } from 'react';
@@ -6,6 +7,7 @@ export default function LoginMenu(): React.JSX.Element {
   const { isOpen, isLogged, toggleStatus } = useLoginMenu();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     if (!isOpen) return;
     const closeMenu = (event: MouseEvent): void => {
@@ -35,11 +37,19 @@ export default function LoginMenu(): React.JSX.Element {
             className="login-menu__login"
             onClick={() => {
               toggleStatus();
+              void navigate('/profile');
             }}
           >
             Profile
           </button>
-          <button type="button" className="login-menu__register" onClick={() => toggleStatus()}>
+          <button
+            type="button"
+            className="login-menu__login"
+            onClick={() => {
+              toggleStatus();
+              void navigate('/');
+            }}
+          >
             Logout
           </button>
         </>
@@ -48,11 +58,25 @@ export default function LoginMenu(): React.JSX.Element {
           <div className={styles['login-menu__title']}>
             <h3>Login please</h3>
           </div>
-          <button type="button" className="login-menu__login" onClick={() => toggleStatus()}>
+          <button
+            type="button"
+            className="login-menu__login"
+            onClick={() => {
+              toggleStatus();
+              void navigate('/login');
+            }}
+          >
             Login
           </button>
-          <button type="button" className="login-menu__register" onClick={() => toggleStatus()}>
-            Register
+          <button
+            type="button"
+            className="login-menu__register"
+            onClick={() => {
+              toggleStatus();
+              void navigate('/registration');
+            }}
+          >
+            Registration
           </button>
         </>
       )}
