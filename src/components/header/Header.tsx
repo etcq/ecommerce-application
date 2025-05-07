@@ -9,13 +9,15 @@ import bucketImg from '../../assets/images/header/bucket.svg';
 import { useLoginMenu } from '../../core/stores/stateLoginMenu';
 
 export default function Header(): React.JSX.Element {
-  const { toggleStatus } = useLoginMenu();
+  const { isOpen, toggleStatus } = useLoginMenu();
 
   return (
     <div className="container">
       <header className={styles.header}>
         <div className={styles.header__logo}>
-          <img src={logoImg} className={styles['header__logo-img']} alt="SneakHub" />
+          <NavLink to="/">
+            <img src={logoImg} className={styles['header__logo-img']} alt="SneakHub" />
+          </NavLink>
           <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
         <ul className={styles['nav-menu']}>
@@ -36,6 +38,10 @@ export default function Header(): React.JSX.Element {
           <div className={styles['header__user-wrapper']}>
             <div className={styles['header__user-icon']} onClick={() => toggleStatus()}>
               <img src={userImg} />
+              <div className={`${styles.arrow} ${isOpen ? styles['arrow-open'] : ''}`}>
+                <div className={`${styles.arrow__line} ${styles.left}`}></div>
+                <div className={`${styles.arrow__line} ${styles.right}`}></div>
+              </div>
             </div>
             <LoginMenu />
           </div>

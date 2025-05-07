@@ -17,6 +17,34 @@ $c-header-hover: $c-dark-hover;
     background-color 0.5s ease-out;
 }
 
+.arrow {
+  position: relative;
+  width: 15px;
+  margin-left: 8px;
+  transition: transform 0.5s ease-out;
+
+  &__line {
+    width: 10px;
+    height: 1.5px;
+    background-color: $c-header-main;
+  }
+
+  .left {
+    transform: rotate(45deg);
+  }
+
+  .right {
+    position: relative;
+    top: -1.5px;
+    right: -6px;
+    transform: rotate(-45deg);
+  }
+}
+
+.arrow-open {
+  transform: rotateX(180deg);
+}
+
 .header {
   display: flex;
   flex-direction: row;

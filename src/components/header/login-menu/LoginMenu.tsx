@@ -3,7 +3,7 @@ import styles from './login-menu.module.scss';
 import { useEffect, useRef } from 'react';
 
 export default function LoginMenu(): React.JSX.Element {
-  const { isOpen, toggleStatus } = useLoginMenu();
+  const { isOpen, isLogged, toggleStatus } = useLoginMenu();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   useEffect(() => {
@@ -25,15 +25,37 @@ export default function LoginMenu(): React.JSX.Element {
   return (
     <div className={`${styles['login-menu']} ${isOpen ? styles.open : styles.close}`} ref={menu}>
       <div className={styles['login-menu__head']}></div>
-      <div className={styles['login-menu__title']}>
-        <h3>Login please</h3>
-      </div>
-      <button type="button" className="login-menu__login" onClick={() => toggleStatus()}>
-        Login
-      </button>
-      <button type="button" className="login-menu__register" onClick={() => toggleStatus()}>
-        Register
-      </button>
+      {isLogged ? (
+        <>
+          <div className={styles['login-menu__title']}>
+            <h3>Hello, User</h3>
+          </div>
+          <button
+            type="button"
+            className="login-menu__login"
+            onClick={() => {
+              toggleStatus();
+            }}
+          >
+            Profile
+          </button>
+          <button type="button" className="login-menu__register" onClick={() => toggleStatus()}>
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <div className={styles['login-menu__title']}>
+            <h3>Login please</h3>
+          </div>
+          <button type="button" className="login-menu__login" onClick={() => toggleStatus()}>
+            Login
+          </button>
+          <button type="button" className="login-menu__register" onClick={() => toggleStatus()}>
+            Register
+          </button>
+        </>
+      )}
     </div>
   );
 }
