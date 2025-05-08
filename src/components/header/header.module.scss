@@ -52,7 +52,7 @@ $c-header-hover: $c-dark-hover;
   justify-content: space-between;
 
   height: 101px;
-  padding: 0 15px;
+  padding: 0 40px;
   border-bottom: 1px solid $c-header-main;
 
   &__logo {
@@ -62,6 +62,8 @@ $c-header-hover: $c-dark-hover;
     align-items: center;
 
     &-img {
+      position: relative;
+      z-index: 10;
       width: 50px;
       height: auto;
     }
@@ -78,14 +80,14 @@ $c-header-hover: $c-dark-hover;
     padding: 0;
     list-style: none;
 
+    a {
+      @include link-dark;
+    }
+
     &-item {
       display: flex;
       flex-direction: column;
       justify-content: start;
-
-      a {
-        @include link-dark;
-      }
 
       &:hover {
         .underline {
@@ -117,7 +119,29 @@ $c-header-hover: $c-dark-hover;
 
       &:hover {
         cursor: pointer;
+
+        svg {
+          fill: $c-header-hover;
+        }
+
+        .arrow {
+          &__line {
+            background-color: $c-header-hover;
+          }
+        }
       }
+    }
+  }
+}
+
+@media screen and (width <= 699px) {
+  .header {
+    .nav-menu {
+      display: none;
+    }
+
+    &__user {
+      display: none;
     }
   }
 }
