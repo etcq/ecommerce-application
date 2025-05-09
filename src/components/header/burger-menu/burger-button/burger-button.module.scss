@@ -1,8 +1,12 @@
 @use '@assets/style/variables' as *;
 
 .burger {
-  position: relative;
+  cursor: pointer;
+
+  position: absolute;
   z-index: 10;
+  top: calc(50% - (25px / 2));
+  right: 40px;
 
   display: none;
   flex-direction: column;
@@ -11,7 +15,7 @@
   width: 25px;
   height: 25px;
 
-  &__line {
+  &-line {
     position: relative;
     transform-origin: 1px;
 
@@ -21,7 +25,16 @@
 
     background-color: $c-dark-main;
 
-    transition: linear 1s;
+    transition: background-color 0.3s ease-in-out;
+    transition:
+      transform 1s ease-in-out,
+      opacity 1s ease-in-out;
+  }
+
+  &:hover {
+    .burger-line {
+      background-color: $c-dark-hover;
+    }
   }
 }
 

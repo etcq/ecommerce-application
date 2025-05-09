@@ -1,3 +1,6 @@
+@use '@assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+
 .burger-menu {
   display: none;
 }
@@ -15,6 +18,7 @@
 
     min-width: 300px;
     height: 100vh;
+    border-left: 1px solid $c-dark-main;
 
     background-color: #fff;
 
@@ -26,12 +30,38 @@
       gap: 20px;
       align-items: center;
 
+      padding: 0;
+
       font-size: 1rem;
       list-style: none;
+
+      &_item {
+        font-size: 1.3rem;
+
+        @include link-item($c-dark-main, $c-dark-hover);
+      }
+
+      a {
+        @include link($c-dark-main, $c-dark-hover);
+      }
+
+      .active {
+        .underline {
+          width: 100%;
+          background-color: $c-dark-main;
+        }
+      }
     }
 
     &__open {
       transform: translateX(-100%);
     }
+  }
+}
+
+@media screen and (width <= 480px) {
+  .burger-menu {
+    right: -100%;
+    min-width: 100%;
   }
 }

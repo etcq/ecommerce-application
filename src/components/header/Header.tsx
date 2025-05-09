@@ -7,13 +7,13 @@ import styles from './header.module.scss';
 
 import { useLoginMenu } from '../../core/stores/stateLoginMenu';
 import { ROUTES } from '@/constants/constants';
-import BurgerButton from './burger-menu/burger-button/BurgerButton';
+import BurgerMenu from './burger-menu/BurgerMenu';
 
 export default function Header(): React.JSX.Element {
   const { isOpen, toggleStatus } = useLoginMenu();
 
   return (
-    <div className="container">
+    <div>
       <header className={styles.header}>
         <div className={styles.header__logo}>
           <NavLink to="/">
@@ -22,19 +22,19 @@ export default function Header(): React.JSX.Element {
           <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
         <ul className={styles['nav-menu']}>
-          <NavLink to="/">
+          <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               Home
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          <NavLink to="/product-list">
+          <NavLink to="/product-list" className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               Catalog
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          <NavLink to="/about">
+          <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               About Us
               <div className={styles.underline}></div>
@@ -60,7 +60,7 @@ export default function Header(): React.JSX.Element {
             </svg>
           </Link>
         </div>
-        <BurgerButton />
+        <BurgerMenu />
       </header>
     </div>
   );

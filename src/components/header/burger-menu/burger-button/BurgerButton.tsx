@@ -1,18 +1,21 @@
-import { useState } from 'react';
 import styles from './burger-button.module.scss';
-import BurgerMenu from '../BurgerMenu';
 
-export default function BurgerButton(): React.JSX.Element {
-  const [isOpen, setOpened] = useState(false);
+interface BurgerButtonProps {
+  open: boolean;
+  setOpened: (open: boolean) => void;
+}
 
+export default function BurgerButton(props: BurgerButtonProps): React.JSX.Element {
   return (
     <>
-      <div className={`${styles.burger} ${isOpen ? styles['burger-open'] : ''}`} onClick={() => setOpened(!isOpen)}>
+      <div
+        className={`${styles.burger} ${props.open ? styles['burger-open'] : ''}`}
+        onClick={() => props.setOpened(!props.open)}
+      >
         <div className={`${styles['burger-line']} ${styles['burger-line-top']}`}></div>
         <div className={`${styles['burger-line']} ${styles['burger-line-middle']}`}></div>
         <div className={`${styles['burger-line']} ${styles['burger-line-bottom']}`}></div>
       </div>
-      <BurgerMenu open={isOpen} />
     </>
   );
 }
