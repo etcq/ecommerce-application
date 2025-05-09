@@ -5,9 +5,9 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: 'large' | 'medium' | 'small' | 'x-small';
 }
 
-const Button: FC<IProps> = ({ type, size, children, ...props }) => {
+const Button: FC<IProps> = ({ type, size, children, className, ...props }) => {
   return (
-    <button {...props} type={type} className={`${styles.button} ${styles[size]}`}>
+    <button {...props} type={type} className={`${styles.button} ${styles[size]} ${className}`}>
       {children}
     </button>
   );
