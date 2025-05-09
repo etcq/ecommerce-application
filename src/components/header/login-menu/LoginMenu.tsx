@@ -37,7 +37,6 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             type="button"
             children="Profile"
-            className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/profile');
@@ -47,7 +46,6 @@ export default function LoginMenu(): React.JSX.Element {
             type="button"
             size="medium"
             children="Log Out"
-            className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/');
@@ -63,7 +61,6 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             children="Log In"
             type="button"
-            className="login-menu__login"
             onClick={() => {
               toggleStatus();
               void navigate('/login');
@@ -73,7 +70,6 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             children="Registration"
             type="button"
-            className="login-menu__register"
             onClick={() => {
               toggleStatus();
               void navigate('/registration');
