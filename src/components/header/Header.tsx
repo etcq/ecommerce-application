@@ -5,15 +5,15 @@ import logoImg from '../../assets/images/header/logo.png';
 
 import styles from './header.module.scss';
 
-import { useLoginMenu } from '../../core/stores/stateLoginMenu';
+import { useHeaderState } from '../../core/stores/stateHeader';
 import { ROUTES } from '@/constants/constants';
 import BurgerMenu from './burger-menu/BurgerMenu';
 
 export default function Header(): React.JSX.Element {
-  const { isOpen, toggleStatus } = useLoginMenu();
+  const { isOpen, toggleStatus, isDarkTheme } = useHeaderState();
 
   return (
-    <div className={styles['dark-theme']}>
+    <div className={isDarkTheme ? styles['dark-theme'] : ''}>
       <header className={styles.header}>
         <div className={styles.header__logo}>
           <NavLink to="/">

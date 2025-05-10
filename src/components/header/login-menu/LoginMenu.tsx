@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router';
-import { useLoginMenu } from '../../../core/stores/stateLoginMenu';
+import { useHeaderState } from '../../../core/stores/stateHeader';
 import styles from './login-menu.module.scss';
 import { useEffect, useRef } from 'react';
 import Button from '@/components/button/Button';
 
 export default function LoginMenu(): React.JSX.Element {
-  const { isOpen, isLogged, toggleStatus } = useLoginMenu();
+  const { isOpen, isLogged, toggleStatus } = useHeaderState();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   const navigate = useNavigate();

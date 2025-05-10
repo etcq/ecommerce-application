@@ -1,6 +1,10 @@
 @use '@assets/style/variables' as *;
 @use '@assets/style/mixins' as *;
 
+$c-burger-menu-light: $c-light-main;
+$c-burger-menu-dark: $c-dark-main;
+$c-burger-menu-secondary: $c-dark-hover;
+
 .burger-menu {
   display: none;
 }
@@ -18,9 +22,9 @@
 
     min-width: 300px;
     height: 100vh;
-    border-left: 1px solid $c-dark-main;
+    border-left: 1px solid $c-burger-menu-dark;
 
-    background-color: #fff;
+    background-color: $c-burger-menu-light;
 
     transition: 0.8s ease-in-out;
 
@@ -38,17 +42,17 @@
       &_item {
         font-size: 1.3rem;
 
-        @include link-item($c-dark-main, $c-dark-hover);
+        @include link-item($c-burger-menu-dark, $c-burger-menu-secondary);
       }
 
       a {
-        @include link($c-dark-main, $c-dark-hover);
+        @include link($c-burger-menu-dark, $c-burger-menu-secondary);
       }
 
       .active {
         .underline {
           width: 100%;
-          background-color: $c-dark-main;
+          background-color: $c-burger-menu-dark;
         }
       }
     }

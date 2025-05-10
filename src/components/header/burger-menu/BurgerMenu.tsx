@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import BurgerButton from './burger-button/BurgerButton';
 import styles from './burger-menu.module.scss';
 import { NavLink } from 'react-router';
-import { useLoginMenu } from '@/core/stores/stateLoginMenu';
+import { useHeaderState } from '@/core/stores/stateHeader';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
-  const { isLogged } = useLoginMenu();
+  const { isLogged } = useHeaderState();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   useEffect(() => {
