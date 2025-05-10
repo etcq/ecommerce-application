@@ -60,19 +60,21 @@
 }
 
 .dark-theme {
+  .burger > .burger-line {
+    background-color: $c-dark-main;
+  }
+
   .burger-open {
     .burger-line {
       background-color: $c-dark-main;
     }
   }
 
-  // .burger-line {
-  //   background-color: $c-light-main;
-  // }
-
-  &:hover {
-    .burger-line {
-      background-color: $c-dark-main;
+  .burger {
+    &:hover {
+      .burger-line {
+        background-color: $c-dark-main;
+      }
     }
   }
 }
