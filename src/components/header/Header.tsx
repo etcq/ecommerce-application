@@ -13,7 +13,7 @@ export default function Header(): React.JSX.Element {
   const { isOpen, toggleStatus } = useLoginMenu();
 
   return (
-    <div>
+    <div className={styles['dark-theme']}>
       <header className={styles.header}>
         <div className={styles.header__logo}>
           <NavLink to="/">

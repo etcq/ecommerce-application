@@ -7,7 +7,7 @@ interface BurgerButtonProps {
 
 export default function BurgerButton(props: BurgerButtonProps): React.JSX.Element {
   return (
-    <>
+    <div className={`${styles.wrapper} ${styles['dark-theme']}`}>
       <div
         className={`${styles.burger} ${props.open ? styles['burger-open'] : ''}`}
         onClick={() => props.setOpened(!props.open)}
@@ -16,6 +16,6 @@ export default function BurgerButton(props: BurgerButtonProps): React.JSX.Elemen
         <div className={`${styles['burger-line']} ${styles['burger-line-middle']}`}></div>
         <div className={`${styles['burger-line']} ${styles['burger-line-bottom']}`}></div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,5 +1,9 @@
 @use '@assets/style/variables' as *;
 
+.wrapper {
+  display: none;
+}
+
 .burger {
   cursor: pointer;
 
@@ -8,7 +12,7 @@
   top: calc(50% - (25px / 2));
   right: 40px;
 
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
 
@@ -25,7 +29,7 @@
 
     background-color: $c-dark-main;
 
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
     transition:
       transform 1s ease-in-out,
       opacity 1s ease-in-out;
@@ -55,8 +59,26 @@
   }
 }
 
+.dark-theme {
+  .burger-open {
+    .burger-line {
+      background-color: $c-dark-main;
+    }
+  }
+
+  // .burger-line {
+  //   background-color: $c-light-main;
+  // }
+
+  &:hover {
+    .burger-line {
+      background-color: $c-dark-main;
+    }
+  }
+}
+
 @media screen and (width <= 699px) {
-  .burger {
-    display: flex;
+  .wrapper {
+    display: block;
   }
 }
