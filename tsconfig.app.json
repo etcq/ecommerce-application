@@ -21,13 +21,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    
-    
+
     "paths": {
       "@/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@store/*": ["./src/store/*"],
-      "@components/*": ["./src/components/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": ["src"]
