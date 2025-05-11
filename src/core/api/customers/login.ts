@@ -1,6 +1,6 @@
-import { tokenCache } from '@/core/api/token/token-store.tsx';
-import { withPasswordFlow } from '@/core/api/middlewere/password-flow.tsx';
-import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.tsx';
+import { tokenCache } from '@/core/api/token/token-store.ts';
+import { withPasswordFlow } from '@/core/api/middlewere/password-flow.ts';
+import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.ts';
 import { CartSignInModeEnum, LocalStorageKeys } from '@/constants/constants';
 import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';
 import { ClientResponse } from '@commercetools/ts-client';

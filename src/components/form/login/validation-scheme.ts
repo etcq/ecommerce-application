@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { ValidationMessages } from '@/constants/validation';
+import { ValidationMessages } from '@/constants/validation.ts';
 
 export const loginFormSchema = z.object({
   email: z

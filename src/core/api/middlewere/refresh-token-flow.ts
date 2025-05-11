@@ -1,22 +1,18 @@
-import {
-  Client,
-  ClientBuilder,
-  HttpMiddlewareOptions,
-  AnonymousAuthMiddlewareOptions,
-} from '@commercetools/sdk-client-v2';
-import { tokenCache } from '@/core/api/token/token-store.tsx';
+import type { HttpMiddlewareOptions, RefreshAuthMiddlewareOptions } from '@commercetools/sdk-client-v2';
+import { ClientBuilder, Client } from '@commercetools/sdk-client-v2';
 import { ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import { tokenCache } from '@/core/api/token/token-store.ts';
 
-export function withAnonymousSessionFlow(): ByProjectKeyRequestBuilder {
+export function withRefreshTokenFlow(refreshToken: string): ByProjectKeyRequestBuilder {
   const projectKey = String(import.meta.env.VITE_CTP_PROJECT_KEY);
-  const options: AnonymousAuthMiddlewareOptions = {
+  const options: RefreshAuthMiddlewareOptions = {
     host: String(import.meta.env.VITE_CTP_AUTH_URL),
     projectKey: projectKey,
     credentials: {
       clientId: String(import.meta.env.VITE_CTP_CLIENT_ID),
       clientSecret: String(import.meta.env.VITE_CTP_CLIENT_SECRET),
     },
-    scopes: [import.meta.env.VITE_CTP_SCOPES],
+    refreshToken,
     tokenCache,
     fetch,
   };
@@ -27,7 +23,7 @@ export function withAnonymousSessionFlow(): ByProjectKeyRequestBuilder {
 
   const ctpClient: Client = new ClientBuilder()
     .withProjectKey(projectKey)
-    .withAnonymousSessionFlow(options)
+    .withRefreshTokenFlow(options)
     .withHttpMiddleware(httpOptions)
     .build();
 

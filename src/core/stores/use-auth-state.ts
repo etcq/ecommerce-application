@@ -1,9 +1,9 @@
 import { create, UseBoundStore, StoreApi } from 'zustand';
-import { tokenCache, useTokenCacheStore } from '@/core/api/token/token-store.tsx';
+import { tokenCache, useTokenCacheStore } from '@/core/api/token/token-store.ts';
 import { ITokenCacheState } from '@/interfaces/interfaces.ts';
-import { loginCustomers } from '@/core/api/customers/login.tsx';
+import { loginCustomers } from '@/core/api/customers/login.ts';
 import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';
-import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.tsx';
+import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.ts';
 import { ClientResponse } from '@commercetools/ts-client';
 import { Customer } from '@commercetools/platform-sdk';
 

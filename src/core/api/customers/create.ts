@@ -1,6 +1,6 @@
 import { Customer, CustomerDraft, CustomerSignInResult } from '@commercetools/platform-sdk';
 import { ClientResponse } from '@commercetools/ts-client';
-import { buildClient } from '@/core/api/client/client-build.tsx';
+import { buildClient } from '@/core/api/client/client-build.ts';
 
 export async function createCustomers(customerData: CustomerDraft): Promise<Customer | undefined> {
   try {
