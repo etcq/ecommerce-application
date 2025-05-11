@@ -1,0 +1,31 @@
+@use '../../../assets/style/variables' as *;
+
+$c-error-message: $c-error-text;
+$c-link: $c-link-main;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error {
+  height: 30px;
+  color: $c-error-message;
+}
+
+.button {
+  align-self: center;
+  margin-top: 20px;
+}
+
+.link {
+  cursor: pointer;
+  color: $c-link;
+}
