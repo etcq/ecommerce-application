@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import {ValidationMessages} from "@/core/constants/validation.tsx";
+import { ValidationMessages } from '@/constants/validation';
 
 export const loginFormSchema = z.object({
   email: z
@@ -17,7 +17,7 @@ export const loginFormSchema = z.object({
     .refine(
       (value: string): boolean | '' => {
         const domain: string = value.split('@')[1];
-        return domain && domain.includes('.');
+        return domain?.includes('.');
       },
       {
         message: ValidationMessages.EMAIL_NO_DOMAIN,

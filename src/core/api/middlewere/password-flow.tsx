@@ -12,14 +12,14 @@ export const withPasswordFlow = (
   password: string,
   tokenCache: TokenCache,
 ): ByProjectKeyRequestBuilder | null => {
-  const projectKey: string = import.meta.env.VITE_CTP_PROJECT_KEY;
+  const projectKey = String(import.meta.env.VITE_CTP_PROJECT_KEY);
 
   const authOptions: PasswordAuthMiddlewareOptions = {
-    host: import.meta.env.VITE_CTP_AUTH_URL,
+    host: String(import.meta.env.VITE_CTP_AUTH_URL),
     projectKey: projectKey,
     credentials: {
-      clientId: import.meta.env.VITE_CTP_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET,
+      clientId: String(import.meta.env.VITE_CTP_CLIENT_ID),
+      clientSecret: String(import.meta.env.VITE_CTP_CLIENT_SECRET),
       user: {
         username,
         password,
@@ -31,7 +31,7 @@ export const withPasswordFlow = (
   };
 
   const httpOptions: HttpMiddlewareOptions = {
-    host: import.meta.env.VITE_CTP_API_URL,
+    host: String(import.meta.env.VITE_CTP_API_URL),
     fetch,
   };
 

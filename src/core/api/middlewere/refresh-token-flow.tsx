@@ -3,21 +3,21 @@ import { ClientBuilder, Client } from '@commercetools/sdk-client-v2';
 import { ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { tokenCache } from '@/core/api/token/token-store.tsx';
 
-export async function withRefreshTokenFlow(refreshToken: string): Promise<ByProjectKeyRequestBuilder> {
-  const projectKey: string = import.meta.env.VITE_CTP_PROJECT_KEY;
+export function withRefreshTokenFlow(refreshToken: string): ByProjectKeyRequestBuilder {
+  const projectKey = String(import.meta.env.VITE_CTP_PROJECT_KEY);
   const options: RefreshAuthMiddlewareOptions = {
-    host: import.meta.env.VITE_CTP_AUTH_URL,
+    host: String(import.meta.env.VITE_CTP_AUTH_URL),
     projectKey: projectKey,
     credentials: {
-      clientId: import.meta.env.VITE_CTP_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET,
+      clientId: String(import.meta.env.VITE_CTP_CLIENT_ID),
+      clientSecret: String(import.meta.env.VITE_CTP_CLIENT_SECRET),
     },
     refreshToken,
     tokenCache,
     fetch,
   };
   const httpOptions: HttpMiddlewareOptions = {
-    host: import.meta.env.VITE_CTP_API_URL,
+    host: String(import.meta.env.VITE_CTP_API_URL),
     fetch,
   };
 

@@ -1,6 +1,6 @@
 import { Customer, CustomerDraft, CustomerSignInResult } from '@commercetools/platform-sdk';
 import { ClientResponse } from '@commercetools/ts-client';
-import { buildClient} from "@/core/api/client/client-build.tsx";
+import { buildClient } from '@/core/api/client/client-build.tsx';
 
 export async function createCustomers(customerData: CustomerDraft): Promise<Customer | undefined> {
   try {
@@ -8,10 +8,12 @@ export async function createCustomers(customerData: CustomerDraft): Promise<Cust
       .customers()
       .post({ body: customerData })
       .execute();
-    console.log(`customer ${response.body?.customer} created successful!`);
     return response.body?.customer;
   } catch (error) {
-    console.log('Error create customer: ', error);
-    throw error;
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error('Create customer: Unknown error');
+    }
   }
 }

@@ -4,18 +4,18 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@components/form/input/Input.tsx';
 import Button from '@components/button/Button.tsx';
-import { useAuthStore} from "@/core/stores/use-auth-state.tsx";
+import { useAuthStore } from '@/core/stores/use-auth-state.tsx';
 import * as React from 'react';
-import { loginFormSchema} from "@components/form/login/validation-scheme.tsx";
+import { loginFormSchema } from '@components/form/login/validation-scheme.tsx';
 import { FormEvent } from 'react';
-import {NavigateFunction, useNavigate} from 'react-router';
-import {ROUTES} from "@/constants/constants.ts";
+import { NavigateFunction, useNavigate } from 'react-router';
+import { ROUTES } from '@/constants/constants.ts';
 
 type TLoginFormValues = z.infer<typeof loginFormSchema>;
 
 export const LoginForm: React.FC = () => {
   const [apiError, setApiError] = React.useState<string | null>(null);
-  const navigate : NavigateFunction = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const {
     handleSubmit,
     control,
@@ -30,8 +30,8 @@ export const LoginForm: React.FC = () => {
 
   const { login } = useAuthStore();
   const goToRegistration = () => {
-    navigate(ROUTES.REGISTRATION)
-  }
+    void navigate(ROUTES.REGISTRATION);
+  };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
     setApiError(null);
@@ -40,7 +40,7 @@ export const LoginForm: React.FC = () => {
       void navigate(ROUTES.MAIN);
     } catch (error) {
       if (error instanceof Error) {
-        setApiError(error.message || 'An unexpected error occurred.');
+        setApiError(error.message);
       }
     }
   };
@@ -49,7 +49,10 @@ export const LoginForm: React.FC = () => {
     <>
       <h2>LOGIN</h2>
       <p>
-        Do not have an account, <span className={styles.link} onClick={goToRegistration}> create a new one.</span>
+        Do not have an account,{' '}
+        <span className={styles.link} onClick={goToRegistration}>
+          create a new one.
+        </span>
       </p>
 
       <form

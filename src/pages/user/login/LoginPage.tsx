@@ -1,6 +1,6 @@
-import styles from './loginPage.module.scss'
+import styles from './loginPage.module.scss';
 import React from 'react';
-import {LoginForm} from "@components/form/login/login.tsx";
+import { LoginForm } from '@components/form/login/login.tsx';
 
 export default function LoginPage(): React.JSX.Element {
   return (

@@ -22,7 +22,6 @@ export const useAuthStore: UseBoundStore<StoreApi<IAuthState>> = create<IAuthSta
   login: async (email: string, password: string): Promise<void> => {
     const response: CustomerSignInResult | null = await loginCustomers(email, password);
     if (response?.customer) {
-      console.log('отработала функция auth.login');
       set({
         isLoggedIn: true,
         customer: response.customer,
@@ -44,16 +43,17 @@ export const useAuthStore: UseBoundStore<StoreApi<IAuthState>> = create<IAuthSta
       if (tokenData.token && tokenCache.isTokenExpired()) {
         try {
           if (tokenData.refreshToken != null) {
-            const client: ByProjectKeyRequestBuilder = await withRefreshTokenFlow(tokenData.refreshToken);
+            const client: ByProjectKeyRequestBuilder = withRefreshTokenFlow(tokenData.refreshToken);
             const response: ClientResponse<Customer> = await client.me().get().execute();
             set({
               isLoggedIn: true,
               customer: response.body,
             });
           }
-          console.log('отработала функция auth.init');
         } catch (error) {
-          console.log('Error initAuthFunc', error);
+          if (error instanceof Error) {
+            throw new Error(error.message);
+          }
           tokenCache.clear();
           set({
             isLoggedIn: false,
