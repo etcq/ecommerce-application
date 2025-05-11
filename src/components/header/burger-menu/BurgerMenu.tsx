@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import BurgerButton from './burger-button/BurgerButton';
 import styles from './burger-menu.module.scss';
-import { NavLink } from 'react-router';
-import { useHeaderState } from '@/core/stores/stateHeader';
+import { NavLink, Link } from 'react-router';
+import { useAuthStore } from '@/core/stores/use-auth-state';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
-  const { isLogged } = useHeaderState();
+  const { isLoggedIn, logout } = useAuthStore();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function BurgerMenu(): React.JSX.Element {
       clearTimeout(timeout);
       document.removeEventListener('click', closeMenu);
     };
-  }, [burgerOpen]);
+  }, [burgerOpen, isLoggedIn]);
 
   return (
     <>
@@ -32,7 +32,10 @@ export default function BurgerMenu(): React.JSX.Element {
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? styles.active : '')}
-            onClick={() => setOpened(false)}
+            onClick={() => {
+              setOpened(false);
+              logout();
+            }}
           >
             <li className={styles['burger-menu__list_item']}>
               Home
@@ -59,7 +62,7 @@ export default function BurgerMenu(): React.JSX.Element {
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          {isLogged ? (
+          {isLoggedIn ? (
             <>
               <NavLink
                 to="/profile"
@@ -71,16 +74,18 @@ export default function BurgerMenu(): React.JSX.Element {
                   <div className={styles.underline}></div>
                 </li>
               </NavLink>
-              <NavLink
-                to="/logout"
-                className={({ isActive }) => (isActive ? styles.active : '')}
-                onClick={() => setOpened(false)}
+              <Link
+                to="/"
+                onClick={() => {
+                  setOpened(false);
+                  logout();
+                }}
               >
                 <li className={styles['burger-menu__list_item']}>
                   Log out
                   <div className={styles.underline}></div>
                 </li>
-              </NavLink>
+              </Link>
             </>
           ) : (
             <>

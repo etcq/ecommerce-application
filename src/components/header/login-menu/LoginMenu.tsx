@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router';
-import { useHeaderState } from '../../../core/stores/stateHeader';
+import { useHeaderState } from '@/core/stores/stateHeader';
 import styles from './login-menu.module.scss';
 import { useEffect, useRef } from 'react';
 import Button from '@/components/button/Button';
+import { ROUTES } from '@/constants/constants';
+import { useAuthStore } from '@/core/stores/use-auth-state';
 
 export default function LoginMenu(): React.JSX.Element {
-  const { isOpen, isLogged, toggleStatus } = useHeaderState();
+  const { isOpen, isBye, toggleStatus, changeByeStatus } = useHeaderState();
+  const { isLoggedIn, logout, customer } = useAuthStore();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   const navigate = useNavigate();
@@ -23,15 +26,21 @@ export default function LoginMenu(): React.JSX.Element {
       clearTimeout(timeout);
       document.removeEventListener('click', closeMenu);
     };
-  }, [isOpen, toggleStatus]);
+  }, [isOpen, isBye, toggleStatus]);
 
   return (
     <div className={`${styles['login-menu']} ${isOpen ? styles.open : styles.close}`} ref={menu}>
       <div className={styles['login-menu__head']}></div>
-      {isLogged ? (
+      {isBye ? (
+        <div className={styles['login-menu__title']}>
+          <h3>
+            Good Bye <br /> {customer?.firstName}
+          </h3>
+        </div>
+      ) : isLoggedIn ? (
         <>
           <div className={styles['login-menu__title']}>
-            <h3>Hello, User</h3>
+            <h3>Hello, {customer?.firstName}</h3>
           </div>
           <Button
             size="medium"
@@ -39,7 +48,7 @@ export default function LoginMenu(): React.JSX.Element {
             children="Profile"
             onClick={() => {
               toggleStatus();
-              void navigate('/profile');
+              void navigate(ROUTES.PROFILE);
             }}
           />
           <Button
@@ -47,8 +56,13 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             children="Log Out"
             onClick={() => {
-              toggleStatus();
-              void navigate('/');
+              changeByeStatus();
+              setTimeout(() => {
+                changeByeStatus();
+                void navigate(ROUTES.MAIN);
+                logout();
+                toggleStatus();
+              }, 1000);
             }}
           />
         </>
@@ -63,7 +77,7 @@ export default function LoginMenu(): React.JSX.Element {
             type="button"
             onClick={() => {
               toggleStatus();
-              void navigate('/login');
+              void navigate(ROUTES.LOGIN);
             }}
           />
           <Button
@@ -72,7 +86,7 @@ export default function LoginMenu(): React.JSX.Element {
             type="button"
             onClick={() => {
               toggleStatus();
-              void navigate('/registration');
+              void navigate(ROUTES.REGISTRATION);
             }}
           />
         </>
