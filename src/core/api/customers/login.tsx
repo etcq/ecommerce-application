@@ -1,13 +1,13 @@
 import { tokenCache } from '@/core/api/token/token-store.tsx';
-import { withPasswordFlow} from "@/core/api/middlewere/password-flow.ts";
-import { withRefreshTokenFlow} from "@/core/api/middlewere/refresh-token-flow.tsx";
-import {CartSignInModeEnum, LocalStorageKeys} from "@/core/constants";
-import { ByProjectKeyRequestBuilder, Customer, CustomerSignInResult } from '@commercetools/platform-sdk';
+import { withPasswordFlow } from '@/core/api/middlewere/password-flow.tsx';
+import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.tsx';
+import { CartSignInModeEnum, LocalStorageKeys } from '@/core/constants';
+import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';
 import { ClientResponse } from '@commercetools/ts-client';
 
-export async function loginCustomers(email: string, password: string): Promise<Customer | null > {
+export async function loginCustomers(email: string, password: string): Promise<CustomerSignInResult | null> {
   try {
-    const anonymousCartId: string | null = localStorage.getItem(LocalStorageKeys.ANONYMOUSCARTID);
+    const anonymousCartId: string | null = localStorage.getItem(LocalStorageKeys.ANONYMOUS_CART_ID);
     const refreshToken: string | undefined = tokenCache.get().refreshToken;
 
     if (anonymousCartId && refreshToken) {
@@ -29,6 +29,7 @@ export async function loginCustomers(email: string, password: string): Promise<C
     tokenCache.clear();
 
     const passwordFlowClient: ByProjectKeyRequestBuilder | null = withPasswordFlow(email, password, tokenCache);
+
     if (!passwordFlowClient) {
       console.error('Failed to create password flow client');
       return null;
@@ -44,13 +45,15 @@ export async function loginCustomers(email: string, password: string): Promise<C
       })
       .execute();
 
-    if (!response.body || !response.body.customer) {
-      console.error('Login response is missing customer information');
-      return null;
+    if (!response.body) {
+      console.log('нету response body', response.body)
+      // throw new Error('Empty response from Commercetools API');
+      return null
     }
-    return response.body.customer;
+    return response.body;
   } catch (error) {
-    console.error('Login error:', error);
-    return null
+    console.log('otrabotala funcciya error')
+    console.error('Error', error)
+    throw error;
   }
 }

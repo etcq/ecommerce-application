@@ -4,5 +4,5 @@ export enum CartSignInModeEnum {
 
 export enum LocalStorageKeys {
   TOKEN = 'ctp-auth-token',
-  ANONYMOUSCARTID = 'anonymousCartId',
+  ANONYMOUS_CART_ID = 'anonymousCartId',
 }
