@@ -28,19 +28,25 @@ export default function LoginMenu(): React.JSX.Element {
     };
   }, [isOpen, isBye, toggleStatus]);
 
+  const getNameForTitle = (name: string | undefined): string => {
+    if (name === undefined || name.length === 0) return 'Anonymous';
+    if (name.length > 10) return `${name.slice(0, 10)}...`;
+    return name;
+  };
+
   return (
     <div className={`${styles['login-menu']} ${isOpen ? styles.open : styles.close}`} ref={menu}>
       <div className={styles['login-menu__head']}></div>
       {isBye ? (
         <div className={styles['login-menu__title']}>
           <h3>
-            Good Bye <br /> {customer?.firstName}
+            Good Bye <br /> {getNameForTitle(customer?.firstName)}
           </h3>
         </div>
       ) : isLoggedIn ? (
         <>
           <div className={styles['login-menu__title']}>
-            <h3>Hello, {customer?.firstName}</h3>
+            <h3>Hello, {getNameForTitle(customer?.firstName)}</h3>
           </div>
           <Button
             size="medium"
@@ -62,7 +68,7 @@ export default function LoginMenu(): React.JSX.Element {
                 void navigate(ROUTES.MAIN);
                 logout();
                 toggleStatus();
-              }, 1000);
+              }, 600);
             }}
           />
         </>
