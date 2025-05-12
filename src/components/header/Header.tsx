@@ -5,7 +5,7 @@ import logoImg from '../../assets/images/header/logo.png';
 
 import styles from './header.module.scss';
 
-import { useHeaderState } from '../../core/stores/stateHeader';
+import { useHeaderState } from '../../core/stores/state-header';
 import { ROUTES } from '@/constants/constants';
 import BurgerMenu from './burger-menu/BurgerMenu';
 
