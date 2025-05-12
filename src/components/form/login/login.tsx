@@ -36,7 +36,7 @@ export const LoginForm: React.FC = () => {
   };
 
   const togglePasswordVisibility: () => void = (): void => {
-    setShowPassword(!showPassword);
+      setShowPassword((prevState : boolean) : boolean => !prevState);
   };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
