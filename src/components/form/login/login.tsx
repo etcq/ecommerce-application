@@ -36,7 +36,7 @@ export const LoginForm: React.FC = () => {
   };
 
   const togglePasswordVisibility: () => void = (): void => {
-      setShowPassword((prevState : boolean) : boolean => !prevState);
+    setShowPassword((prevState: boolean): boolean => !prevState);
   };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
@@ -62,6 +62,7 @@ export const LoginForm: React.FC = () => {
       </p>
 
       <form
+        noValidate
         className={styles.wrapper}
         onSubmit={(e: FormEvent<HTMLFormElement>): void => {
           e.preventDefault();
