@@ -29,3 +29,22 @@ $c-link: $c-link-main;
   cursor: pointer;
   color: $c-link;
 }
+
+.inner {
+  position: relative;
+}
+
+.visibility {
+  cursor: pointer;
+
+  position: absolute;
+  top: 69%;
+  right: 20px;
+  transform: translateY(-50%);
+
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  background: none;
+}

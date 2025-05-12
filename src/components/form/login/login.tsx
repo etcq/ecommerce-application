@@ -10,11 +10,13 @@ import { loginFormSchema } from '@components/form/login/validation-scheme.ts';
 import { FormEvent } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 type TLoginFormValues = z.infer<typeof loginFormSchema>;
 
 export const LoginForm: React.FC = () => {
   const [apiError, setApiError] = React.useState<string | null>(null);
+  const [showPassword, setShowPassword] = React.useState(false);
   const navigate: NavigateFunction = useNavigate();
   const {
     handleSubmit,
@@ -29,8 +31,12 @@ export const LoginForm: React.FC = () => {
   });
 
   const { login } = useAuthStore();
-  const goToRegistration = () => {
+  const goToRegistration: () => void = (): void => {
     void navigate(ROUTES.REGISTRATION);
+  };
+
+  const togglePasswordVisibility: () => void = (): void => {
+    setShowPassword(!showPassword);
   };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
@@ -84,14 +90,19 @@ export const LoginForm: React.FC = () => {
             name={'password'}
             control={control}
             render={({ field }) => (
-              <Input
-                {...field}
-                type={'password'}
-                id={'login-form__password'}
-                label={'Password'}
-                placeholder={'password'}
-                wrapperClassName={'wrapper'}
-              />
+              <div className={styles.inner}>
+                <Input
+                  {...field}
+                  type={showPassword ? 'text' : 'password'}
+                  id={'login-form__password'}
+                  label={'Password'}
+                  placeholder={'password'}
+                  wrapperClassName={'wrapper'}
+                />
+                <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             )}
           />
           {errors.password && <span className={styles.error}>{errors.password.message}</span>}
