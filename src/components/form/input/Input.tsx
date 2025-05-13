@@ -8,9 +8,10 @@ interface IProps {
   placeholder?: string;
   onChange?: () => void;
   wrapperClassName: string;
+  error?: string;
 }
 
-const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName }) => {
+const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, error, ...props }) => {
   return (
     <div className={`${styles.wrapper} ${styles[wrapperClassName]}`}>
       {label && (
@@ -19,7 +20,15 @@ const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wr
         </label>
       )}
 
-      <input className={styles.input} type={type} id={id} placeholder={placeholder} onChange={onChange}></input>
+      <input
+        className={styles.input}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        {...props}
+      ></input>
+      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 };
