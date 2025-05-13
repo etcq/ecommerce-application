@@ -31,3 +31,9 @@ $c-input-label: $c-dark-main;
   font-size: 16px;
   color: $c-input-label;
 }
+
+.error {
+  height: 20px;
+  font-size: 14px;
+  color: $c-error-text;
+}
