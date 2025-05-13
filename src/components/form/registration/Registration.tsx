@@ -57,20 +57,33 @@ const RegistrationForm: React.FC = () => {
       <form className={styles.form} onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input {...register('firstName')} label="First Name" placeholder="John"></Input>
-            <div className={styles['input-error']}>{errors.firstName?.message}</div>
+            <Input
+              {...register('firstName')}
+              label="First Name"
+              placeholder="John"
+              error={errors.firstName?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
-            <Input {...register('lastName')} label="Last Name" placeholder="Doe"></Input>
-            <div className={styles['input-error']}>{errors.lastName?.message}</div>
+            <Input
+              {...register('lastName')}
+              label="Last Name"
+              placeholder="Doe"
+              error={errors.lastName?.message}
+            ></Input>
           </div>
         </div>
 
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input {...register('email')} label="Email" type="email" placeholder="johndoe@email.com"></Input>
-            <div className={styles['input-error']}>{errors.email?.message}</div>
+            <Input
+              {...register('email')}
+              label="Email"
+              type="email"
+              placeholder="johndoe@email.com"
+              error={errors.email?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
@@ -79,18 +92,23 @@ const RegistrationForm: React.FC = () => {
               label="Password"
               type={isVisible ? 'text' : 'password'}
               placeholder="********"
+              error={errors.password?.message}
             ></Input>
             <span className={styles.eye} onClick={toggleVisibility}>
               {isVisible ? <FaEyeSlash /> : <FaEye />}
             </span>
-            <div className={styles['input-error']}>{errors.password?.message}</div>
           </div>
         </div>
 
         <div className={`${styles['input-wrapper-row']} ${styles.date}`}>
           <div className={styles['input-wrapper']}>
-            <Input {...register('dateOfBirth')} label="Date of Birth" type="date" placeholder="mm/dd/yyyy"></Input>
-            <div className={styles['input-error']}>{errors.dateOfBirth?.message}</div>
+            <Input
+              {...register('dateOfBirth')}
+              label="Date of Birth"
+              type="date"
+              placeholder="mm/dd/yyyy"
+              error={errors.dateOfBirth?.message}
+            ></Input>
           </div>
         </div>
 
@@ -98,20 +116,33 @@ const RegistrationForm: React.FC = () => {
 
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input {...register('address.street')} label="Street" placeholder="123 Maple Street"></Input>
-            <div className={styles['input-error']}>{errors.address?.street?.message}</div>
+            <Input
+              {...register('address.street')}
+              label="Street"
+              placeholder="123 Maple Street"
+              error={errors.address?.street?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
-            <Input {...register('address.city')} label="City" placeholder="Anytown"></Input>
-            <div className={styles['input-error']}>{errors.address?.city?.message}</div>
+            <Input
+              {...register('address.city')}
+              label="City"
+              placeholder="Anytown"
+              error={errors.address?.city?.message}
+            ></Input>
           </div>
         </div>
 
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input maxLength={5} {...register('address.zip')} label="Postal Code" placeholder="12345"></Input>
-            <div className={styles['input-error']}>{errors.address?.zip?.message}</div>
+            <Input
+              maxLength={5}
+              {...register('address.zip')}
+              label="Postal Code"
+              placeholder="12345"
+              error={errors.address?.zip?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
@@ -141,20 +172,33 @@ const RegistrationForm: React.FC = () => {
 
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input {...register('billing.street')} label="Street" placeholder="123 Maple Street"></Input>
-            <div className={styles['input-error']}>{errors.billing?.street?.message}</div>
+            <Input
+              {...register('billing.street')}
+              label="Street"
+              placeholder="123 Maple Street"
+              error={errors.billing?.street?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
-            <Input {...register('billing.city')} label="City" placeholder="Anytown"></Input>
-            <div className={styles['input-error']}>{errors.billing?.city?.message}</div>
+            <Input
+              {...register('billing.city')}
+              label="City"
+              placeholder="Anytown"
+              error={errors.billing?.city?.message}
+            ></Input>
           </div>
         </div>
 
         <div className={styles['input-wrapper-row']}>
           <div className={styles['input-wrapper']}>
-            <Input maxLength={5} {...register('billing.zip')} label="Postal Code" placeholder="12345"></Input>
-            <div className={styles['input-error']}>{errors.billing?.zip?.message}</div>
+            <Input
+              maxLength={5}
+              {...register('billing.zip')}
+              label="Postal Code"
+              placeholder="12345"
+              error={errors.billing?.zip?.message}
+            ></Input>
           </div>
 
           <div className={styles['input-wrapper']}>
