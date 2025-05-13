@@ -10,7 +10,7 @@ interface IProps {
   wrapperClassName: string;
 }
 
-const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName }) => {
+const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, ...props }) => {
   return (
     <div className={`${styles.wrapper} ${styles[wrapperClassName]}`}>
       {label && (
@@ -19,7 +19,14 @@ const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wr
         </label>
       )}
 
-      <input className={styles.input} type={type} id={id} placeholder={placeholder} onChange={onChange}></input>
+      <input
+        {...props}
+        className={styles.input}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+      ></input>
     </div>
   );
 };
