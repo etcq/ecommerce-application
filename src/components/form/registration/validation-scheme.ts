@@ -7,22 +7,14 @@ const minimumAge = 18;
 const todayDate = new Date();
 const validDate = new Date(todayDate.getFullYear() - minimumAge, todayDate.getMonth(), todayDate.getDate());
 
-const birthDateSchema = z.preprocess(
-  (value) => {
-    if (typeof value === 'string' || value instanceof Date) {
-      const date = new Date(value);
-      return isNaN(date.getTime()) ? undefined : date;
-    }
-  },
-  z
-    .date()
-    .refine((date) => date <= todayDate, {
-      message: ValidationMessages.DATE_FUTURE,
-    })
-    .refine((date) => date <= validDate, {
-      message: ValidationMessages.DATE_AGE,
-    }),
-);
+const birthDateSchema = z.coerce
+  .date()
+  .refine((date) => date <= todayDate, {
+    message: ValidationMessages.DATE_FUTURE,
+  })
+  .refine((date) => date <= validDate, {
+    message: ValidationMessages.DATE_AGE,
+  });
 
 export const userFormSchema = z.object({
   firstName: z

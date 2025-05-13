@@ -15,5 +15,5 @@ export enum ValidationMessages {
   SPECIAL_CHAR = 'First name must contain only letters (no special characters or numbers)',
   ZIP_INVALID = 'Invalid postal code',
   DATE_FUTURE = 'Date cannot be in the future',
-  DATE_AGE = 'You must be at least ${minimumAge} years old',
+  DATE_AGE = 'You must be at least 18 years old',
 }

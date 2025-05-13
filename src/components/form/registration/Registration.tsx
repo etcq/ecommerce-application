@@ -30,7 +30,7 @@ const RegistrationForm: React.FC = () => {
 
   const [error, setError] = React.useState<string | null>(null);
 
-  const onSubmit = async (data: TFormFields) => {
+  const onSubmit = () => {
     setError(null);
     try {
       void navigate(ROUTES.MAIN);
@@ -115,15 +115,13 @@ const RegistrationForm: React.FC = () => {
           </div>
 
           <div className={styles['input-wrapper']}>
-            <label>Country</label>
-            <select
-              {...register('address.country')}
-              className={inputStyles.input}
-              label="Country"
-              placeholder="Select Country"
-            >
-              <option value="">United States</option>
-              <option value="">Canada</option>
+            <label htmlFor="country">Country</label>
+            <select {...register('address.country')} className={inputStyles.input} id="country" defaultValue="select">
+              <option value="select" disabled>
+                Select Country
+              </option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
             </select>
             <div className={styles['input-error']}>{errors.address?.country?.message}</div>
           </div>
@@ -162,13 +160,16 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <label>Country</label>
             <select
-              {...register('billing.country')}
-              className={`${inputStyles.input} ${styles.country}`}
-              label="Country"
-              placeholder="Select Country"
+              {...register('address.country')}
+              className={inputStyles.input}
+              id="billing-country"
+              defaultValue="select"
             >
-              <option value="">United States</option>
-              <option value="">Canada</option>
+              <option value="select" disabled>
+                Select Country
+              </option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
             </select>
             <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
           </div>

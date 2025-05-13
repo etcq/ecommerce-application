@@ -7,12 +7,12 @@ interface IProps {
   id?: string;
   placeholder?: string;
   onChange?: () => void;
-  wrapperClassName: string;
+  wrapperClassName?: string;
 }
 
 const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, ...props }) => {
   return (
-    <div className={`${styles.wrapper} ${styles[wrapperClassName]}`}>
+    <div className={`${styles.wrapper} ${wrapperClassName ? styles[wrapperClassName] : ''}`}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}
