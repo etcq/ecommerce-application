@@ -1,22 +1,24 @@
 import { useNavigate } from 'react-router';
 import { useHeaderState } from '@/core/stores/state-header';
 import styles from './login-menu.module.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '@/components/button/Button';
 import { ROUTES } from '@/constants/constants';
 import { useAuthStore } from '@/core/stores/use-auth-state';
+import editNameView from '@/core/utils/edit-name-view';
 
 export default function LoginMenu(): React.JSX.Element {
-  const { isOpen, isBye, toggleStatus, changeByeStatus } = useHeaderState();
+  const { isLoginMenuOpened, toggleLoginMenuOpened } = useHeaderState();
   const { isLoggedIn, logout, customer } = useAuthStore();
+  const [isByeMessageShown, setByeMessageShown] = useState(false);
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isLoginMenuOpened) return;
     const closeMenu = (event: MouseEvent): void => {
       if (menu.current && event.target instanceof Node && !menu.current.contains(event.target)) {
-        toggleStatus();
+        toggleLoginMenuOpened();
       }
     };
     const timeout = setTimeout(() => {
@@ -26,34 +28,28 @@ export default function LoginMenu(): React.JSX.Element {
       clearTimeout(timeout);
       document.removeEventListener('click', closeMenu);
     };
-  }, [isOpen, isBye, toggleStatus]);
-
-  const getNameForTitle = (name: string | undefined): string => {
-    if (name === undefined || name.length === 0) return 'Anonymous';
-    if (name.length > 10) return `${name.slice(0, 10)}...`;
-    return name;
-  };
+  }, [isLoginMenuOpened, isByeMessageShown, toggleLoginMenuOpened]);
 
   return (
-    <div className={`${styles['login-menu']} ${isOpen ? styles.open : styles.close}`} ref={menu}>
+    <div className={`${styles['login-menu']} ${isLoginMenuOpened ? styles.open : styles.close}`} ref={menu}>
       <div className={styles['login-menu__head']}></div>
-      {isBye ? (
+      {isByeMessageShown ? (
         <div className={styles['login-menu__title']}>
           <h3>
-            Good Bye <br /> {getNameForTitle(customer?.firstName)}
+            Good Bye <br /> {editNameView(customer?.firstName)}
           </h3>
         </div>
       ) : isLoggedIn ? (
         <>
           <div className={styles['login-menu__title']}>
-            <h3>Hello, {getNameForTitle(customer?.firstName)}</h3>
+            <h3>Hello, {editNameView(customer?.firstName)}</h3>
           </div>
           <Button
             size="medium"
             type="button"
             children="Profile"
             onClick={() => {
-              toggleStatus();
+              toggleLoginMenuOpened();
               void navigate(ROUTES.PROFILE);
             }}
           />
@@ -62,13 +58,13 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             children="Log Out"
             onClick={() => {
-              changeByeStatus();
+              setByeMessageShown(true);
               setTimeout(() => {
-                changeByeStatus();
                 void navigate(ROUTES.MAIN);
+                setByeMessageShown(false);
                 logout();
-                toggleStatus();
-              }, 600);
+                toggleLoginMenuOpened();
+              }, 800);
             }}
           />
         </>
@@ -82,7 +78,7 @@ export default function LoginMenu(): React.JSX.Element {
             children="Log In"
             type="button"
             onClick={() => {
-              toggleStatus();
+              toggleLoginMenuOpened();
               void navigate(ROUTES.LOGIN);
             }}
           />
@@ -91,7 +87,7 @@ export default function LoginMenu(): React.JSX.Element {
             children="Registration"
             type="button"
             onClick={() => {
-              toggleStatus();
+              toggleLoginMenuOpened();
               void navigate(ROUTES.REGISTRATION);
             }}
           />

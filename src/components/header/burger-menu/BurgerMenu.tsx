@@ -3,6 +3,7 @@ import BurgerButton from './burger-button/BurgerButton';
 import styles from './burger-menu.module.scss';
 import { NavLink, Link } from 'react-router';
 import { useAuthStore } from '@/core/stores/use-auth-state';
+import { ROUTES } from '@/constants/constants';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
@@ -30,7 +31,7 @@ export default function BurgerMenu(): React.JSX.Element {
       <div className={`${styles['burger-menu']} ${burgerOpen ? styles['burger-menu__open'] : ''}`} ref={menu}>
         <ul className={styles['burger-menu__list']}>
           <NavLink
-            to="/"
+            to={ROUTES.MAIN}
             className={({ isActive }) => (isActive ? styles.active : '')}
             onClick={() => {
               setOpened(false);
@@ -43,7 +44,7 @@ export default function BurgerMenu(): React.JSX.Element {
             </li>
           </NavLink>
           <NavLink
-            to="/product-list"
+            to={ROUTES.PRODUCT_LIST}
             className={({ isActive }) => (isActive ? styles.active : '')}
             onClick={() => setOpened(false)}
           >
@@ -53,7 +54,7 @@ export default function BurgerMenu(): React.JSX.Element {
             </li>
           </NavLink>
           <NavLink
-            to="/about"
+            to={ROUTES.ABOUT}
             className={({ isActive }) => (isActive ? styles.active : '')}
             onClick={() => setOpened(false)}
           >
@@ -65,7 +66,7 @@ export default function BurgerMenu(): React.JSX.Element {
           {isLoggedIn ? (
             <>
               <NavLink
-                to="/profile"
+                to={ROUTES.PROFILE}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >
@@ -75,7 +76,7 @@ export default function BurgerMenu(): React.JSX.Element {
                 </li>
               </NavLink>
               <Link
-                to="/"
+                to={ROUTES.MAIN}
                 onClick={() => {
                   setOpened(false);
                   logout();
@@ -90,7 +91,7 @@ export default function BurgerMenu(): React.JSX.Element {
           ) : (
             <>
               <NavLink
-                to="/login"
+                to={ROUTES.LOGIN}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >
@@ -100,7 +101,7 @@ export default function BurgerMenu(): React.JSX.Element {
                 </li>
               </NavLink>
               <NavLink
-                to="/registration"
+                to={ROUTES.REGISTRATION}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >

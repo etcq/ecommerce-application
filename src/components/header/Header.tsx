@@ -10,31 +10,31 @@ import { ROUTES } from '@/constants/constants';
 import BurgerMenu from './burger-menu/BurgerMenu';
 
 export default function Header(): React.JSX.Element {
-  const { isOpen, toggleStatus, isDarkTheme } = useHeaderState();
+  const { isLoginMenuOpened, toggleLoginMenuOpened, isDarkTheme } = useHeaderState();
 
   return (
     <div className={isDarkTheme ? styles['dark-theme'] : ''}>
       <header className={styles.header}>
         <div className={styles.header__logo}>
-          <NavLink to="/">
+          <NavLink to={ROUTES.MAIN}>
             <img src={logoImg} className={styles['header__logo-img']} alt="SneakHub" />
           </NavLink>
           <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
         <ul className={styles['nav-menu']}>
-          <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : '')}>
+          <NavLink to={ROUTES.MAIN} className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               Home
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          <NavLink to="/product-list" className={({ isActive }) => (isActive ? styles.active : '')}>
+          <NavLink to={ROUTES.PRODUCT_LIST} className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               Catalog
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : '')}>
+          <NavLink to={ROUTES.ABOUT} className={({ isActive }) => (isActive ? styles.active : '')}>
             <li className={styles['nav-menu-item']}>
               About Us
               <div className={styles.underline}></div>
@@ -43,11 +43,11 @@ export default function Header(): React.JSX.Element {
         </ul>
         <div className={styles.header__user}>
           <div className={styles['header__user-wrapper']}>
-            <div className={styles['header__user-icon']} onClick={() => toggleStatus()}>
+            <div className={styles['header__user-icon']} onClick={() => toggleLoginMenuOpened()}>
               <svg width="21" height="20" viewBox="0 0 21 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.5996 10C9.22461 10 8.04753 9.51042 7.06836 8.53125C6.08919 7.55208 5.59961 6.375 5.59961 5C5.59961 3.625 6.08919 2.44792 7.06836 1.46875C8.04753 0.489584 9.22461 0 10.5996 0C11.9746 0 13.1517 0.489584 14.1309 1.46875C15.11 2.44792 15.5996 3.625 15.5996 5C15.5996 6.375 15.11 7.55208 14.1309 8.53125C13.1517 9.51042 11.9746 10 10.5996 10ZM0.599609 20V16.5C0.599609 15.7917 0.78211 15.1404 1.14711 14.5463C1.51211 13.9521 1.99628 13.4992 2.59961 13.1875C3.89128 12.5417 5.20378 12.0571 6.53711 11.7338C7.87044 11.4104 9.22461 11.2492 10.5996 11.25C11.9746 11.25 13.3288 11.4117 14.6621 11.735C15.9954 12.0583 17.3079 12.5425 18.5996 13.1875C19.2038 13.5 19.6884 13.9533 20.0534 14.5475C20.4184 15.1417 20.6004 15.7925 20.5996 16.5V20H0.599609Z" />
               </svg>
-              <div className={`${styles.arrow} ${isOpen ? styles['arrow-open'] : ''}`}>
+              <div className={`${styles.arrow} ${isLoginMenuOpened ? styles['arrow-open'] : ''}`}>
                 <div className={`${styles.arrow__line} ${styles.left}`}></div>
                 <div className={`${styles.arrow__line} ${styles.right}`}></div>
               </div>
