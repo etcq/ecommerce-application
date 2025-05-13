@@ -8,7 +8,7 @@ import ProfilePage from './pages/user/profile/Profile';
 import RegistrationPage from './pages/user/registration/RegistrationPage';
 import { ROUTES } from './constants/constants';
 import Bucket from './pages/bucket/Bucket';
-import { ProtectedRoutesForAuth } from './core/routes/protected-routes';
+import { RedirectForAuthPerson } from './core/routes/protected-routes';
 import { useAuthStore } from './core/stores/use-auth-state';
 import { useEffect } from 'react';
 
@@ -27,7 +27,7 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />
           <Route path={ROUTES.PRODUCT_LIST} element={<ProductList />} />
-          <Route element={<ProtectedRoutesForAuth />}>
+          <Route element={<RedirectForAuthPerson />}>
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
           </Route>
