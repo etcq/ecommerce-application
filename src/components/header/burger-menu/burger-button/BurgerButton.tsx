@@ -1,5 +1,5 @@
 import styles from './burger-button.module.scss';
-import { useHeaderState } from '@/core/stores/stateHeader';
+import { useHeaderState } from '@/core/stores/state-header';
 interface BurgerButtonProps {
   open: boolean;
   setOpened: (open: boolean) => void;

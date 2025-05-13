@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BurgerButton from './burger-button/BurgerButton';
 import styles from './burger-menu.module.scss';
-import { NavLink } from 'react-router';
-import { useHeaderState } from '@/core/stores/stateHeader';
+import { NavLink, Link } from 'react-router';
+import { useAuthStore } from '@/core/stores/use-auth-state';
+import { ROUTES } from '@/constants/constants';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
-  const { isLogged } = useHeaderState();
+  const { isLoggedIn, logout } = useAuthStore();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   useEffect(() => {
@@ -23,16 +24,19 @@ export default function BurgerMenu(): React.JSX.Element {
       clearTimeout(timeout);
       document.removeEventListener('click', closeMenu);
     };
-  }, [burgerOpen]);
+  }, [burgerOpen, isLoggedIn]);
 
   return (
     <>
       <div className={`${styles['burger-menu']} ${burgerOpen ? styles['burger-menu__open'] : ''}`} ref={menu}>
         <ul className={styles['burger-menu__list']}>
           <NavLink
-            to="/"
+            to={ROUTES.MAIN}
             className={({ isActive }) => (isActive ? styles.active : '')}
-            onClick={() => setOpened(false)}
+            onClick={() => {
+              setOpened(false);
+              logout();
+            }}
           >
             <li className={styles['burger-menu__list_item']}>
               Home
@@ -40,7 +44,7 @@ export default function BurgerMenu(): React.JSX.Element {
             </li>
           </NavLink>
           <NavLink
-            to="/product-list"
+            to={ROUTES.PRODUCT_LIST}
             className={({ isActive }) => (isActive ? styles.active : '')}
             onClick={() => setOpened(false)}
           >
@@ -50,7 +54,7 @@ export default function BurgerMenu(): React.JSX.Element {
             </li>
           </NavLink>
           <NavLink
-            to="/about"
+            to={ROUTES.ABOUT}
             className={({ isActive }) => (isActive ? styles.active : '')}
             onClick={() => setOpened(false)}
           >
@@ -59,10 +63,10 @@ export default function BurgerMenu(): React.JSX.Element {
               <div className={styles.underline}></div>
             </li>
           </NavLink>
-          {isLogged ? (
+          {isLoggedIn ? (
             <>
               <NavLink
-                to="/profile"
+                to={ROUTES.PROFILE}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >
@@ -71,21 +75,23 @@ export default function BurgerMenu(): React.JSX.Element {
                   <div className={styles.underline}></div>
                 </li>
               </NavLink>
-              <NavLink
-                to="/logout"
-                className={({ isActive }) => (isActive ? styles.active : '')}
-                onClick={() => setOpened(false)}
+              <Link
+                to={ROUTES.MAIN}
+                onClick={() => {
+                  setOpened(false);
+                  logout();
+                }}
               >
                 <li className={styles['burger-menu__list_item']}>
                   Log out
                   <div className={styles.underline}></div>
                 </li>
-              </NavLink>
+              </Link>
             </>
           ) : (
             <>
               <NavLink
-                to="/login"
+                to={ROUTES.LOGIN}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >
@@ -95,7 +101,7 @@ export default function BurgerMenu(): React.JSX.Element {
                 </li>
               </NavLink>
               <NavLink
-                to="/registration"
+                to={ROUTES.REGISTRATION}
                 className={({ isActive }) => (isActive ? styles.active : '')}
                 onClick={() => setOpened(false)}
               >

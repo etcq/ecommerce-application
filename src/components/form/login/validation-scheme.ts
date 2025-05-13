@@ -1,15 +1,20 @@
 import * as z from 'zod';
 import { ValidationMessages } from '@/constants/validation.ts';
 
+export type TLoginFormValues = z.infer<typeof loginFormSchema>;
+
 export const loginFormSchema = z.object({
   email: z
     .string()
     .trim()
-    .email({
-      message: ValidationMessages.EMAIL_INVALID,
-    })
     .min(1, {
       message: ValidationMessages.EMAIL_REQUIRED,
+    })
+    .refine((value: string): boolean => !/^\s|\s$/.test(value), {
+      message: ValidationMessages.EMAIL_WHITESPACE,
+    })
+    .refine((value: string): boolean => /^[a-zA-Z0-9@._-]+$/.test(value), {
+      message: ValidationMessages.EMAIL_INVALID_CHARACTERS,
     })
     .refine((value: string): boolean => value.includes('@'), {
       message: ValidationMessages.EMAIL_NO_AT_SYMBOL,
@@ -17,15 +22,15 @@ export const loginFormSchema = z.object({
     .refine(
       (value: string): boolean | '' => {
         const domain: string = value.split('@')[1];
-        return domain?.includes('.');
+        if (!domain) return false;
+        const parts: string[] = domain.split('.');
+        return parts.length >= 2 && parts.every((part: string): boolean => part.trim().length > 0);
       },
       {
         message: ValidationMessages.EMAIL_NO_DOMAIN,
       },
-    )
-    .refine((value: string): boolean => !/^\s|\s$/.test(value), {
-      message: ValidationMessages.EMAIL_WHITESPACE,
-    }),
+    ),
+
   password: z
     .string()
     .min(1, {
