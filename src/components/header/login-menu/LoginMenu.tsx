@@ -10,7 +10,7 @@ import editNameView from '@/core/utils/edit-name-view';
 export default function LoginMenu(): React.JSX.Element {
   const { isLoginMenuOpened, toggleLoginMenuOpened } = useHeaderState();
   const { isLoggedIn, logout, customer } = useAuthStore();
-  const [showByeMessage, setShowByeMessage] = useState(false);
+  const [isByeMessageShown, setByeMessageShown] = useState(false);
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   const navigate = useNavigate();
@@ -28,12 +28,12 @@ export default function LoginMenu(): React.JSX.Element {
       clearTimeout(timeout);
       document.removeEventListener('click', closeMenu);
     };
-  }, [isLoginMenuOpened, showByeMessage, toggleLoginMenuOpened]);
+  }, [isLoginMenuOpened, isByeMessageShown, toggleLoginMenuOpened]);
 
   return (
     <div className={`${styles['login-menu']} ${isLoginMenuOpened ? styles.open : styles.close}`} ref={menu}>
       <div className={styles['login-menu__head']}></div>
-      {showByeMessage ? (
+      {isByeMessageShown ? (
         <div className={styles['login-menu__title']}>
           <h3>
             Good Bye <br /> {editNameView(customer?.firstName)}
@@ -58,10 +58,10 @@ export default function LoginMenu(): React.JSX.Element {
             size="medium"
             children="Log Out"
             onClick={() => {
-              setShowByeMessage(true);
+              setByeMessageShown(true);
               setTimeout(() => {
                 void navigate(ROUTES.MAIN);
-                setShowByeMessage(false);
+                setByeMessageShown(false);
                 logout();
                 toggleLoginMenuOpened();
               }, 800);
