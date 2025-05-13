@@ -1,9 +1,12 @@
 import * as z from 'zod';
 import { ValidationMessages } from '@/constants/validation.ts';
 
+export type TLoginFormValues = z.infer<typeof loginFormSchema>;
+
 export const loginFormSchema = z.object({
   email: z
     .string()
+    .trim()
     .min(1, {
       message: ValidationMessages.EMAIL_REQUIRED,
     })
