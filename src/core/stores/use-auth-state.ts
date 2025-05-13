@@ -40,7 +40,7 @@ export const useAuthStore: UseBoundStore<StoreApi<IAuthState>> = create<IAuthSta
   initializationAuth: (): void => {
     void (async (): Promise<void> => {
       const tokenData: ITokenCacheState = useTokenCacheStore.getState();
-      if (tokenData.token && tokenCache.isTokenExpired()) {
+      if (tokenData.token && !tokenCache.isTokenExpired()) {
         try {
           if (tokenData.refreshToken != null) {
             const client: ByProjectKeyRequestBuilder = withRefreshTokenFlow(tokenData.refreshToken);
