@@ -1,12 +1,12 @@
 import styles from './input.module.scss';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface IProps {
   type?: 'text' | 'email' | 'password' | 'date';
   label?: string;
   id?: string;
   placeholder?: string;
-  onChange?: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   wrapperClassName: string;
   error?: string;
 }
