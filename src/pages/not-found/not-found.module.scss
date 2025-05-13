@@ -1,0 +1,45 @@
+.not-found {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 900;
+  margin: 0 auto;
+  margin-top: 5vw;
+
+  &_img {
+    width: 30%;
+    height: auto;
+  }
+
+  &_description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+
+    .title {
+      margin: 0;
+      font-family: Sneakers, serif;
+      font-size: 3rem;
+    }
+  }
+}
+
+@media screen and (width <= 700px) {
+  .not-found {
+    flex-direction: column-reverse;
+    gap: 30px;
+
+    &_img {
+      width: 60%;
+    }
+
+    &_description {
+      .title {
+        font-size: 2rem;
+      }
+    }
+  }
+}
