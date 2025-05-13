@@ -1,6 +1,5 @@
 import styles from './loginForm.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@components/form/input/Input.tsx';
 import Button from '@components/button/Button.tsx';
@@ -11,11 +10,10 @@ import { FormEvent } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
-type TLoginFormValues = z.infer<typeof loginFormSchema>;
+import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
 
 export const LoginForm: React.FC = () => {
-  const [apiError, setApiError] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const navigate: NavigateFunction = useNavigate();
   const {
@@ -24,10 +22,7 @@ export const LoginForm: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    mode: 'onChange',
   });
 
   const { login } = useAuthStore();
@@ -36,17 +31,17 @@ export const LoginForm: React.FC = () => {
   };
 
   const togglePasswordVisibility: () => void = (): void => {
-      setShowPassword((prevState : boolean) : boolean => !prevState);
+    setShowPassword((prevState: boolean): boolean => !prevState);
   };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
-    setApiError(null);
+    setError(null);
     try {
-      await login(data.email.toLowerCase(), data.password);
+      await login(data.email, data.password);
       void navigate(ROUTES.MAIN);
     } catch (error) {
       if (error instanceof Error) {
-        setApiError(error.message);
+        setError(error.message);
       }
     }
   };
@@ -62,6 +57,7 @@ export const LoginForm: React.FC = () => {
       </p>
 
       <form
+        noValidate
         className={styles.wrapper}
         onSubmit={(e: FormEvent<HTMLFormElement>): void => {
           e.preventDefault();
@@ -108,7 +104,7 @@ export const LoginForm: React.FC = () => {
           {errors.password && <span className={styles.error}>{errors.password.message}</span>}
         </div>
 
-        {apiError && <span className={styles.error}>{apiError}</span>}
+        {error && <span className={styles.error}>{error}</span>}
 
         <Button
           className={styles.button}
