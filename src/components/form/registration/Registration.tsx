@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
 import { TFormFields, userFormSchema } from './validation-scheme';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
 
 const RegistrationForm: React.FC = () => {
@@ -27,9 +27,6 @@ const RegistrationForm: React.FC = () => {
   };
 
   const navigate = useNavigate();
-  const goToLogin = () => {
-    void navigate(ROUTES.LOGIN);
-  };
 
   const [error, setError] = React.useState<string | null>(null);
 
@@ -50,9 +47,9 @@ const RegistrationForm: React.FC = () => {
         <h1 className={styles['title-header']}>Sign Up</h1>
         <p className={styles['title-subheader']}>
           Already Have An Account,
-          <a className={styles['title-link']} href="" onClick={goToLogin}>
+          <NavLink className={styles['title-link']} to="/login">
             Login
-          </a>
+          </NavLink>
           .
         </p>
       </div>
