@@ -91,4 +91,22 @@ export const userFormSchema = z.object({
     }),
     country: z.string(),
   }),
+
+  billing: z.object({
+    street: z.string().min(1, {
+      message: ValidationMessages.REQUIRED,
+    }),
+    city: z
+      .string()
+      .min(1, {
+        message: ValidationMessages.REQUIRED,
+      })
+      .regex(/^[A-Za-z]+$/, {
+        message: ValidationMessages.SPECIAL_CHAR,
+      }),
+    zip: z.string().regex(/^\d{5}$/, {
+      message: ValidationMessages.ZIP_INVALID,
+    }),
+    country: z.string(),
+  }),
 });

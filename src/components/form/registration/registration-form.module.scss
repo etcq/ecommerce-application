@@ -35,6 +35,16 @@
   font-size: 24px;
 }
 
+.shipping {
+  display: flex;
+  align-self: flex-end;
+  margin: 10px;
+
+  &-label {
+    margin-right: 8px;
+  }
+}
+
 .title {
   margin-bottom: 55px;
 

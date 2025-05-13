@@ -132,6 +132,56 @@ const RegistrationForm: React.FC = () => {
           </div>
         </div>
 
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use as default for shipping</span>
+          <input type="checkbox" />
+        </span>
+
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use shipping address as billing</span>
+          <input type="checkbox" />
+        </span>
+
+        <p className={styles.address}>Billing Address</p>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input {...register('billing.street')} label="Street" placeholder="123 Maple Street"></Input>
+            <div className={styles['input-error']}>{errors.billing?.street?.message}</div>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <Input {...register('billing.city')} label="City" placeholder="Anytown"></Input>
+            <div className={styles['input-error']}>{errors.billing?.city?.message}</div>
+          </div>
+        </div>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input maxLength={5} {...register('billing.zip')} label="Postal Code" placeholder="12345"></Input>
+            <div className={styles['input-error']}>{errors.billing?.zip?.message}</div>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <label>Country</label>
+            <select
+              {...register('billing.country')}
+              className={`${inputStyles.input} ${styles.country}`}
+              label="Country"
+              placeholder="Select Country"
+            >
+              <option value="">United States</option>
+              <option value="">Canada</option>
+            </select>
+            <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
+          </div>
+        </div>
+
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use as default for billing</span>
+          <input type="checkbox" />
+        </span>
+
         <Button disabled={isSubmitting || !isValid} type="submit" size="large">
           {isSubmitting ? 'Loading...' : 'Create Account'}
         </Button>
