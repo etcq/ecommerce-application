@@ -1,16 +1,17 @@
 import styles from './input.module.scss';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 interface IProps {
   type?: 'text' | 'email' | 'password' | 'date';
   label?: string;
   id?: string;
   placeholder?: string;
-  onChange?: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   wrapperClassName?: string;
+  error?: string;
 }
 
-const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, ...props }) => {
+const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, error, ...props }) => {
   return (
     <div className={`${styles.wrapper} ${wrapperClassName ? styles[wrapperClassName] : ''}`}>
       {label && (
@@ -27,6 +28,7 @@ const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wr
         placeholder={placeholder}
         onChange={onChange}
       ></input>
+      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 };

@@ -5,16 +5,17 @@
 $c-input-border: $c-light-secondary;
 $c-input-text: $c-dark-secondary;
 $c-input-label: $c-dark-main;
+$c-input-error: $c-error-text;
 
 .wrapper {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   width: 100%;
 }
 
 .input {
   height: 50px;
-  margin-top: 10px;
   padding: 0 14px;
   border: 1px solid $c-input-border;
   border-radius: 50px;
@@ -35,5 +36,5 @@ $c-input-label: $c-dark-main;
 .error {
   height: 20px;
   font-size: 14px;
-  color: $c-error-text;
+  color: $c-input-error;
 }
