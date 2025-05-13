@@ -1,5 +1,5 @@
 import styles from './loginForm.module.scss';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@components/form/input/Input.tsx';
 import Button from '@components/button/Button.tsx';
@@ -18,7 +18,7 @@ export const LoginForm: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const {
     handleSubmit,
-    control,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(loginFormSchema),
@@ -65,43 +65,26 @@ export const LoginForm: React.FC = () => {
         }}
       >
         <div className={styles.container}>
-          <Controller
-            name={'email'}
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type={'email'}
-                label={'Email'}
-                id={'login-form__email'}
-                placeholder={'email'}
-                wrapperClassName={'wrapper'}
-              />
-            )}
+          <Input
+            {...register('email')}
+            type={'email'}
+            label={'Email'}
+            id={'login-form__email'}
+            placeholder={'johndoe@email.com'}
+            error={errors.email?.message}
           />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
         </div>
         <div className={styles.container}>
-          <Controller
-            name={'password'}
-            control={control}
-            render={({ field }) => (
-              <div className={styles.inner}>
-                <Input
-                  {...field}
-                  type={showPassword ? 'text' : 'password'}
-                  id={'login-form__password'}
-                  label={'Password'}
-                  placeholder={'password'}
-                  wrapperClassName={'wrapper'}
-                />
-                <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            )}
-          />
-          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+          <div className={styles.inner}>
+            <Input
+              {...register('password')}
+              type={'password'}
+              id={'login-form__password'}
+              label={'Password'}
+              placeholder={'********'}
+              error={errors.password?.message}
+            />
+          </div>
         </div>
 
         {error && <span className={styles.error}>{error}</span>}
