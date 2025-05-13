@@ -10,4 +10,10 @@ export enum ValidationMessages {
   PASSWORD_MISSING_UPPERCASE = 'Password must contain at least one uppercase letter.',
   PASSWORD_MISSING_LOWERCASE = 'Password must contain at least one lowercase letter.',
   PASSWORD_WHITESPACE = 'Password must not contain leading or trailing whitespace.',
+  REQUIRED = 'Field is required',
+  WHITESPACE = 'Email address must not contain spaces.',
+  SPECIAL_CHAR = 'First name must contain only letters (no special characters or numbers)',
+  ZIP_INVALID = 'Invalid postal code',
+  DATE_FUTURE = 'Date cannot be in the future',
+  DATE_AGE = 'You must be at least ${minimumAge} years old',
 }
