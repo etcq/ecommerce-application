@@ -1,5 +1,5 @@
 import Button from '@/components/button/Button';
-import imgPath from '@assets/images/login/login-sneakers.jpg';
+import imgPath from '@assets/images/not-found/not-found.png';
 import styles from './not-found.module.scss';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
