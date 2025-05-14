@@ -1,3 +1,13 @@
-export default function RegistrationPage(): React.JSX.Element {
-  return <div>RegistrationPage</div>;
+import styles from './registration-page.module.scss';
+import React from 'react';
+import RegistrationForm from '@/components/form/registration/Registration';
+
+function RegistrationPage(): React.JSX.Element {
+  return (
+    <div className={styles.container}>
+      <RegistrationForm />
+    </div>
+  );
 }
+
+export default RegistrationPage;

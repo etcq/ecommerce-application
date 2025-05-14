@@ -25,26 +25,20 @@ $c-link: $c-link-main;
   margin-top: 20px;
 }
 
+.subheader {
+  color: $c-dark-hover;
+}
+
 .link {
   cursor: pointer;
-  color: $c-link;
+  color: $c-dark-main;
+  text-decoration: underline;
+
+  &:hover {
+    color: $c-dark-hover;
+  }
 }
 
 .inner {
   position: relative;
-}
-
-.visibility {
-  cursor: pointer;
-
-  position: absolute;
-  top: 69%;
-  right: 20px;
-  transform: translateY(-50%);
-
-  margin: 0;
-  padding: 0;
-  border: none;
-
-  background: none;
 }

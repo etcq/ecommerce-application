@@ -1,6 +1,5 @@
 import styles from './loginForm.module.scss';
-import { Controller, useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@components/form/input/Input.tsx';
 import Button from '@components/button/Button.tsx';
@@ -8,60 +7,48 @@ import { useAuthStore } from '@/core/stores/use-auth-state.ts';
 import * as React from 'react';
 import { loginFormSchema } from '@components/form/login/validation-scheme.ts';
 import { FormEvent } from 'react';
-import { NavigateFunction, useNavigate } from 'react-router';
+import { NavigateFunction, NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
-type TLoginFormValues = z.infer<typeof loginFormSchema>;
+import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
 
 export const LoginForm: React.FC = () => {
-  const [apiError, setApiError] = React.useState<string | null>(null);
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const navigate: NavigateFunction = useNavigate();
   const {
     handleSubmit,
-    control,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    mode: 'onChange',
   });
 
   const { login } = useAuthStore();
-  const goToRegistration: () => void = (): void => {
-    void navigate(ROUTES.REGISTRATION);
-  };
-
-  const togglePasswordVisibility: () => void = (): void => {
-    setShowPassword((prevState: boolean): boolean => !prevState);
-  };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
-    setApiError(null);
+    setError(null);
     try {
-      await login(data.email.toLowerCase(), data.password);
+      await login(data.email, data.password);
       void navigate(ROUTES.MAIN);
     } catch (error) {
       if (error instanceof Error) {
-        setApiError(error.message);
+        setError(error.message);
       }
     }
   };
 
   return (
     <>
-      <h2>LOGIN</h2>
-      <p>
+      <h2 className={styles.header}>LOGIN</h2>
+      <p className={styles.subheader}>
         Do not have an account,{' '}
-        <span className={styles.link} onClick={goToRegistration}>
+        <NavLink className={styles.link} to="/registration">
           create a new one.
-        </span>
+        </NavLink>
       </p>
 
       <form
+        noValidate
         className={styles.wrapper}
         onSubmit={(e: FormEvent<HTMLFormElement>): void => {
           e.preventDefault();
@@ -69,46 +56,29 @@ export const LoginForm: React.FC = () => {
         }}
       >
         <div className={styles.container}>
-          <Controller
-            name={'email'}
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type={'email'}
-                label={'Email'}
-                id={'login-form__email'}
-                placeholder={'email'}
-                wrapperClassName={'wrapper'}
-              />
-            )}
+          <Input
+            {...register('email')}
+            type={'email'}
+            label={'Email'}
+            id={'login-form__email'}
+            placeholder={'johndoe@email.com'}
+            error={errors.email?.message}
           />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
         </div>
         <div className={styles.container}>
-          <Controller
-            name={'password'}
-            control={control}
-            render={({ field }) => (
-              <div className={styles.inner}>
-                <Input
-                  {...field}
-                  type={showPassword ? 'text' : 'password'}
-                  id={'login-form__password'}
-                  label={'Password'}
-                  placeholder={'password'}
-                  wrapperClassName={'wrapper'}
-                />
-                <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            )}
-          />
-          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+          <div className={styles.inner}>
+            <Input
+              {...register('password')}
+              type={'password'}
+              id={'login-form__password'}
+              label={'Password'}
+              placeholder={'********'}
+              error={errors.password?.message}
+            />
+          </div>
         </div>
 
-        {apiError && <span className={styles.error}>{apiError}</span>}
+        {error && <span className={styles.error}>{error}</span>}
 
         <Button
           className={styles.button}

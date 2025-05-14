@@ -1,0 +1,226 @@
+import React from 'react';
+import styles from './registration-form.module.scss';
+import Input from '../input/Input';
+import Button from '@/components/button/Button';
+import inputStyles from '../../../components/form/input/input.module.scss';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { TFormFields, userFormSchema } from './validation-scheme';
+import { NavLink, useNavigate } from 'react-router';
+import { ROUTES } from '@/constants/constants';
+
+const RegistrationForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<TFormFields>({
+    resolver: zodResolver(userFormSchema),
+    mode: 'onChange',
+  });
+
+  const navigate = useNavigate();
+
+  const [error, setError] = React.useState<string | null>(null);
+
+  const onSubmit = () => {
+    setError(null);
+    try {
+      void navigate(ROUTES.MAIN);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
+  };
+
+  return (
+    <div className={styles['registration-form']}>
+      <div className={styles.title}>
+        <h1 className={styles['title-header']}>Sign Up</h1>
+        <p className={styles['title-subheader']}>
+          Already Have An Account,
+          <NavLink className={styles['title-link']} to="/login">
+            Login
+          </NavLink>
+          .
+        </p>
+      </div>
+
+      <form className={styles.form} onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('firstName')}
+              label="First Name"
+              placeholder="John"
+              error={errors.firstName?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('lastName')}
+              label="Last Name"
+              placeholder="Doe"
+              error={errors.lastName?.message}
+            ></Input>
+          </div>
+        </div>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('email')}
+              label="Email"
+              type="email"
+              placeholder="johndoe@email.com"
+              error={errors.email?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('password')}
+              label="Password"
+              type={'password'}
+              placeholder="********"
+              error={errors.password?.message}
+            ></Input>
+          </div>
+        </div>
+
+        <div className={`${styles['input-wrapper-row']} ${styles.date}`}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('dateOfBirth')}
+              label="Date of Birth"
+              type="date"
+              placeholder="mm/dd/yyyy"
+              error={errors.dateOfBirth?.message}
+            ></Input>
+          </div>
+        </div>
+
+        <p className={styles.address}>Address Information</p>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('address.street')}
+              label="Street"
+              placeholder="123 Maple Street"
+              error={errors.address?.street?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('address.city')}
+              label="City"
+              placeholder="Anytown"
+              error={errors.address?.city?.message}
+            ></Input>
+          </div>
+        </div>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              maxLength={5}
+              {...register('address.zip')}
+              label="Postal Code"
+              placeholder="12345"
+              error={errors.address?.zip?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <label htmlFor="country">Country</label>
+            <select {...register('address.country')} className={inputStyles.input} id="country" defaultValue="select">
+              <option value="select" disabled>
+                Select Country
+              </option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+            </select>
+            <div className={styles['input-error']}>{errors.address?.country?.message}</div>
+          </div>
+        </div>
+
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use as default for shipping</span>
+          <input type="checkbox" />
+        </span>
+
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use shipping address as billing</span>
+          <input type="checkbox" />
+        </span>
+
+        <p className={styles.address}>Billing Address</p>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('billing.street')}
+              label="Street"
+              placeholder="123 Maple Street"
+              error={errors.billing?.street?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <Input
+              {...register('billing.city')}
+              label="City"
+              placeholder="Anytown"
+              error={errors.billing?.city?.message}
+            ></Input>
+          </div>
+        </div>
+
+        <div className={styles['input-wrapper-row']}>
+          <div className={styles['input-wrapper']}>
+            <Input
+              maxLength={5}
+              {...register('billing.zip')}
+              label="Postal Code"
+              placeholder="12345"
+              error={errors.billing?.zip?.message}
+            ></Input>
+          </div>
+
+          <div className={styles['input-wrapper']}>
+            <label>Country</label>
+            <select
+              {...register('address.country')}
+              className={inputStyles.input}
+              id="billing-country"
+              defaultValue="select"
+            >
+              <option value="select" disabled>
+                Select Country
+              </option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+            </select>
+            <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
+          </div>
+        </div>
+
+        <span className={styles.shipping}>
+          <span className={styles['shipping-label']}>Use as default for billing</span>
+          <input type="checkbox" />
+        </span>
+
+        <Button className={styles.submit} disabled={isSubmitting || !isValid} type="submit" size="large">
+          {isSubmitting ? 'Loading...' : 'Create Account'}
+        </Button>
+        <div className={styles['input-error']}>{error}</div>
+      </form>
+    </div>
+  );
+};
+
+export default RegistrationForm;
