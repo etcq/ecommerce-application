@@ -9,12 +9,10 @@ import { loginFormSchema } from '@components/form/login/validation-scheme.ts';
 import { FormEvent } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
 
 export const LoginForm: React.FC = () => {
   const [error, setError] = React.useState<string | null>(null);
-  const [showPassword, setShowPassword] = React.useState(false);
   const navigate: NavigateFunction = useNavigate();
   const {
     handleSubmit,
@@ -28,10 +26,6 @@ export const LoginForm: React.FC = () => {
   const { login } = useAuthStore();
   const goToRegistration: () => void = (): void => {
     void navigate(ROUTES.REGISTRATION);
-  };
-
-  const togglePasswordVisibility: () => void = (): void => {
-    setShowPassword((prevState: boolean): boolean => !prevState);
   };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {

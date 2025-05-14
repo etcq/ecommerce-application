@@ -5,8 +5,6 @@ import Button from '@/components/button/Button';
 import inputStyles from '../../../components/form/input/input.module.scss';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useState } from 'react';
 import { TFormFields, userFormSchema } from './validation-scheme';
 import { NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
@@ -20,11 +18,6 @@ const RegistrationForm: React.FC = () => {
     resolver: zodResolver(userFormSchema),
     mode: 'onChange',
   });
-
-  const [isVisible, setIsVisible] = useState(false);
-  const toggleVisibility = () => {
-    setIsVisible((prev) => !prev);
-  };
 
   const navigate = useNavigate();
 
@@ -90,13 +83,10 @@ const RegistrationForm: React.FC = () => {
             <Input
               {...register('password')}
               label="Password"
-              type={isVisible ? 'text' : 'password'}
+              type={'password'}
               placeholder="********"
               error={errors.password?.message}
             ></Input>
-            <span className={styles.eye} onClick={toggleVisibility}>
-              {isVisible ? <FaEyeSlash /> : <FaEye />}
-            </span>
           </div>
         </div>
 
