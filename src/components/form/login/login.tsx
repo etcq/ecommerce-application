@@ -7,7 +7,7 @@ import { useAuthStore } from '@/core/stores/use-auth-state.ts';
 import * as React from 'react';
 import { loginFormSchema } from '@components/form/login/validation-scheme.ts';
 import { FormEvent } from 'react';
-import { NavigateFunction, useNavigate } from 'react-router';
+import { NavigateFunction, NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
 
@@ -24,9 +24,6 @@ export const LoginForm: React.FC = () => {
   });
 
   const { login } = useAuthStore();
-  const goToRegistration: () => void = (): void => {
-    void navigate(ROUTES.REGISTRATION);
-  };
 
   const onSubmit = async (data: TLoginFormValues): Promise<void> => {
     setError(null);
@@ -42,12 +39,12 @@ export const LoginForm: React.FC = () => {
 
   return (
     <>
-      <h2>LOGIN</h2>
-      <p>
+      <h2 className={styles.header}>LOGIN</h2>
+      <p className={styles.subheader}>
         Do not have an account,{' '}
-        <span className={styles.link} onClick={goToRegistration}>
+        <NavLink className={styles.link} to="/registration">
           create a new one.
-        </span>
+        </NavLink>
       </p>
 
       <form
