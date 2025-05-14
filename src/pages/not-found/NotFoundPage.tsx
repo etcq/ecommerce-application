@@ -10,9 +10,9 @@ export default function NotFoundPage(): React.JSX.Element {
   return (
     <div>
       <div className={styles['not-found']}>
-        <img src={imgPath} className={styles['not-found_img']} />
+        <img src={imgPath} className={styles['not-found_img']} alt="Sad sneaker" />
         <div className={styles['not-found_description']}>
-          <h2 className={styles.title}>Oh... Sh#!%t</h2>
+          <h2 className={styles.title}>Error 404</h2>
           <h2 className={styles.title}>Page is not found</h2>
           <p>We can't find the page you were looking for.</p>
           <Button
