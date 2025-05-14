@@ -68,23 +68,13 @@
 .form {
   display: flex;
   flex-direction: column;
+}
 
-  button {
-    margin: 65px auto 0;
-  }
+.submit {
+  margin: 65px auto 0;
 }
 
 .date::after {
   content: '';
   flex-basis: 50%;
-}
-
-.eye {
-  cursor: pointer;
-
-  position: absolute;
-  top: 45%;
-  right: 5%;
-
-  color: $c-dark-hover;
 }

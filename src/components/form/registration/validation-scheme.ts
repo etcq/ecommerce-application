@@ -44,13 +44,22 @@ export const userFormSchema = z.object({
     .min(1, {
       message: ValidationMessages.REQUIRED,
     })
+    .regex(/^\S*$/, {
+      message: ValidationMessages.WHITESPACE,
+    })
     .email({
       message: ValidationMessages.EMAIL_INVALID,
+    })
+    .regex(/^\S*$/, {
+      message: ValidationMessages.WHITESPACE,
     }),
   password: z
     .string()
     .min(1, {
       message: ValidationMessages.REQUIRED,
+    })
+    .regex(/^\S*$/, {
+      message: ValidationMessages.WHITESPACE,
     })
     .min(8, {
       message: ValidationMessages.PASSWORD_TOO_SHORT,
