@@ -10,7 +10,7 @@ $c-input-error: $c-error-text;
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
 }
 
@@ -34,5 +34,24 @@ $c-input-error: $c-error-text;
 }
 
 .error {
+  height: 20px;
+  font-size: 14px;
   color: $c-input-error;
+}
+
+.visibility {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  color: $c-dark-hover;
+
+  background: none;
 }

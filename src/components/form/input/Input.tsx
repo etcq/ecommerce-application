@@ -1,5 +1,6 @@
 import styles from './input.module.scss';
 import React, { FC } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface IProps {
   type?: 'text' | 'email' | 'password' | 'date';
@@ -7,13 +8,19 @@ interface IProps {
   id?: string;
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  wrapperClassName: string;
+  wrapperClassName?: string;
   error?: string;
 }
 
 const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, error, ...props }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const togglePasswordVisibility: () => void = (): void => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
-    <div className={`${styles.wrapper} ${styles[wrapperClassName]}`}>
+    <div className={`${styles.wrapper} ${wrapperClassName ? styles[wrapperClassName] : ''}`}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}
@@ -21,14 +28,21 @@ const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wr
       )}
 
       <input
+        {...props}
         className={styles.input}
-        type={type}
+        type={(type === 'password' && (showPassword ? 'text' : 'password')) || type}
         id={id}
         placeholder={placeholder}
         onChange={onChange}
-        {...props}
       ></input>
-      {error && <span className={styles.error}>{error}</span>}
+
+      <span className={styles.error}>{error}</span>
+
+      {type === 'password' && (
+        <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </button>
+      )}
     </div>
   );
 };
