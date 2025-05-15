@@ -14,6 +14,9 @@ export default defineConfig({
       all: true,
       exclude: ['**/*.type.ts', '**/*.d.ts', '**/*.interface.ts', '**/*.constants.ts'],
     },
+    css: {
+      modules: { classNameStrategy: 'non-scoped' },
+    },
   },
   resolve: {
     alias: [

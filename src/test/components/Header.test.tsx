@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import Header from '../../components/header/Header';
 import { BrowserRouter } from 'react-router';
@@ -13,12 +13,15 @@ describe('Header component', () => {
     expect(screen.getByAltText('SneakHub')).toBeInTheDocument();
     expect(screen.getByRole('menu')).toBeInTheDocument();
   });
-  it('check to login menu must be opened', () => {
+  it('Check the initial state of the login menu component and the class change when the icon is clicked.', () => {
     render(
       <BrowserRouter>
         <Header />
       </BrowserRouter>,
     );
-    expect(screen.getByTestId('login-menu')).toHaveStyle('visibility: visible');
+    const button = screen.getByTestId('login-menu-button');
+    expect(screen.getByTestId('login-menu')).toHaveClass('close');
+    fireEvent.click(button);
+    expect(screen.getByTestId('login-menu')).toHaveClass('open');
   });
 });
