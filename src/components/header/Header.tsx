@@ -27,7 +27,7 @@ export default function Header(): React.JSX.Element {
           </NavLink>
           <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
-        <ul className={styles['nav-menu']}>
+        <ul className={styles['nav-menu']} role="menu">
           {menuLinks.map((link) => (
             <NavLink to={link.route} className={({ isActive }) => (isActive ? styles.active : '')} key={link.route}>
               <li className={styles['nav-menu-item']}>

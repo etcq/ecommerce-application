@@ -31,7 +31,11 @@ export default function LoginMenu(): React.JSX.Element {
   }, [isLoginMenuOpened, isByeMessageShown, toggleLoginMenuOpened]);
 
   return (
-    <div className={`${styles['login-menu']} ${isLoginMenuOpened ? styles.open : styles.close}`} ref={menu}>
+    <div
+      className={`${styles['login-menu']} ${isLoginMenuOpened ? styles.open : styles.close}`}
+      ref={menu}
+      data-testid="login-menu"
+    >
       <div className={styles['login-menu__head']}></div>
       {isByeMessageShown ? (
         <div className={styles['login-menu__title']}>

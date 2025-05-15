@@ -22,7 +22,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <>
+      <div data-testid="app">
         <Header />
         <main>
           <Routes>
@@ -38,7 +38,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
-      </>
+      </div>
     </BrowserRouter>
   );
 }
