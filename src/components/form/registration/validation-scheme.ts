@@ -16,6 +16,26 @@ const birthDateSchema = z.coerce
     message: ValidationMessages.DATE_AGE,
   });
 
+const addressSchema = z.object({
+  street: z.string().min(1, {
+    message: ValidationMessages.REQUIRED,
+  }),
+  city: z
+    .string()
+    .min(1, {
+      message: ValidationMessages.REQUIRED,
+    })
+    .regex(/^[A-Za-z]+$/, {
+      message: ValidationMessages.SPECIAL_CHAR,
+    }),
+  zip: z.string().regex(/^\d{5}$/, {
+    message: ValidationMessages.ZIP_INVALID,
+  }),
+  country: z.enum(['US', 'CA'], {
+    message: ValidationMessages.REQUIRED,
+  }),
+});
+
 export const userFormSchema = z.object({
   firstName: z
     .string()
@@ -74,40 +94,6 @@ export const userFormSchema = z.object({
       message: ValidationMessages.PASSWORD_MISSING_DIGIT,
     }),
   dateOfBirth: birthDateSchema,
-
-  address: z.object({
-    street: z.string().min(1, {
-      message: ValidationMessages.REQUIRED,
-    }),
-    city: z
-      .string()
-      .min(1, {
-        message: ValidationMessages.REQUIRED,
-      })
-      .regex(/^[A-Za-z]+$/, {
-        message: ValidationMessages.SPECIAL_CHAR,
-      }),
-    zip: z.string().regex(/^\d{5}$/, {
-      message: ValidationMessages.ZIP_INVALID,
-    }),
-    country: z.string(),
-  }),
-
-  billing: z.object({
-    street: z.string().min(1, {
-      message: ValidationMessages.REQUIRED,
-    }),
-    city: z
-      .string()
-      .min(1, {
-        message: ValidationMessages.REQUIRED,
-      })
-      .regex(/^[A-Za-z]+$/, {
-        message: ValidationMessages.SPECIAL_CHAR,
-      }),
-    zip: z.string().regex(/^\d{5}$/, {
-      message: ValidationMessages.ZIP_INVALID,
-    }),
-    country: z.string(),
-  }),
+  address: addressSchema,
+  billing: addressSchema,
 });
