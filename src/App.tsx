@@ -12,6 +12,7 @@ import Bucket from './pages/bucket/Bucket';
 import { RedirectForAuthPerson } from './core/routes/protected-routes';
 import { useAuthStore } from './core/stores/use-auth-state';
 import { useEffect } from 'react';
+import Loading from './components/loading/Loading';
 
 function App() {
   const { initializationAuth } = useAuthStore();
