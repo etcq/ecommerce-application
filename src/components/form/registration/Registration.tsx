@@ -253,7 +253,7 @@ const RegistrationForm: React.FC = () => {
             </span>
           </>
         )}
-        <span className={styles['input-error']}>{error}</span>
+        <span className={styles.error}>{error}</span>
         <Button className={styles.submit} disabled={isSubmitting} type="submit" size="large">
           {isSubmitting ? 'Loading...' : 'Create Account'}
         </Button>
