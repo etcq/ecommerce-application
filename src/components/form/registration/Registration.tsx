@@ -52,6 +52,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('firstName')}
+              id="first-name"
               label="First Name"
               placeholder="John"
               error={errors.firstName?.message}
@@ -61,6 +62,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('lastName')}
+              id="last-name"
               label="Last Name"
               placeholder="Doe"
               error={errors.lastName?.message}
@@ -72,6 +74,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('email')}
+              id="email"
               label="Email"
               type="email"
               placeholder="johndoe@email.com"
@@ -82,6 +85,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('password')}
+              id="password"
               label="Password"
               type={'password'}
               placeholder="********"
@@ -94,6 +98,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('dateOfBirth')}
+              id="date-of-birth"
               label="Date of Birth"
               type="date"
               placeholder="mm/dd/yyyy"
@@ -108,6 +113,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('address.street')}
+              id="address-street"
               label="Street"
               placeholder="123 Maple Street"
               error={errors.address?.street?.message}
@@ -117,6 +123,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('address.city')}
+              id="address-city"
               label="City"
               placeholder="Anytown"
               error={errors.address?.city?.message}
@@ -129,6 +136,7 @@ const RegistrationForm: React.FC = () => {
             <Input
               maxLength={5}
               {...register('address.zip')}
+              id="address-zip"
               label="Postal Code"
               placeholder="12345"
               error={errors.address?.zip?.message}
@@ -136,8 +144,12 @@ const RegistrationForm: React.FC = () => {
           </div>
 
           <div className={styles['input-wrapper']}>
-            <label htmlFor="country">Country</label>
-            <select {...register('address.country')} className={inputStyles.input} id="country" defaultValue="select">
+            <label htmlFor="address-country">Country</label>
+            <select
+              {...register('address.country')}
+              className={inputStyles.input}
+              id="address-country"
+              defaultValue="select">
               <option value="select" disabled>
                 Select Country
               </option>
@@ -164,6 +176,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('billing.street')}
+              id="billing-street"
               label="Street"
               placeholder="123 Maple Street"
               error={errors.billing?.street?.message}
@@ -173,6 +186,7 @@ const RegistrationForm: React.FC = () => {
           <div className={styles['input-wrapper']}>
             <Input
               {...register('billing.city')}
+              id="billing-city"
               label="City"
               placeholder="Anytown"
               error={errors.billing?.city?.message}
@@ -185,6 +199,7 @@ const RegistrationForm: React.FC = () => {
             <Input
               maxLength={5}
               {...register('billing.zip')}
+              id="billing-zip"
               label="Postal Code"
               placeholder="12345"
               error={errors.billing?.zip?.message}
@@ -192,7 +207,7 @@ const RegistrationForm: React.FC = () => {
           </div>
 
           <div className={styles['input-wrapper']}>
-            <label>Country</label>
+            <label htmlFor="billing-country">Country</label>
             <select
               {...register('address.country')}
               className={inputStyles.input}
