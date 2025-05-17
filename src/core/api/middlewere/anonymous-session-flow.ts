@@ -26,7 +26,6 @@ export function withAnonymousSessionFlow(): ByProjectKeyRequestBuilder {
   };
 
   const ctpClient: Client = new ClientBuilder()
-    .withProjectKey(projectKey)
     .withAnonymousSessionFlow(options)
     .withHttpMiddleware(httpOptions)
     .build();
