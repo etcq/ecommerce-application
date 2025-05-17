@@ -1,0 +1,36 @@
+.product {
+  // border: 1px solid black;
+  width: 286px;
+  height: 432px;
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px 5px gray;
+  }
+
+  &__preview {
+    width: 100%;
+    height: 360px;
+    border-radius: 1rem;
+
+    background: url('@assets/images/login/login-sneakers.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__decryption {
+    margin: 0 14px;
+  }
+
+  &__name {
+    margin-top: 12px;
+    margin-bottom: 8px;
+
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 100%;
+  }
+}
