@@ -176,7 +176,8 @@ const RegistrationForm: React.FC = () => {
               {...register('address.country')}
               className={inputStyles.input}
               id="address-country"
-              defaultValue="select">
+              defaultValue="select"
+            >
               <option value="select" disabled>
                 Select Country
               </option>
