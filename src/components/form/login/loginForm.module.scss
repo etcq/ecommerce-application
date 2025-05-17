@@ -1,0 +1,44 @@
+@use '../../../assets/style/variables' as *;
+
+$c-error-message: $c-error-text;
+$c-link: $c-link-main;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error {
+  height: 30px;
+  color: $c-error-message;
+}
+
+.button {
+  align-self: center;
+  margin-top: 20px;
+}
+
+.subheader {
+  color: $c-dark-hover;
+}
+
+.link {
+  cursor: pointer;
+  color: $c-dark-main;
+  text-decoration: underline;
+
+  &:hover {
+    color: $c-dark-hover;
+  }
+}
+
+.inner {
+  position: relative;
+}

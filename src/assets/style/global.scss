@@ -5,11 +5,17 @@
   font-family: Oxygen, sans-serif;
 }
 
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
+html {
+  overflow-x: visible !important;
+  height: 100vh;
 }
 
 .hidden {
   display: none !important;
+}
+
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px;
 }

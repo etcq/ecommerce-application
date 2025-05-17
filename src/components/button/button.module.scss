@@ -1,0 +1,57 @@
+@use '../../assets/style/variables.scss' as *;
+
+/* button */
+
+$c-button-main: $c-dark-secondary;
+$c-button-border: $c-dark-secondary;
+$c-button-text: $c-light-main;
+$c-button-hover: rgba($c-dark-main, 0);
+$c-button-disabled: rgba($c-dark-secondary, 0.5);
+$c-button-text-disabled: rgba($c-light-main, 0.5);
+
+.button {
+  width: 100%;
+  height: 59px;
+  border: 1px solid $c-button-main;
+  border-radius: 50px;
+
+  font-size: 20px;
+  color: $c-button-text;
+
+  background-color: $c-button-main;
+
+  transition: 0.2s;
+
+  &.large {
+    max-width: 540px;
+  }
+
+  &.medium {
+    max-width: 300px;
+    height: 49px;
+  }
+
+  &.small {
+    max-width: 135px;
+    height: 49px;
+  }
+
+  &.x-small {
+    width: fit-content;
+    height: 32px;
+    padding: 4px 16px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $c-button-main;
+    background-color: $c-button-hover;
+  }
+
+  &:disabled {
+    cursor: default;
+    border: 1px solid $c-button-disabled;
+    color: $c-button-text-disabled;
+    background-color: $c-button-disabled;
+  }
+}
