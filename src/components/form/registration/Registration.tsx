@@ -255,7 +255,7 @@ const RegistrationForm: React.FC = () => {
                   <option value="US">United States</option>
                   <option value="CA">Canada</option>
                 </select>
-                <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
+                <span className={styles['input-error']}>{errors.billing?.country?.message}</span>
               </div>
             </div>
 

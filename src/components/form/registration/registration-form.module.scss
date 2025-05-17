@@ -87,3 +87,9 @@ $c-error-message: $c-error-text;
   margin-top: 15px;
   color: $c-error-message;
 }
+
+.input-error {
+  height: 20px;
+  font-size: 14px;
+  color: $c-error-message;
+}
