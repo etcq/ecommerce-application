@@ -4,29 +4,56 @@ import Input from '../input/Input';
 import Button from '@/components/button/Button';
 import inputStyles from '../../../components/form/input/input.module.scss';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { TFormFields, userFormSchema } from './validation-scheme';
-import { NavLink, useNavigate } from 'react-router';
-import { ROUTES } from '@/constants/constants';
+import { NavLink } from 'react-router';
+import { useEffect, useState, ChangeEvent } from 'react';
+import { createAddresses } from '@/core/utils/create-addresses.ts';
+import { createCustomerDraft } from '@/core/utils/create-customer-draft.ts';
+import { registerCustomer } from '@/core/api/customers/registration.ts';
+import { useAuthStore } from '@/core/stores/use-auth-state.ts';
+import { CustomerSignInResult } from '@commercetools/platform-sdk';
 
 const RegistrationForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    setValue,
+    control,
+    formState: { errors, isSubmitting },
   } = useForm<TFormFields>({
     resolver: zodResolver(userFormSchema),
     mode: 'onChange',
   });
 
-  const navigate = useNavigate();
-
+  const { login } = useAuthStore();
   const [error, setError] = React.useState<string | null>(null);
+  const [useAsDefaultBilling, setUseAsDefaultBilling] = useState(false);
+  const [useAsDefaultShipping, setUseAsDefaultShipping] = useState(false);
+  const [useShippingAsBilling, setUseShippingAsBilling] = useState(false);
 
-  const onSubmit = () => {
+  const address = useWatch({ control, name: 'address' });
+
+  useEffect(() => {
+    if (useShippingAsBilling && address) {
+      setValue('billing.street', address.street);
+      setValue('billing.city', address.city);
+      setValue('billing.zip', address.zip);
+      setValue('billing.country', address.country);
+    }
+  }, [address, useShippingAsBilling, setValue]);
+
+  const onSubmit = async (data: TFormFields): Promise<void> => {
     setError(null);
+
+    const createdAddresses = createAddresses(data, useShippingAsBilling);
+    const customerData = createCustomerDraft(data, createdAddresses, useAsDefaultBilling, useAsDefaultShipping);
+
     try {
-      void navigate(ROUTES.MAIN);
+      const customer: CustomerSignInResult = await registerCustomer(customerData);
+      if (customer) {
+        await login(data.email, data.password);
+      }
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -162,77 +189,89 @@ const RegistrationForm: React.FC = () => {
 
         <span className={styles.shipping}>
           <span className={styles['shipping-label']}>Use as default for shipping</span>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={(e: ChangeEvent<HTMLInputElement>): void => setUseAsDefaultShipping(e.target.checked)}
+          />
         </span>
 
         <span className={styles.shipping}>
           <span className={styles['shipping-label']}>Use shipping address as billing</span>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={(e: ChangeEvent<HTMLInputElement>): void => setUseShippingAsBilling(e.target.checked)}
+          />
         </span>
 
-        <p className={styles.address}>Billing Address</p>
+        {!useShippingAsBilling && (
+          <>
+            <p className={styles.address}>Billing Address</p>
 
-        <div className={styles['input-wrapper-row']}>
-          <div className={styles['input-wrapper']}>
-            <Input
-              {...register('billing.street')}
-              id="billing-street"
-              label="Street"
-              placeholder="123 Maple Street"
-              error={errors.billing?.street?.message}
-            ></Input>
-          </div>
+            <div className={styles['input-wrapper-row']}>
+              <div className={styles['input-wrapper']}>
+                <Input
+                  {...register('billing.street')}
+                  id="billing-street"
+                  label="Street"
+                  placeholder="123 Maple Street"
+                  error={errors.billing?.street?.message}
+                ></Input>
+              </div>
 
-          <div className={styles['input-wrapper']}>
-            <Input
-              {...register('billing.city')}
-              id="billing-city"
-              label="City"
-              placeholder="Anytown"
-              error={errors.billing?.city?.message}
-            ></Input>
-          </div>
-        </div>
+              <div className={styles['input-wrapper']}>
+                <Input
+                  {...register('billing.city')}
+                  id="billing-city"
+                  label="City"
+                  placeholder="Anytown"
+                  error={errors.billing?.city?.message}
+                ></Input>
+              </div>
+            </div>
 
-        <div className={styles['input-wrapper-row']}>
-          <div className={styles['input-wrapper']}>
-            <Input
-              maxLength={5}
-              {...register('billing.zip')}
-              id="billing-zip"
-              label="Postal Code"
-              placeholder="12345"
-              error={errors.billing?.zip?.message}
-            ></Input>
-          </div>
+            <div className={styles['input-wrapper-row']}>
+              <div className={styles['input-wrapper']}>
+                <Input
+                  maxLength={5}
+                  {...register('billing.zip')}
+                  id="billing-zip"
+                  label="Postal Code"
+                  placeholder="12345"
+                  error={errors.billing?.zip?.message}
+                ></Input>
+              </div>
 
-          <div className={styles['input-wrapper']}>
-            <label htmlFor="billing-country">Country</label>
-            <select
-              {...register('address.country')}
-              className={inputStyles.input}
-              id="billing-country"
-              defaultValue="select"
-            >
-              <option value="select" disabled>
-                Select Country
-              </option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-            </select>
-            <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
-          </div>
-        </div>
+              <div className={styles['input-wrapper']}>
+                <label htmlFor="billing-country">Country</label>
+                <select
+                  {...register('address.country')}
+                  className={inputStyles.input}
+                  id="billing-country"
+                  defaultValue="select"
+                >
+                  <option value="select" disabled>
+                    Select Country
+                  </option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                </select>
+                <div className={styles['input-error']}>{errors.billing?.country?.message}</div>
+              </div>
+            </div>
 
-        <span className={styles.shipping}>
-          <span className={styles['shipping-label']}>Use as default for billing</span>
-          <input type="checkbox" />
-        </span>
-
-        <Button className={styles.submit} disabled={isSubmitting || !isValid} type="submit" size="large">
+            <span className={styles.shipping}>
+              <span className={styles['shipping-label']}>Use as default for billing</span>
+              <input
+                type="checkbox"
+                onChange={(e: ChangeEvent<HTMLInputElement>): void => setUseAsDefaultBilling(e.target.checked)}
+              />
+            </span>
+          </>
+        )}
+        <span className={styles.error}>{error}</span>
+        <Button className={styles.submit} disabled={isSubmitting} type="submit" size="large">
           {isSubmitting ? 'Loading...' : 'Create Account'}
         </Button>
-        <div className={styles['input-error']}>{error}</div>
       </form>
     </div>
   );
