@@ -13,7 +13,7 @@ const LoginPage = lazy(() => import('@pages/user/login/LoginPage'));
 const NotFoundPage = lazy(() => import('@pages/not-found/NotFoundPage'));
 const ProfilePage = lazy(() => import('@pages/user/profile/Profile'));
 const RegistrationPage = lazy(() => import('@pages/user/registration/RegistrationPage'));
-const Bucket = lazy(() => import('@pages/bucket/Bucket'));
+const Cart = lazy(() => import('@pages/cart/Cart'));
 
 function App() {
   const { initializationAuth } = useAuthStore();
@@ -37,7 +37,7 @@ function App() {
                 <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
               </Route>
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-              <Route path={ROUTES.BUCKET} element={<Bucket />} />
+              <Route path={ROUTES.CART} element={<Cart />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

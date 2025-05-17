@@ -5,8 +5,8 @@ export default function Loading(): React.JSX.Element {
   return (
     <div className={styles.wrapper}>
       <div className={styles.spinner}>
-        <img src={imgPath} className={styles.left}></img>
-        <img src={imgPath} className={styles.right}></img>
+        <img src={imgPath} className={`${styles.sneaker} ${styles.left}`}></img>
+        <img src={imgPath} className={`${styles.sneaker} ${styles.right}`}></img>
       </div>
       <span className={styles.text}>Loading...</span>
     </div>

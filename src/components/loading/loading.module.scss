@@ -21,28 +21,23 @@
   font-size: 2.4rem;
 }
 
-.left {
+.sneaker {
   position: relative;
 
   width: 150px;
   height: auto;
 
-  animation-name: move-left;
   animation-duration: 1.8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
+.left {
+  animation-name: move-left;
+}
+
 .right {
-  position: relative;
-
-  width: 150px;
-  height: auto;
-
   animation-name: move-right;
-  animation-duration: 1.8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
 }
 
 @keyframes move-left {
@@ -84,8 +79,13 @@
     transform: rotate(0deg);
   }
 
+  90% {
+    transform: rotate(7deg);
+  }
+
   100% {
     left: 0;
+    transform: rotate(10deg);
   }
 }
 
@@ -94,10 +94,14 @@
     left: 0;
   }
 
+  40% {
+    transform: rotate(7deg);
+  }
+
   50% {
     top: 0;
     left: -164px;
-    transform: rotate(0);
+    transform: rotate(10deg);
   }
 
   58% {

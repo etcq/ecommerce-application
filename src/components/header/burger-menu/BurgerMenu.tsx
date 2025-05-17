@@ -26,43 +26,32 @@ export default function BurgerMenu(): React.JSX.Element {
     };
   }, [burgerOpen, isLoggedIn]);
 
+  const menuDefaultLinks = [
+    { route: ROUTES.MAIN, caption: 'Home' },
+    { route: ROUTES.PRODUCT_LIST, caption: 'Catalog' },
+    { route: ROUTES.ABOUT, caption: 'About Us' },
+    { route: ROUTES.CART, caption: 'Cart' },
+  ];
+
   return (
     <>
       <div className={`${styles['burger-menu']} ${burgerOpen ? styles['burger-menu__open'] : ''}`} ref={menu}>
         <ul className={styles['burger-menu__list']}>
-          <NavLink
-            to={ROUTES.MAIN}
-            className={({ isActive }) => (isActive ? styles.active : '')}
-            onClick={() => {
-              setOpened(false);
-              logout();
-            }}
-          >
-            <li className={styles['burger-menu__list_item']}>
-              Home
-              <div className={styles.underline}></div>
-            </li>
-          </NavLink>
-          <NavLink
-            to={ROUTES.PRODUCT_LIST}
-            className={({ isActive }) => (isActive ? styles.active : '')}
-            onClick={() => setOpened(false)}
-          >
-            <li className={styles['burger-menu__list_item']}>
-              Catalog
-              <div className={styles.underline}></div>
-            </li>
-          </NavLink>
-          <NavLink
-            to={ROUTES.ABOUT}
-            className={({ isActive }) => (isActive ? styles.active : '')}
-            onClick={() => setOpened(false)}
-          >
-            <li className={styles['burger-menu__list_item']}>
-              About Us
-              <div className={styles.underline}></div>
-            </li>
-          </NavLink>
+          {menuDefaultLinks.map((link) => (
+            <NavLink
+              to={link.route}
+              className={({ isActive }) => (isActive ? styles.active : '')}
+              key={link.route}
+              onClick={() => {
+                setOpened(false);
+              }}
+            >
+              <li className={styles['burger-menu__list_item']}>
+                {link.caption}
+                <div className={styles.underline}></div>
+              </li>
+            </NavLink>
+          ))}
           {isLoggedIn ? (
             <>
               <NavLink

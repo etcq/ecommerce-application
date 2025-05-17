@@ -5,7 +5,7 @@ export enum ROUTES {
   LOGIN = '/login',
   REGISTRATION = '/registration',
   PROFILE = '/profile',
-  BUCKET = '/bucket',
+  CART = '/cart',
 }
 
 export enum CartSignInModeEnum {
