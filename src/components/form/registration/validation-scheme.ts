@@ -69,9 +69,6 @@ export const userFormSchema = z.object({
     })
     .email({
       message: ValidationMessages.EMAIL_INVALID,
-    })
-    .regex(/^\S*$/, {
-      message: ValidationMessages.WHITESPACE,
     }),
   password: z
     .string()

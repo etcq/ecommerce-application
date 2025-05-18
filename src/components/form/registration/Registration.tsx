@@ -103,7 +103,6 @@ const RegistrationForm: React.FC = () => {
               {...register('email')}
               id="email"
               label="Email"
-              type="email"
               placeholder="johndoe@email.com"
               error={errors.email?.message}
             ></Input>

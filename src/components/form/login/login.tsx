@@ -58,7 +58,6 @@ export const LoginForm: React.FC = () => {
         <div className={styles.container}>
           <Input
             {...register('email')}
-            type={'email'}
             label={'Email'}
             id={'login-form__email'}
             placeholder={'johndoe@email.com'}
