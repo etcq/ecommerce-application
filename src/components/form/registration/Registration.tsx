@@ -245,7 +245,7 @@ const RegistrationForm: React.FC = () => {
               <div className={styles['input-wrapper']}>
                 <label htmlFor="billing-country">Country</label>
                 <select
-                  {...register('address.country')}
+                  {...register('billing.country')}
                   className={inputStyles.input}
                   id="billing-country"
                   defaultValue="select"
