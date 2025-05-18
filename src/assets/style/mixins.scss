@@ -1,0 +1,49 @@
+@use './variables' as *;
+
+@mixin link($color, $color-hover) {
+  color: $color;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-hover;
+    transition: 0.5s ease-in-out;
+  }
+}
+
+@mixin link-underline($color) {
+  width: 0%;
+  height: 2px;
+  margin-top: 3px;
+
+  background-color: $color;
+
+  transition:
+    width 0.5s ease-out,
+    background-color 0.5s ease-out;
+}
+
+@mixin link-underline-hover($color) {
+  width: 100%;
+  background-color: $color;
+}
+
+@mixin link-item($color-underline, $color-underline-hover) {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  .underline {
+    @include link-underline($color-underline);
+  }
+
+  &:hover {
+    .underline {
+      @include link-underline-hover($color-underline-hover);
+    }
+  }
+}
+
+@mixin container {
+  max-width: 1240px;
+  margin: 0 auto;
+}

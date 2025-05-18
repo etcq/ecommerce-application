@@ -1,0 +1,21 @@
+@use '../../../node_modules/normalize.css/normalize.css';
+@use './fonts';
+
+* {
+  font-family: Oxygen, sans-serif;
+}
+
+html {
+  overflow-x: visible !important;
+  height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px;
+}

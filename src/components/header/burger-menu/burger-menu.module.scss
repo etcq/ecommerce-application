@@ -1,0 +1,71 @@
+@use '@assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+
+$c-burger-menu-light: $c-light-main;
+$c-burger-menu-dark: $c-dark-main;
+$c-burger-menu-secondary: $c-dark-hover;
+
+.burger-menu {
+  display: none;
+}
+
+@media screen and (width <= 699px) {
+  .burger-menu {
+    position: fixed;
+    z-index: 8;
+    top: 0;
+    right: -300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 300px;
+    height: 100vh;
+    border-left: 1px solid $c-burger-menu-dark;
+
+    background-color: $c-burger-menu-light;
+
+    transition: 0.8s ease-in-out;
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+
+      padding: 0;
+
+      font-size: 1rem;
+      list-style: none;
+
+      &_item {
+        font-size: 1.3rem;
+
+        @include link-item($c-burger-menu-dark, $c-burger-menu-secondary);
+      }
+
+      a {
+        @include link($c-burger-menu-dark, $c-burger-menu-secondary);
+      }
+
+      .active {
+        .underline {
+          width: 100%;
+          background-color: $c-burger-menu-dark;
+        }
+      }
+    }
+
+    &__open {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@media screen and (width <= 480px) {
+  .burger-menu {
+    right: -100%;
+    min-width: 100%;
+  }
+}

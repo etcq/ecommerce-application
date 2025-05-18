@@ -1,0 +1,95 @@
+@use '../../../assets/style/variables' as *;
+
+$c-error-message: $c-error-text;
+
+.registration-form {
+  width: 1224px;
+  margin: 32px 20px 10px;
+  padding: 40px 30px 95px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 10px;
+}
+
+.input-wrapper-row {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 40px;
+  margin-bottom: 10px;
+
+  @media (width <= 700px) {
+    flex-direction: column;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  gap: 5px;
+
+  width: 100%;
+}
+
+.address {
+  font-size: 24px;
+}
+
+.shipping {
+  display: flex;
+  align-self: flex-end;
+  margin: 10px;
+
+  &-label {
+    margin-right: 8px;
+  }
+}
+
+.title {
+  margin-bottom: 55px;
+
+  &-header {
+    margin: 0;
+  }
+
+  &-subheader {
+    color: $c-dark-hover;
+  }
+
+  &-link {
+    margin-left: 5px;
+    color: $c-dark-main;
+    text-decoration: underline;
+
+    &:hover {
+      color: $c-dark-hover;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit {
+  margin: 65px auto 0;
+}
+
+.date::after {
+  content: '';
+  flex-basis: 50%;
+}
+
+.error {
+  align-self: center;
+  margin-top: 15px;
+  color: $c-error-message;
+}
+
+.input-error {
+  height: 20px;
+  font-size: 14px;
+  color: $c-error-message;
+}
