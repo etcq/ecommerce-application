@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { ROUTES } from './constants/constants';
-import { RedirectForAuthPerson } from './core/routes/protected-routes';
+import { RedirectForAuthPerson, RedirectForNotAuthPerson } from './core/routes/protected-routes';
 import { useAuthStore } from './core/stores/use-auth-state';
 import { lazy, useEffect, Suspense } from 'react';
 import Header from './components/header/Header';
@@ -36,7 +36,9 @@ function App() {
                 <Route path={ROUTES.LOGIN} element={<LoginPage />} />
                 <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
               </Route>
-              <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+              <Route element={<RedirectForNotAuthPerson />}>
+                <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+              </Route>
               <Route path={ROUTES.CART} element={<Cart />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
