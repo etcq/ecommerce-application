@@ -2,11 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import { ROUTES } from './constants/constants';
 import { RedirectForAuthPerson, RedirectForNotAuthPerson } from './core/routes/protected-routes';
 import { useAuthStore } from './core/stores/use-auth-state';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { useToastStore } from '@/core/stores/toast.ts';
 import { Toast } from '@components/toast/Toast.tsx';
 import Layout from './components/layout/Layout';
-import Loading from './components/loading/Loading';
 
 const MainPage = lazy(() => import('@pages/main/Main'));
 const AboutPage = lazy(() => import('@pages/about/AboutUs'));
@@ -29,24 +28,22 @@ function App() {
     <BrowserRouter>
       <div data-testid="app">
         {message && <Toast message={message} onClose={clearMessage} />}
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<MainPage />} />
-              <Route path={ROUTES.ABOUT} element={<AboutPage />} />
-              <Route path={ROUTES.PRODUCT_LIST} element={<ProductList />} />
-              <Route element={<RedirectForAuthPerson />}>
-                <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-                <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
-              </Route>
-              <Route element={<RedirectForNotAuthPerson />}>
-                <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-              </Route>
-              <Route path={ROUTES.CART} element={<Cart />} />
-              <Route path="*" element={<NotFoundPage />} />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+            <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+            <Route path={ROUTES.PRODUCT_LIST} element={<ProductList />} />
+            <Route element={<RedirectForAuthPerson />}>
+              <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+              <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
             </Route>
-          </Routes>
-        </Suspense>
+            <Route element={<RedirectForNotAuthPerson />}>
+              <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            </Route>
+            <Route path={ROUTES.CART} element={<Cart />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
       </div>
     </BrowserRouter>
   );
