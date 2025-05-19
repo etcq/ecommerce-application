@@ -8,11 +8,19 @@ import { useForm, useWatch } from 'react-hook-form';
 import { TFormFields, userFormSchema } from './validation-scheme';
 import { NavLink } from 'react-router';
 import { useEffect, useState, ChangeEvent } from 'react';
-import { createAddresses } from '@/core/utils/create-addresses.ts';
+import {
+  createAddresses,
+  IAddressDataResult
+} from '@/core/utils/create-addresses.ts';
 import { createCustomerDraft } from '@/core/utils/create-customer-draft.ts';
 import { registerCustomer } from '@/core/api/customers/registration.ts';
 import { useAuthStore } from '@/core/stores/use-auth-state.ts';
-import { CustomerSignInResult } from '@commercetools/platform-sdk';
+import {
+  CustomerSignInResult,
+  MyCustomerDraft
+} from '@commercetools/platform-sdk';
+import {useToastStore} from "@/core/stores/toast.ts";
+import {AuthMessages} from "@/constants/constants.ts";
 
 const RegistrationForm: React.FC = () => {
   const {
@@ -34,7 +42,7 @@ const RegistrationForm: React.FC = () => {
 
   const address = useWatch({ control, name: 'address' });
 
-  useEffect(() => {
+  useEffect((): void => {
     if (useShippingAsBilling && address) {
       setValue('billing.street', address.street);
       setValue('billing.city', address.city);
@@ -46,12 +54,13 @@ const RegistrationForm: React.FC = () => {
   const onSubmit = async (data: TFormFields): Promise<void> => {
     setError(null);
 
-    const createdAddresses = createAddresses(data, useShippingAsBilling);
-    const customerData = createCustomerDraft(data, createdAddresses, useAsDefaultBilling, useAsDefaultShipping);
+    const createdAddresses: IAddressDataResult = createAddresses(data, useShippingAsBilling);
+    const customerData: MyCustomerDraft = createCustomerDraft(data, createdAddresses, useAsDefaultBilling, useAsDefaultShipping);
 
     try {
       const customer: CustomerSignInResult = await registerCustomer(customerData);
       if (customer) {
+        useToastStore.getState().setMessage(AuthMessages.REGISTRATION)
         await login(data.email, data.password);
       }
     } catch (error) {
