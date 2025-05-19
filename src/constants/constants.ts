@@ -16,3 +16,8 @@ export enum LocalStorageKeys {
   TOKEN = 'ctp-auth-token',
   ANONYMOUS_CART_ID = 'anonymousCartId',
 }
+
+export enum AuthMessages {
+  REGISTRATION = 'Your registration was successful!',
+  LOGIN = 'Your login was successful!',
+}

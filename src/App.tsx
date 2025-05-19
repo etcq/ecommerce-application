@@ -5,6 +5,8 @@ import { useAuthStore } from './core/stores/use-auth-state';
 import { lazy, useEffect, Suspense } from 'react';
 import Header from './components/header/Header';
 import Loading from './components/loading/Loading';
+import { useToastStore } from '@/core/stores/toast.ts';
+import { Toast } from '@components/toast/Toast.tsx';
 
 const MainPage = lazy(() => import('@pages/main/Main'));
 const AboutPage = lazy(() => import('@pages/about/AboutUs'));
@@ -17,6 +19,7 @@ const Cart = lazy(() => import('@pages/cart/Cart'));
 
 function App() {
   const { initializationAuth } = useAuthStore();
+  const { message, clearMessage } = useToastStore();
 
   useEffect(() => {
     initializationAuth();
@@ -26,6 +29,7 @@ function App() {
     <BrowserRouter>
       <div data-testid="app">
         <Header />
+        {message && <Toast message={message} onClose={clearMessage} />}
         <main>
           <Suspense fallback={<Loading />}>
             <Routes>
