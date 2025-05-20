@@ -4,10 +4,10 @@ import { ROUTES } from '@/constants/constants';
 
 export function RedirectForAuthPerson(): React.JSX.Element {
   const { isLoggedIn } = useAuthStore();
-  return !isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.MAIN} />;
+  return !isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.MAIN} replace />;
 }
 
 export function RedirectForNotAuthPerson(): React.JSX.Element {
   const { isLoggedIn } = useAuthStore();
-  return isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.MAIN} />;
+  return isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.MAIN} replace />;
 }

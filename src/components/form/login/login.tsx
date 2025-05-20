@@ -10,6 +10,8 @@ import { FormEvent } from 'react';
 import { NavigateFunction, NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
+import { useToastStore } from '@/core/stores/toast.ts';
+import { AuthMessages } from '@/constants/constants.ts';
 
 export const LoginForm: React.FC = () => {
   const [error, setError] = React.useState<string | null>(null);
@@ -29,6 +31,7 @@ export const LoginForm: React.FC = () => {
     setError(null);
     try {
       await login(data.email, data.password);
+      useToastStore.getState().setMessage(AuthMessages.LOGIN);
       void navigate(ROUTES.MAIN);
     } catch (error) {
       if (error instanceof Error) {
