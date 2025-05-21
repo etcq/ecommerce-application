@@ -1,5 +1,5 @@
 .product {
-  // border: 1px solid black;
+  overflow: hidden;
   width: 286px;
   height: 432px;
   border-radius: 1rem;
@@ -11,8 +11,13 @@
   }
 
   &__preview {
-    width: 286px;
-    height: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 360px;
     border-radius: 1rem;
 
     img {

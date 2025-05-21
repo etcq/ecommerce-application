@@ -1,5 +1,6 @@
 import { ProductProjection } from '@commercetools/platform-sdk';
 import { IProductInfoForCard } from '@/interfaces/interfaces.ts';
+import imgPath from '@assets/images/not-found/not-found.png';
 
 export default function getInfoForCard(item: ProductProjection) {
   const images = item.masterVariant.images;
@@ -7,7 +8,7 @@ export default function getInfoForCard(item: ProductProjection) {
   const productInfo: IProductInfoForCard = {
     id: item.id,
     name: item.name.en,
-    img: images && images.length > 0 ? images[0].url : 'No image',
+    img: images && images.length > 0 ? images[0].url : imgPath,
     price: prices ? prices[0].value.centAmount : 'Not have price',
   };
 

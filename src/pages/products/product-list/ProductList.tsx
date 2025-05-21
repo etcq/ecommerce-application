@@ -24,7 +24,7 @@ export default function ProductList(): JSX.Element {
   return (
     <div className={styles.wrapper}>
       {catalog.map((item: IProductInfoForCard) => (
-        <ProductCard name={item.name} price={item.price} img={item.img} id={item.id} key={item.id} />
+        <ProductCard {...item} key={item.id} />
       ))}
     </div>
   );
