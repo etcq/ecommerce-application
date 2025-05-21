@@ -4,3 +4,10 @@ export interface ITokenCacheState extends TokenStore {
   setTokenData: (newTokenData: TokenStore) => void;
   clearTokenData: () => void;
 }
+
+export interface IProductInfoForCard {
+  id: string;
+  name: string;
+  img?: string;
+  price?: number | string;
+}

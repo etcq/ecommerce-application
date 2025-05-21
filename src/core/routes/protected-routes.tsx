@@ -9,5 +9,5 @@ export function RedirectForAuthPerson(): React.JSX.Element {
 
 export function RedirectForNotAuthPerson(): React.JSX.Element {
   const { isLoggedIn } = useAuthStore();
-  return isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.MAIN} replace />;
+  return isLoggedIn ? <Outlet /> : <Navigate to={ROUTES.CART} replace />;
 }
