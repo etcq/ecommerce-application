@@ -23,6 +23,8 @@ const UserForm: React.FC = () => {
 
   const { customer } = useAuthStore();
 
+  const shippingAddress = customer?.addresses.find((address) => address.id === customer.defaultShippingAddressId);
+  const billingAddress = customer?.addresses.find((address) => address.id === customer.defaultBillingAddressId);
   const userAddresses = customer?.addresses;
 
   return (
@@ -94,6 +96,30 @@ const UserForm: React.FC = () => {
 
         <div className={styles['header-wrapper']}>
           <h3>Address Information</h3>
+        </div>
+
+        <div className={formStyles['input-wrapper-row']}>
+          <div className={formStyles['input-wrapper']}>
+            {shippingAddress && (
+              <Input
+                disabled
+                defaultValue={formatAddress(shippingAddress)}
+                id="shipping-address"
+                label="Shipping Address"
+              ></Input>
+            )}
+          </div>
+
+          <div className={formStyles['input-wrapper']}>
+            {billingAddress && (
+              <Input
+                disabled
+                defaultValue={formatAddress(billingAddress)}
+                id="billing-address"
+                label="Billing Address"
+              ></Input>
+            )}
+          </div>
         </div>
 
         {userAddresses?.map((address, index) => (
