@@ -1,8 +1,8 @@
 import styles from './input.module.scss';
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-interface IProps {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'text' | 'email' | 'password' | 'date';
   label?: string;
   id?: string;
