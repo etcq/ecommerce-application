@@ -1,3 +1,9 @@
+@use '@assets/style/variables' as *;
+
+$c-bg-price-percent: $c-dark-hover;
+$c-font-price-percent: $c-light-main;
+$c-font-price-discount: $c-dark-hover;
+
 .price-wrapper {
   display: flex;
   flex-direction: row;
@@ -10,6 +16,22 @@
 
   .discounted {
     font-weight: 400;
+    color: $c-font-price-discount;
     text-decoration: line-through;
+  }
+
+  .price-discount-percent {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    width: 50px;
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    color: $c-font-price-percent;
+    text-align: center;
+
+    background-color: $c-bg-price-percent;
   }
 }
