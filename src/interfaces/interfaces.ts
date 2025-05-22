@@ -9,5 +9,5 @@ export interface IProductInfoForCard {
   id: string;
   name: string;
   img?: string;
-  price?: number | string;
+  prices: { main: number; discount?: number };
 }
