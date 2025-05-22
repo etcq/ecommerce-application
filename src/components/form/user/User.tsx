@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TFormFields, userFormSchema } from '../registration/validation-scheme';
 import { useAuthStore } from '@/core/stores/use-auth-state';
+import React, { useState } from 'react';
 import { Address } from '@commercetools/platform-sdk';
 
 const formatAddress = (address: Address) => {
@@ -27,6 +28,13 @@ const UserForm: React.FC = () => {
   const billingAddress = customer?.addresses.find((address) => address.id === customer.defaultBillingAddressId);
   const userAddresses = customer?.addresses;
 
+  const [isEditUserMode, setIsEditUserMode] = useState(true);
+  const [isEditAddressMode, setIsEditAddressMode] = useState<Record<string, boolean>>({});
+
+  const toggleEdit = (address: Address) => () => {
+    setIsEditAddressMode((prev) => ({ ...prev, [`${address.id}`]: !prev[`${address.id}`] }));
+  };
+
   return (
     <div className={styles.form}>
       <div className={formStyles.title}>
@@ -36,7 +44,7 @@ const UserForm: React.FC = () => {
       <form className={formStyles.form}>
         <div className={styles['header-wrapper']}>
           <h3>User Information</h3>
-          <Button type="button" size="x-small">
+          <Button type="button" size="x-small" onClick={() => setIsEditUserMode((prev) => !prev)}>
             Edit
           </Button>
         </div>
@@ -44,7 +52,7 @@ const UserForm: React.FC = () => {
         <div className={formStyles['input-wrapper-row']}>
           <div className={formStyles['input-wrapper']}>
             <Input
-              disabled
+              disabled={isEditUserMode}
               {...register('firstName')}
               defaultValue={customer?.firstName}
               id="first-name"
@@ -56,7 +64,7 @@ const UserForm: React.FC = () => {
 
           <div className={formStyles['input-wrapper']}>
             <Input
-              disabled
+              disabled={isEditUserMode}
               {...register('lastName')}
               defaultValue={customer?.lastName}
               id="last-name"
@@ -70,7 +78,7 @@ const UserForm: React.FC = () => {
         <div className={formStyles['input-wrapper-row']}>
           <div className={formStyles['input-wrapper']}>
             <Input
-              disabled
+              disabled={isEditUserMode}
               {...register('email')}
               defaultValue={customer?.email}
               id="email"
@@ -82,7 +90,7 @@ const UserForm: React.FC = () => {
 
           <div className={formStyles['input-wrapper']}>
             <Input
-              disabled
+              disabled={isEditUserMode}
               {...register('dateOfBirth')}
               defaultValue={customer?.dateOfBirth}
               id="date-of-birth"
@@ -123,13 +131,19 @@ const UserForm: React.FC = () => {
         </div>
 
         {userAddresses?.map((address, index) => (
-          <Input
-            disabled
-            key={address.id}
-            label={`Address ${index + 1}`}
-            defaultValue={formatAddress(address)}
-            id={`address-${index + 1}`}
-          ></Input>
+          <div className={styles.address} key={address.id}>
+            <>
+              <Input
+                disabled={!isEditAddressMode[address.id!]}
+                label={`Address ${index + 1}`}
+                defaultValue={formatAddress(address)}
+                id={`address-${index + 1}`}
+              ></Input>
+              <Button type="button" size="small" onClick={toggleEdit(address)}>
+                Edit
+              </Button>
+            </>
+          </div>
         ))}
 
         <Button className={formStyles.submit} disabled={isSubmitting} type="submit" size="large">
