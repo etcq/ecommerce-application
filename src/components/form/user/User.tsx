@@ -6,6 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { TFormFields, userFormSchema } from '../registration/validation-scheme';
 import { useAuthStore } from '@/core/stores/use-auth-state';
+import { Address } from '@commercetools/platform-sdk';
+
+const formatAddress = (address: Address) => {
+  return `${address?.streetName}, ${address?.city}, ${address?.postalCode}, ${address?.country}`;
+};
 
 const UserForm: React.FC = () => {
   const {
@@ -17,6 +22,8 @@ const UserForm: React.FC = () => {
   });
 
   const { customer } = useAuthStore();
+
+  const userAddresses = customer?.addresses;
 
   return (
     <div className={styles.form}>
@@ -84,6 +91,20 @@ const UserForm: React.FC = () => {
             ></Input>
           </div>
         </div>
+
+        <div className={styles['header-wrapper']}>
+          <h3>Address Information</h3>
+        </div>
+
+        {userAddresses?.map((address, index) => (
+          <Input
+            disabled
+            key={address.id}
+            label={`Address ${index + 1}`}
+            defaultValue={formatAddress(address)}
+            id={`address-${index + 1}`}
+          ></Input>
+        ))}
 
         <Button className={formStyles.submit} disabled={isSubmitting} type="submit" size="large">
           {isSubmitting ? 'Loading...' : 'Save Changes'}
