@@ -8,6 +8,7 @@ export interface ITokenCacheState extends TokenStore {
 export interface IProductInfoForCard {
   id: string;
   name: string;
+  description: string | undefined;
   img?: string;
   prices: { main: number; discount?: number };
 }

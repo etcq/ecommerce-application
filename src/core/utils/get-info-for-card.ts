@@ -9,6 +9,7 @@ export default function getInfoForCard(item: ProductProjection) {
     id: item.id,
     name: item.name.en,
     img: images && images.length > 0 ? images[0].url : imgPath,
+    description: item.description ? item.description['en-US'] : undefined,
     prices: prices
       ? { main: prices[0].value.centAmount, discount: prices[0].discounted?.value.centAmount }
       : { main: 0 },
