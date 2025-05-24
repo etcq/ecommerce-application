@@ -1,9 +1,11 @@
 import styles from './product-list.module.scss';
+import { JSX } from 'react';
+import ProductCardsList from '@/components/product-cards-list/ProductCardsList';
 
-export default function ProductList(): React.JSX.Element {
+export default function ProductList(): JSX.Element {
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>The catalog page will be here</h1>
+      <ProductCardsList />
     </div>
   );
 }
