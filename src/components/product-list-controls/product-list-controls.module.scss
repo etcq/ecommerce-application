@@ -1,0 +1,63 @@
+@use '@assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+
+$c-main-indicator: $c-dark-main;
+$c-shadow: $c-dark-secondary;
+$c-font: $c-font-name;
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  margin: 40px 0 20px;
+
+  &__title {
+    font-weight: 400;
+    color: $c-font;
+  }
+
+  .pagination {
+    @include flex-centered;
+
+    flex-direction: row;
+    gap: 2rem;
+
+    &__view {
+      position: relative;
+
+      display: flex;
+      flex-direction: row;
+      gap: 3px;
+      align-items: center;
+
+      &-indicator {
+        @include pagination_element($c-main-indicator);
+
+        position: absolute;
+        background-color: $c-main-indicator;
+        transition: all 0.5s ease-out;
+      }
+
+      &-item {
+        @include pagination-element($c-main-indicator);
+
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 12px 0 $c-shadow;
+          transition: all 0.5s ease-out;
+        }
+      }
+    }
+
+    &__btn {
+      @include flex-centered;
+
+      width: 60px;
+      height: 22px;
+      padding: 0 0 2px;
+    }
+  }
+}

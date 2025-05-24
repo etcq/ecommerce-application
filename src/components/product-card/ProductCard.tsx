@@ -37,7 +37,7 @@ export default function ProductCard(props: IProductInfoForCard): JSX.Element {
             </div>
           </div>
         </div>
-        <div className={styles.product__description}>{props.description ?? ''}</div>
+        <div className={styles['product-description']}>{props.description ?? ''}</div>
       </div>
     </div>
   );
