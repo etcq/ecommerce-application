@@ -23,19 +23,19 @@ $c-font: $c-font-name;
 
     flex-direction: row;
     gap: 2rem;
+    width: 100%;
 
     &__view {
       position: relative;
-
       display: flex;
       flex-direction: row;
-      gap: 3px;
       align-items: center;
 
       &-indicator {
-        @include pagination_element($c-main-indicator);
+        @include pagination-element($c-main-indicator);
 
         position: absolute;
+        border: none;
         background-color: $c-main-indicator;
         transition: all 0.5s ease-out;
       }
@@ -44,6 +44,7 @@ $c-font: $c-font-name;
         @include pagination-element($c-main-indicator);
 
         cursor: pointer;
+        margin-right: 3px;
 
         &:hover {
           box-shadow: 0 0 12px 0 $c-shadow;
@@ -59,5 +60,28 @@ $c-font: $c-font-name;
       height: 22px;
       padding: 0 0 2px;
     }
+
+    &__loading {
+      width: 5%;
+      height: 16px;
+      margin: 0 auto;
+      border-radius: 10px;
+
+      background-color: $c-shadow;
+
+      animation: pulse 3s infinite ease-in-out;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    width: 5%;
+  }
+  50% {
+    width: 40%;
+  }
+  100% {
+    width: 5%;
   }
 }

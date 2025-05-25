@@ -13,15 +13,14 @@ export default function ProductCardsList(): JSX.Element {
   const [catalog, setCatalog] = useState<IProductInfoForCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { page, setTotal, setIsProductEnded } = useProductListStore();
-  const baseLimit = BASE_LIMIT_PER_PAGE;
   useEffect(() => {
     setIsLoading(true);
-    getProductsForPage({ limit: baseLimit, offset: baseLimit * (page - 1) })
+    getProductsForPage({ limit: BASE_LIMIT_PER_PAGE, offset: BASE_LIMIT_PER_PAGE * (page - 1) })
       .then((response) => {
         const productArr: IProductInfoForCard[] = [];
         if (response?.results && response.total) {
           setTotal(response.total);
-          setIsProductEnded(response.results.length < baseLimit);
+          setIsProductEnded(response.results.length < BASE_LIMIT_PER_PAGE);
           response.results.forEach((product) => {
             productArr.push(getInfoForCard(product));
           });
@@ -30,7 +29,7 @@ export default function ProductCardsList(): JSX.Element {
       })
       .then(() => setIsLoading(false))
       .catch((err) => console.error(err));
-  }, [page, baseLimit]);
+  }, [page, setTotal, setIsProductEnded]);
   return (
     <>
       {isLoading ? (

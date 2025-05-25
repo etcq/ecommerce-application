@@ -23,4 +23,4 @@ export enum AuthMessages {
 }
 
 export const BASE_LIMIT_PER_PAGE = 9;
-export const BASE_WIDTH_PAGE_INDICATOR = 350;
+export const BASE_PAGINATION_WIDTH = 60;
