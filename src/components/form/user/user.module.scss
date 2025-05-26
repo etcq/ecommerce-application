@@ -1,3 +1,5 @@
+@use '../../../assets/style/variables' as *;
+
 .form {
   width: 100%;
   padding: 40px 30px 95px;
@@ -8,4 +10,25 @@
   gap: 10px;
   align-items: center;
   margin-bottom: 40px;
+}
+
+.address {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 10px;
+
+  button {
+    align-self: center;
+  }
 }

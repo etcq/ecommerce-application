@@ -20,4 +20,5 @@ export enum LocalStorageKeys {
 export enum AuthMessages {
   REGISTRATION = 'Your registration was successful!',
   LOGIN = 'Your login was successful!',
+  UPDATE = 'Saved successfully!'
 }
