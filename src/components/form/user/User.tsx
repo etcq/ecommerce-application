@@ -95,6 +95,25 @@ const UserForm: React.FC = () => {
     }
   };
 
+  const handleRemoveAddress = async (index: number) => {
+    setError(null);
+    try {
+      const updateActions = [
+        {
+          action: 'removeAddress',
+          addressId: customer?.addresses[index].id,
+        },
+      ];
+
+      await updateCustomer(customer?.id, customer?.version, updateActions);
+      useToastStore.getState().setMessage('Address deleted successfully!');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
+  };
+
   const onSubmit = async (formData: TUserFormFields): Promise<void> => {
     setError(null);
     try {
@@ -318,6 +337,9 @@ const UserForm: React.FC = () => {
                 ></Input>
                 <Button type="button" size="small" onClick={toggleEdit(address)}>
                   Edit
+                </Button>
+                <Button type="button" size="small" onClick={() => void handleRemoveAddress(index)}>
+                  Delete
                 </Button>
               </>
             ) : (
