@@ -36,6 +36,12 @@ const UserForm: React.FC = () => {
       lastName: customer?.lastName,
       email: customer?.email,
       dateOfBirth: customer?.dateOfBirth,
+      address: {
+        streetName: '',
+        city: '',
+        postalCode: '',
+        country: 'select',
+      },
       addresses: userAddresses?.map((addr) => ({
         streetName: addr.streetName,
         city: addr.city,
@@ -48,16 +54,45 @@ const UserForm: React.FC = () => {
   const [error, setError] = React.useState<string | null>(null);
   const [isEditUserMode, setIsEditUserMode] = useState(true);
   const [isEditAddressMode, setIsEditAddressMode] = useState<Record<string, boolean>>({});
+  const [addAddress, setAddAddress] = useState(true);
+  const newAddress = useWatch({ control, name: 'address' });
+  const addressesFormValues = useWatch({ control, name: 'addresses' });
 
   const toggleEdit = (address: Address) => () => {
     setIsEditAddressMode((prev) => ({ ...prev, [`${address.id}`]: !prev[`${address.id}`] }));
   };
 
-  const addressesFormValues = useWatch({ control, name: 'addresses' });
-
-  const hasAddressErrors = (index: number) => {
-    const error = errors.addresses?.[index];
+  const hasAddressErrors = (index?: number) => {
+    let error = errors.address;
+    if (index) {
+      error = errors.addresses?.[index];
+    }
     return !!(error?.streetName ?? error?.city ?? error?.postalCode ?? error?.country);
+  };
+
+  const handleAddNewAddress = async () => {
+    setError(null);
+    try {
+      const updateActions = [
+        {
+          action: 'addAddress',
+          address: {
+            streetName: newAddress?.streetName,
+            city: newAddress?.city,
+            postalCode: newAddress?.postalCode,
+            country: newAddress?.country,
+          },
+        },
+      ];
+
+      await updateCustomer(customer?.id, customer?.version, updateActions);
+      setAddAddress(true);
+      useToastStore.getState().setMessage('New address added successfully!');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
   };
 
   const onSubmit = async (formData: TUserFormFields): Promise<void> => {
@@ -183,7 +218,69 @@ const UserForm: React.FC = () => {
 
         <div className={styles['header-wrapper']}>
           <h3>Address Information</h3>
+          <Button size="x-small" onClick={() => setAddAddress((prev) => !prev)}>
+            Add New Address
+          </Button>
         </div>
+
+        {!addAddress && (
+          <div className={styles.edit}>
+            <div className={formStyles['input-wrapper-row']}>
+              <div className={formStyles['input-wrapper']}>
+                <Input
+                  {...register(`address.streetName`)}
+                  id="address-street"
+                  label="Street"
+                  placeholder="123 Maple Street"
+                  error={errors.address?.streetName?.message}
+                ></Input>
+              </div>
+
+              <div className={formStyles['input-wrapper']}>
+                <Input
+                  {...register(`address.city`)}
+                  id="address-city"
+                  label="City"
+                  placeholder="Anytown"
+                  error={errors.address?.city?.message}
+                ></Input>
+              </div>
+            </div>
+
+            <div className={formStyles['input-wrapper-row']}>
+              <div className={formStyles['input-wrapper']}>
+                <Input
+                  maxLength={5}
+                  {...register(`address.postalCode`)}
+                  id="address-zip"
+                  label="Postal Code"
+                  placeholder="12345"
+                  error={errors.address?.postalCode?.message}
+                ></Input>
+              </div>
+
+              <div className={formStyles['input-wrapper']}>
+                <label htmlFor="address-country">Country</label>
+                <select {...register(`address.country`)} className={inputStyles.input} id="address-country">
+                  <option value="select" disabled>
+                    Select Country
+                  </option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                </select>
+                <span className={formStyles['input-error']}>{errors.address?.country?.message}</span>
+              </div>
+            </div>
+            <Button
+              disabled={hasAddressErrors()}
+              type="submit"
+              size="medium"
+              onClick={() => void handleAddNewAddress()}
+            >
+              Add Address
+            </Button>
+          </div>
+        )}
 
         <div className={formStyles['input-wrapper-row']}>
           <div className={formStyles['input-wrapper']}>
