@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { TUserFormFields, userFormSchema } from './validation-scheme';
 import { useAuthStore } from '@/core/stores/use-auth-state';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Address } from '@commercetools/platform-sdk';
 import { updateCustomer } from '@/core/api/customers/update';
 import { useToastStore } from '@/core/stores/toast';
@@ -18,7 +18,7 @@ const formatAddress = (address: Address) => {
 };
 
 const UserForm: React.FC = () => {
-  const { customer } = useAuthStore();
+  const { customer, fetchCustomer } = useAuthStore();
   const userAddresses = customer?.addresses;
   const shippingAddress = customer?.addresses.find((address) => address.id === customer.defaultShippingAddressId);
   const billingAddress = customer?.addresses.find((address) => address.id === customer.defaultBillingAddressId);
@@ -28,6 +28,9 @@ const UserForm: React.FC = () => {
     formState: { errors, isSubmitting },
     control,
     handleSubmit,
+    reset,
+    resetField,
+    getValues,
   } = useForm<TUserFormFields>({
     resolver: zodResolver(userFormSchema),
     mode: 'onChange',
@@ -36,12 +39,6 @@ const UserForm: React.FC = () => {
       lastName: customer?.lastName,
       email: customer?.email,
       dateOfBirth: customer?.dateOfBirth,
-      address: {
-        streetName: '',
-        city: '',
-        postalCode: '',
-        country: 'select',
-      },
       addresses: userAddresses?.map((addr) => ({
         streetName: addr.streetName,
         city: addr.city,
@@ -51,12 +48,28 @@ const UserForm: React.FC = () => {
     },
   });
 
+  useEffect(() => {
+    if (customer) {
+      reset({
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        email: customer.email,
+        dateOfBirth: customer.dateOfBirth,
+        addresses: customer.addresses?.map((addr) => ({
+          streetName: addr.streetName,
+          city: addr.city,
+          postalCode: addr.postalCode,
+          country: addr.country,
+        })),
+      });
+    }
+  }, [customer, reset]);
+
   const [error, setError] = React.useState<string | null>(null);
   const [isEditUserMode, setIsEditUserMode] = useState(true);
   const [isEditAddressMode, setIsEditAddressMode] = useState<Record<string, boolean>>({});
   const [addAddress, setAddAddress] = useState(true);
   const newAddress = useWatch({ control, name: 'address' });
-  const addressesFormValues = useWatch({ control, name: 'addresses' });
 
   const toggleEdit = (address: Address) => () => {
     setIsEditAddressMode((prev) => ({ ...prev, [`${address.id}`]: !prev[`${address.id}`] }));
@@ -64,10 +77,44 @@ const UserForm: React.FC = () => {
 
   const hasAddressErrors = (index?: number) => {
     let error = errors.address;
-    if (index) {
+    if (index !== undefined) {
       error = errors.addresses?.[index];
     }
     return !!(error?.streetName ?? error?.city ?? error?.postalCode ?? error?.country);
+  };
+
+  const handleSaveAddress = async (index: number, address: Address) => {
+    setError(null);
+    try {
+      const formData = getValues();
+      const addressData = formData.addresses?.[index];
+
+      if (!addressData || !customer) return;
+
+      const updateActions = [
+        {
+          action: 'changeAddress',
+          addressId: address.id,
+          address: {
+            ...address,
+            streetName: addressData.streetName,
+            city: addressData.city,
+            postalCode: addressData.postalCode,
+            country: addressData.country,
+          },
+        },
+      ];
+
+      await updateCustomer(customer.id, customer.version, updateActions);
+      await fetchCustomer();
+
+      toggleEdit(address)();
+      useToastStore.getState().setMessage('Address updated successfully!');
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
   };
 
   const handleAddNewAddress = async () => {
@@ -85,7 +132,9 @@ const UserForm: React.FC = () => {
         },
       ];
 
-      await updateCustomer(customer?.id, customer?.version, updateActions);
+      await updateCustomer(customer!.id, customer!.version, updateActions);
+      await fetchCustomer();
+
       setAddAddress(true);
       useToastStore.getState().setMessage('New address added successfully!');
     } catch (error) {
@@ -105,7 +154,9 @@ const UserForm: React.FC = () => {
         },
       ];
 
-      await updateCustomer(customer?.id, customer?.version, updateActions);
+      await updateCustomer(customer!.id, customer!.version, updateActions);
+      await fetchCustomer();
+
       useToastStore.getState().setMessage('Address deleted successfully!');
     } catch (error) {
       if (error instanceof Error) {
@@ -136,34 +187,12 @@ const UserForm: React.FC = () => {
       if (formDate !== customerDate) {
         updateActions.push({ action: 'setDateOfBirth', dateOfBirth: formDate });
       }
-      if (formData.addresses && customer?.addresses) {
-        formData.addresses.forEach((newAddr, id) => {
-          const oldAddress = customer.addresses[id];
-          const isChanged =
-            newAddr.streetName !== oldAddress.streetName ||
-            newAddr.city !== oldAddress.city ||
-            newAddr.postalCode !== oldAddress.postalCode ||
-            newAddr.country !== oldAddress.country;
-
-          if (isChanged) {
-            updateActions.push({
-              action: 'changeAddress',
-              addressId: oldAddress.id,
-              address: {
-                ...oldAddress,
-                streetName: newAddr.streetName,
-                city: newAddr.city,
-                postalCode: newAddr.postalCode,
-                country: newAddr.country,
-              },
-            });
-          }
-        });
-      }
 
       if (updateActions.length === 0) return;
 
-      await updateCustomer(customer?.id, customer?.version, updateActions);
+      await updateCustomer(customer!.id, customer!.version, updateActions);
+      await fetchCustomer();
+
       useToastStore.getState().setMessage(AuthMessages.UPDATE);
     } catch (error) {
       if (error instanceof Error) {
@@ -183,6 +212,9 @@ const UserForm: React.FC = () => {
           <h3>User Information</h3>
           <Button type="button" size="x-small" onClick={() => setIsEditUserMode((prev) => !prev)}>
             Edit
+          </Button>
+          <Button type="button" size="x-small">
+            Change Password
           </Button>
         </div>
 
@@ -237,7 +269,20 @@ const UserForm: React.FC = () => {
 
         <div className={styles['header-wrapper']}>
           <h3>Address Information</h3>
-          <Button size="x-small" onClick={() => setAddAddress((prev) => !prev)}>
+          <Button
+            size="x-small"
+            onClick={() => {
+              setAddAddress((prev) => !prev);
+              resetField('address', {
+                defaultValue: {
+                  streetName: '',
+                  city: '',
+                  postalCode: '',
+                  country: 'select',
+                },
+              });
+            }}
+          >
             Add New Address
           </Button>
         </div>
@@ -332,7 +377,7 @@ const UserForm: React.FC = () => {
                 <Input
                   disabled
                   label={`Address ${index + 1}`}
-                  defaultValue={formatAddress(addressesFormValues?.[index])}
+                  defaultValue={formatAddress(customer!.addresses[index])}
                   id={`address-${index + 1}`}
                 ></Input>
                 <Button type="button" size="small" onClick={toggleEdit(address)}>
@@ -348,7 +393,6 @@ const UserForm: React.FC = () => {
                   <div className={formStyles['input-wrapper']}>
                     <Input
                       {...register(`addresses.${index}.streetName`)}
-                      defaultValue={customer?.addresses[index].streetName}
                       id="address-street"
                       label="Street"
                       placeholder="123 Maple Street"
@@ -395,9 +439,19 @@ const UserForm: React.FC = () => {
                     <span className={formStyles['input-error']}>{errors.addresses?.[index]?.country?.message}</span>
                   </div>
                 </div>
-                <Button disabled={hasAddressErrors(index)} type="button" size="medium" onClick={toggleEdit(address)}>
-                  Done
-                </Button>
+                <div className={`${styles.address} ${styles['address-buttons']}`}>
+                  <Button
+                    disabled={hasAddressErrors(index)}
+                    type="button"
+                    size="small"
+                    onClick={() => void handleSaveAddress(index, address)}
+                  >
+                    Save
+                  </Button>
+                  <Button type="button" size="small" onClick={toggleEdit(address)}>
+                    Cancel
+                  </Button>
+                </div>
               </div>
             )}
           </div>
