@@ -8,9 +8,12 @@ $c-input-label: $c-dark-main;
 $c-input-error: $c-error-text;
 
 .wrapper {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   width: 100%;
 }
 
@@ -54,4 +57,21 @@ $c-input-error: $c-error-text;
   color: $c-dark-hover;
 
   background: none;
+}
+
+.reset-input {
+  cursor: pointer;
+
+  position: absolute;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 8% !important;
+  height: 50px !important;
+  border-radius: 50px;
+
+  font-size: 2rem;
 }

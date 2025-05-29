@@ -1,7 +1,10 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 10px;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+
+  width: 70vw;
+  min-height: 60vh;
 }

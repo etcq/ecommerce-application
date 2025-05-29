@@ -9,6 +9,7 @@ interface IProductListState {
   setPage: (number: number) => void;
   setTotal: (number: number) => void;
   setIsProductEnded: (status: boolean) => void;
+  resetList: () => void;
 }
 
 export const useProductListStore = create<IProductListState>((set) => ({
@@ -20,4 +21,5 @@ export const useProductListStore = create<IProductListState>((set) => ({
   setPage: (number: number) => set(() => ({ page: number })),
   setTotal: (number: number) => set(() => ({ total: number })),
   setIsProductEnded: (status: boolean) => set(() => ({ isProductEnded: status })),
+  resetList: () => set(() => ({ page: 1, total: 0 })),
 }));

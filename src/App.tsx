@@ -41,7 +41,7 @@ function App() {
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
             </Route>
             <Route path={ROUTES.CART} element={<Cart />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage forCatalog={false} />} />
           </Route>
         </Routes>
       </div>
