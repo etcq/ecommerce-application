@@ -12,6 +12,7 @@ import { Address } from '@commercetools/platform-sdk';
 import { updateCustomer } from '@/core/api/customers/update';
 import { useToastStore } from '@/core/stores/toast';
 import { AuthMessages } from '@/constants/constants';
+import { NavLink } from 'react-router';
 
 const formatAddress = (address: Address) => {
   return `${address?.streetName}, ${address?.city}, ${address?.postalCode}, ${address?.country}`;
@@ -213,9 +214,11 @@ const UserForm: React.FC = () => {
           <Button type="button" size="x-small" onClick={() => setIsEditUserMode((prev) => !prev)}>
             Edit
           </Button>
-          <Button type="button" size="x-small">
-            Change Password
-          </Button>
+          <NavLink className={styles.link} to="/password">
+            <Button type="button" size="x-small">
+              Change Password
+            </Button>
+          </NavLink>
         </div>
 
         <div className={formStyles['input-wrapper-row']}>

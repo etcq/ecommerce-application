@@ -13,6 +13,7 @@ const ProductList = lazy(() => import('@pages/products/product-list/ProductList'
 const LoginPage = lazy(() => import('@pages/user/login/LoginPage'));
 const NotFoundPage = lazy(() => import('@pages/not-found/NotFoundPage'));
 const ProfilePage = lazy(() => import('@pages/user/profile/Profile'));
+const PasswordPage = lazy(() => import('@pages/user/profile/password/Password'));
 const RegistrationPage = lazy(() => import('@pages/user/registration/RegistrationPage'));
 const Cart = lazy(() => import('@pages/cart/Cart'));
 
@@ -39,6 +40,7 @@ function App() {
             </Route>
             <Route element={<RedirectForNotAuthPerson />}>
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+              <Route path={ROUTES.PASSWORD} element={<PasswordPage />} />
             </Route>
             <Route path={ROUTES.CART} element={<Cart />} />
             <Route path="*" element={<NotFoundPage />} />
