@@ -23,7 +23,11 @@ export const createAddresses = (data: TFormFields, useShippingAsBilling: boolean
   let billingIndex: number | undefined;
 
   if (useShippingAsBilling) {
-    billingIndex = shippingIndex;
+    const billingAddress: BaseAddress = {
+      ...shippingAddress,
+    };
+    addresses.push(billingAddress);
+    billingIndex = 1;
   } else if (data.billing) {
     const billingAddress: BaseAddress = {
       streetName: data.billing.street,
