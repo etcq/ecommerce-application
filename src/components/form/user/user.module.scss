@@ -1,5 +1,6 @@
 @use '../../../assets/style/variables' as *;
 
+$c-header-hover: $c-dark-hover;
 $c-error-message: $c-error-text;
 
 .form {
@@ -34,6 +35,10 @@ $c-error-message: $c-error-text;
 
   input {
     margin-left: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -53,6 +58,24 @@ $c-error-message: $c-error-text;
 
   button {
     align-self: center;
+  }
+}
+
+.icon {
+  display: flex;
+
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+
+    svg {
+      fill: $c-header-hover;
+    }
   }
 }
 
