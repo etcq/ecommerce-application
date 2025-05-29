@@ -7,12 +7,12 @@ const minimumAge = 18;
 const todayDate = new Date();
 const validDate = new Date(todayDate.getFullYear() - minimumAge, todayDate.getMonth(), todayDate.getDate());
 
-const birthDateSchema = z.coerce
-  .date()
-  .refine((date) => date <= todayDate, {
+const birthDateSchema = z
+  .string()
+  .refine((date) => new Date(date) <= todayDate, {
     message: ValidationMessages.DATE_FUTURE,
   })
-  .refine((date) => date <= validDate, {
+  .refine((date) => new Date(date) <= validDate, {
     message: ValidationMessages.DATE_AGE,
   });
 
