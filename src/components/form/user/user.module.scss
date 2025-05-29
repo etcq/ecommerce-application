@@ -14,10 +14,27 @@ $c-error-message: $c-error-text;
   margin-bottom: 40px;
 }
 
+.address-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .address {
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 100%;
+}
+
+.select {
+  display: flex;
+  gap: 5px;
+  margin: -20px 0 20px;
+
+  input {
+    margin-left: 20px;
+  }
 }
 
 .address-buttons {
