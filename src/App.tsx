@@ -43,7 +43,7 @@ function App() {
               <Route path={ROUTES.PASSWORD} element={<PasswordPage />} />
             </Route>
             <Route path={ROUTES.CART} element={<Cart />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage forCatalog={false} />} />
           </Route>
         </Routes>
       </div>

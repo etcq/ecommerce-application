@@ -23,6 +23,7 @@ export enum AuthMessages {
   LOGIN = 'Your login was successful!',
 }
 
+
 export enum UserUpdateMessages {
   UPDATE = 'Saved successfully!',
   ADDRESS_UPDATE = 'Address updated successfully!',
@@ -31,3 +32,6 @@ export enum UserUpdateMessages {
   ADDRESS_SHIPPING = 'Default shipping address updated!',
   ADDRESS_BILLING = 'Default billing address updated!',
 }
+
+export const BASE_LIMIT_PER_PAGE = 9;
+export const BASE_PAGINATION_WIDTH = 60;

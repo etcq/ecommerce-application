@@ -5,6 +5,7 @@ $c-login-menu-dark: $c-dark-main;
 
 .login-menu {
   position: absolute;
+  z-index: 9999;
   top: 110%;
   right: -204%;
 
