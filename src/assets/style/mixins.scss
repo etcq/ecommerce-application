@@ -75,3 +75,15 @@
   max-width: 1240px;
   margin: 0 auto;
 }
+
+@mixin flex-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin pagination-element($color) {
+  height: 16px;
+  border: 1px solid $color;
+  border-radius: 10px;
+}

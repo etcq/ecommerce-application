@@ -1,6 +1,8 @@
 import styles from './input.module.scss';
 import React, { FC } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { MdClear } from 'react-icons/md';
+import Button from '@components/button/Button.tsx';
 
 interface IProps {
   type?: 'text' | 'email' | 'password' | 'date';
@@ -8,11 +10,23 @@ interface IProps {
   id?: string;
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  resetFn?: () => void;
   wrapperClassName?: string;
   error?: string;
+  value?: string;
 }
 
-const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wrapperClassName, error, ...props }) => {
+const Input: FC<IProps> = ({
+  type = 'text',
+  label,
+  id,
+  placeholder,
+  onChange,
+  wrapperClassName,
+  error,
+  resetFn,
+  ...props
+}) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const togglePasswordVisibility: () => void = (): void => {
@@ -42,6 +56,11 @@ const Input: FC<IProps> = ({ type = 'text', label, id, placeholder, onChange, wr
         <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </button>
+      )}
+      {type === 'text' && id === 'search' && (
+        <Button size={'x-small'} type="button" className={styles['reset-input']} onClick={resetFn}>
+          <MdClear />
+        </Button>
       )}
     </div>
   );

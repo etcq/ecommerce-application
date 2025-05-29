@@ -21,3 +21,6 @@ export enum AuthMessages {
   REGISTRATION = 'Your registration was successful!',
   LOGIN = 'Your login was successful!',
 }
+
+export const BASE_LIMIT_PER_PAGE = 9;
+export const BASE_PAGINATION_WIDTH = 60;
