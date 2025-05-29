@@ -31,7 +31,7 @@ $c-error-message: $c-error-text;
 .select {
   display: flex;
   gap: 5px;
-  margin: -20px 0 20px;
+  margin: 5px 0 20px;
 
   input {
     margin-left: 20px;
@@ -66,6 +66,7 @@ $c-error-message: $c-error-text;
 
   width: 35px;
   height: 35px;
+  margin-top: 20px;
   padding: 5px;
   border: 1px solid $c-light-secondary;
   border-radius: 10px;

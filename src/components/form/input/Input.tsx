@@ -13,6 +13,7 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   resetFn?: () => void;
   wrapperClassName?: string;
   error?: string;
+  removeError?: boolean;
   value?: string;
 }
 
@@ -24,6 +25,7 @@ const Input: FC<IProps> = ({
   onChange,
   wrapperClassName,
   error,
+  removeError,
   resetFn,
   ...props
 }) => {
@@ -50,7 +52,7 @@ const Input: FC<IProps> = ({
         onChange={onChange}
       ></input>
 
-      <span className={styles.error}>{error}</span>
+      {!removeError && <span className={styles.error}>{error}</span>}
 
       {type === 'password' && (
         <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>
