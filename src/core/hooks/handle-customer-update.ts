@@ -100,8 +100,7 @@ export const useUserFormHandlers = (
   const handleUserFormSubmit = (formData: TUserFormFields): CustomerUpdateAction[] => {
     const updateActions: CustomerUpdateAction[] = [];
 
-    const formDate =
-      formData.dateOfBirth instanceof Date ? formData.dateOfBirth.toISOString().split('T')[0] : formData.dateOfBirth;
+    const formDate = formData.dateOfBirth ? new Date(formData.dateOfBirth).toISOString().split('T')[0] : undefined;
 
     const customerDate = customer?.dateOfBirth ? new Date(customer.dateOfBirth).toISOString().split('T')[0] : undefined;
 
