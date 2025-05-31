@@ -7,7 +7,7 @@ describe('Not found component', () => {
   it('renders not found image and header', () => {
     render(
       <BrowserRouter>
-        <NotFoundPage forCatalog={false} />
+        <NotFoundPage />
       </BrowserRouter>,
     );
     expect(screen.getByAltText('Sad sneaker')).toBeInTheDocument();

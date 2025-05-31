@@ -15,17 +15,11 @@
 }
 
 .preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   width: 48%;
-  border: 1px solid black;
 
   img {
+    align-self: center;
     width: 100%;
-    height: auto;
   }
 }
 
@@ -59,6 +53,7 @@
   }
 
   &__text {
+    flex: 1;
     font-size: 15px;
     font-weight: 400;
     line-height: 171%;
@@ -69,15 +64,22 @@
     flex-direction: column;
     gap: 25px;
     align-items: flex-start;
+
+    width: 100%;
+    margin-bottom: 25px;
   }
 
   &__benefits {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
+    margin-top: 30px;
 
-    margin-top: 16px;
+    &_item {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+
+      margin-top: 16px;
+    }
   }
 }
 
@@ -98,12 +100,33 @@
   }
 
   .description {
+    align-items: center;
     width: 100%;
     margin-top: 20px;
     padding: 0;
 
-    &__content {
-      gap: 40px;
+    &__text {
+      margin-bottom: 60px;
+    }
+
+    &__benefits {
+      width: 100%;
+    }
+
+    &__buy-parameters {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-bottom: 40px;
+    }
+  }
+}
+
+@media screen and (width <= 500px) {
+  .description {
+    &__buy-parameters {
+      flex-direction: column;
+      align-items: center;
     }
   }
 }

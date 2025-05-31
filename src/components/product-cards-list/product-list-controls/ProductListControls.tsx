@@ -7,8 +7,8 @@ import { getPageCount, getPageRange, getWidthPaginationElement } from '@/core/ut
 
 export default function ProductListControls(props: { isLoading: boolean }): JSX.Element {
   const { isLoading } = props;
-  const { page, total, isProductEnded, incPage, decPage, setPage } = useProductListStore();
-  const { start, end } = getPageRange(total, page, isProductEnded);
+  const { page, total, isLastPage, incPage, decPage, setPage } = useProductListStore();
+  const { start, end } = getPageRange(total, page, isLastPage);
   const [showLoading, setShowLoading] = useState<boolean>(true);
   const firstLoad = useRef(true);
   useEffect(() => {
@@ -66,9 +66,9 @@ export default function ProductListControls(props: { isLoading: boolean }): JSX.
         <Button
           size="x-small"
           className={styles.pagination__btn}
-          disabled={isProductEnded || isLoading}
+          disabled={isLastPage || isLoading}
           onClick={() => {
-            if (isProductEnded) return;
+            if (isLastPage) return;
             incPage();
           }}
         >
