@@ -12,3 +12,9 @@ export interface IProductInfoForCard {
   img?: string;
   prices: { main: number; discount?: number };
 }
+
+export interface IProductInfoForDetailedPage extends IProductInfoForCard {
+  images: string[];
+  sizes: number[];
+  colors: string[];
+}

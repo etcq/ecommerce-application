@@ -2,8 +2,11 @@ import styles from './product-card.module.scss';
 import { IProductInfoForCard } from '@/interfaces/interfaces.ts';
 import PriceView from '@components/price-view/PriceView.tsx';
 import { JSX } from 'react';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '@/constants/constants.ts';
 
 export default function ProductCard(props: IProductInfoForCard): JSX.Element {
+  const navigate = useNavigate();
   return (
     <div className={styles.product}>
       <div className={styles.product__preview}>
@@ -14,7 +17,12 @@ export default function ProductCard(props: IProductInfoForCard): JSX.Element {
         <div className={styles.product__price}>
           <PriceView prices={props.prices} />
           <div className={styles['product__price-controls']}>
-            <div className={styles['product__move-page']}>
+            <div
+              className={styles['product__move-page']}
+              onClick={() => {
+                void navigate(`${ROUTES.PRODUCT_LIST}/${props.id}`, { state: { props } });
+              }}
+            >
               <svg
                 fill="#000000"
                 xmlns="http://www.w3.org/2000/svg"

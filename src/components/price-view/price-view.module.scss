@@ -9,10 +9,8 @@ $c-font-price-discount: $c-dark-hover;
   flex-direction: row;
   gap: 4px;
 
-  .price {
-    font-size: 14px;
-    font-weight: 700;
-  }
+  font-size: 14px;
+  font-weight: 700;
 
   .discounted {
     font-weight: 400;

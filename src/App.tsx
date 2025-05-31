@@ -15,6 +15,7 @@ const NotFoundPage = lazy(() => import('@pages/not-found/NotFoundPage'));
 const ProfilePage = lazy(() => import('@pages/user/profile/Profile'));
 const RegistrationPage = lazy(() => import('@pages/user/registration/RegistrationPage'));
 const Cart = lazy(() => import('@pages/cart/Cart'));
+const ProductDetailed = lazy(() => import('@pages/products/product-detailed/ProductDetailed.tsx'));
 
 function App() {
   const { initializationAuth } = useAuthStore();
@@ -32,7 +33,10 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
             <Route path={ROUTES.ABOUT} element={<AboutPage />} />
-            <Route path={ROUTES.PRODUCT_LIST} element={<ProductList />} />
+            <Route path={ROUTES.PRODUCT_LIST}>
+              <Route index element={<ProductList />} />
+              <Route path=":id" element={<ProductDetailed />} />
+            </Route>
             <Route element={<RedirectForAuthPerson />}>
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
               <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />

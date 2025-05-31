@@ -31,3 +31,12 @@ export async function getProductsForPage(queryArgs: { limit: number; offset: num
     console.log("Can't get a products-list", error);
   }
 }
+
+export async function getCurrentProduct(id: string) {
+  try {
+    const response = await buildClient().productProjections().withId({ ID: id }).get().execute();
+    return response.body;
+  } catch (error) {
+    console.log("Can't get current product list", error);
+  }
+}
