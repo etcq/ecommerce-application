@@ -6,6 +6,7 @@ import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools
 import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.ts';
 import { ClientResponse } from '@commercetools/ts-client';
 import { Customer } from '@commercetools/platform-sdk';
+import { getCustomer } from '@/core/api/customers/get';
 
 interface IAuthState {
   isLoggedIn: boolean;
@@ -13,6 +14,7 @@ interface IAuthState {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   initializationAuth: () => void;
+  fetchCustomer: () => Promise<void>;
 }
 
 export const useAuthStore: UseBoundStore<StoreApi<IAuthState>> = create<IAuthState>((set) => ({
@@ -62,5 +64,17 @@ export const useAuthStore: UseBoundStore<StoreApi<IAuthState>> = create<IAuthSta
         }
       }
     })();
+  },
+
+  fetchCustomer: async (): Promise<void> => {
+    try {
+      const freshCustomer = await getCustomer();
+
+      set({ customer: freshCustomer });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      }
+    }
   },
 }));

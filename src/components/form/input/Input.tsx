@@ -1,10 +1,10 @@
 import styles from './input.module.scss';
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdClear } from 'react-icons/md';
 import Button from '@components/button/Button.tsx';
 
-interface IProps {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'text' | 'email' | 'password' | 'date';
   label?: string;
   id?: string;
@@ -13,6 +13,7 @@ interface IProps {
   resetFn?: () => void;
   wrapperClassName?: string;
   error?: string;
+  removeError?: boolean;
   value?: string;
 }
 
@@ -24,6 +25,7 @@ const Input: FC<IProps> = ({
   onChange,
   wrapperClassName,
   error,
+  removeError,
   resetFn,
   ...props
 }) => {
@@ -50,7 +52,7 @@ const Input: FC<IProps> = ({
         onChange={onChange}
       ></input>
 
-      <span className={styles.error}>{error}</span>
+      {!removeError && <span className={styles.error}>{error}</span>}
 
       {type === 'password' && (
         <button type="button" className={styles.visibility} onClick={togglePasswordVisibility}>

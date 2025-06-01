@@ -1,0 +1,87 @@
+@use '../../../assets/style/variables' as *;
+
+$c-header-hover: $c-dark-hover;
+$c-error-message: $c-error-text;
+
+.form {
+  width: 100%;
+  padding: 40px 30px 95px;
+}
+
+.header-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.address-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.address {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.select {
+  display: flex;
+  gap: 5px;
+  margin: 5px 0 20px;
+
+  input {
+    margin-left: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.address-buttons {
+  justify-content: center;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 10px;
+
+  button {
+    align-self: center;
+  }
+}
+
+.icon {
+  display: flex;
+
+  width: 35px;
+  height: 35px;
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+
+    svg {
+      fill: $c-header-hover;
+    }
+  }
+}
+
+.error {
+  align-self: center;
+  margin-top: 15px;
+  color: $c-error-message;
+}

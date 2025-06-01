@@ -43,7 +43,10 @@ const RegistrationForm: React.FC = () => {
       setValue('billing.zip', address.zip);
       setValue('billing.country', address.country);
     }
-  }, [address, useShippingAsBilling, setValue]);
+    if (useAsDefaultShipping) {
+      setUseAsDefaultBilling(true);
+    }
+  }, [address, useAsDefaultShipping, useShippingAsBilling, setValue]);
 
   const onSubmit = async (data: TFormFields): Promise<void> => {
     setError(null);
