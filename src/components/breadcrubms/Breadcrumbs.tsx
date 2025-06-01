@@ -8,7 +8,7 @@ interface IBreadcrumbsProps {
   onBreadcrumbClick: (categoryId: string) => void;
 }
 
-export const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ onBreadcrumbClick }: IBreadcrumbsProps) => {
+export const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ onBreadcrumbClick }) => {
   const { breadcrumb, resetBreadcrumb } = useBreadcrumbStore();
   const { setReset } = useCategoryNavigationStore();
 
@@ -25,7 +25,7 @@ export const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ onBreadcrumbClick }: 
       </span>
       {breadcrumb.length > 0 && (
         <>
-          {breadcrumb.map((item: IBreadcrumbItem, index: number) => () => {
+          {breadcrumb.map((item: IBreadcrumbItem, index: number) => {
             const isLast: boolean = index === breadcrumb.length - 1;
             return (
               <span key={item.id}>
