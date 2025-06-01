@@ -11,10 +11,9 @@ import ColorPicker from '@components/color-picker/ColorPicker.tsx';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import deliveryIcon from '@assets/images/product-detailed/delivery-icon.png';
 import shippingIcon from '@assets/images/product-detailed/shipping-icon.png';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { A11y, Autoplay, Scrollbar, Pagination } from 'swiper/modules';
 import EmptyCatalog from '@/empty-catalog/EmptyCatalog.tsx';
+import ImageSlider from '@components/slider/Slider.tsx';
 
 export default function ProductDetailed(): JSX.Element {
   const { id } = useParams();
@@ -48,25 +47,7 @@ export default function ProductDetailed(): JSX.Element {
       ) : (
         <>
           <div className={styles.preview}>
-            <Swiper
-              modules={[Scrollbar, A11y, Autoplay, Pagination]}
-              slidesPerView={1}
-              spaceBetween={2}
-              centeredSlides={true}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
-              pagination={{ clickable: true }}
-              onSwiper={(swiper) => console.log(swiper)}
-              onClick={() => console.log('open modal')}
-              className={styles.preview__slide}
-            >
-              {productInfo.images.map((image) => {
-                return (
-                  <SwiperSlide key={image}>
-                    <img src={image} alt={productInfo.name} />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+            <ImageSlider slides={productInfo.images} name={productInfo.name} />
           </div>
           <div className={styles.description}>
             <div className={styles.description__header}>
