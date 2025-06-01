@@ -1,15 +1,36 @@
-import { buildClient } from '../client/client-build.ts';
+import { IPriceRange } from '@/interfaces/interfaces.ts';
+import { withClientCredentialsFlow } from '@/core/api/middlewere/client-credentials.ts';
 
-export async function getProductsList() {
-  try {
-    const response = await buildClient().productProjections().get().execute();
-    return response.body.results;
-  } catch (error) {
-    console.log("Can't getting a products-list", error);
+export async function getProductsForPage(
+  queryArgs: { limit: number; offset: number },
+  searchText?: string,
+  priceRanges?: IPriceRange[],
+  sort?: string,
+  categoryIds?: string[],
+) {
+  const filterQuery: string[] = [];
+  const queryFilterArgs: Record<string, string | string[]> = {};
+
+  if (priceRanges?.length) {
+    const [first, ...rest] = priceRanges;
+    const firstPart = `range(${first.min} to ${first.max})`;
+    const restParts: string = rest.map((range: IPriceRange): string => `(${range.min} to ${range.max})`).join(',');
+    const priceFilter = `variants.price.centAmount:${firstPart}${restParts ? ',' + restParts : ''}`;
+    filterQuery.push(priceFilter);
   }
-}
 
-export async function getProductsForPage(queryArgs: { limit: number; offset: number }, searchText?: string) {
+  if (sort) {
+    queryFilterArgs.sort = sort;
+  }
+
+  if (categoryIds?.length) {
+    const brandFilter = `categories.id:${categoryIds.map((id: string): string => `"${id}"`).join(',')}`;
+    filterQuery.push(brandFilter);
+  }
+  if (filterQuery.length) {
+    queryFilterArgs['filter.query'] = filterQuery;
+  }
+
   const searchingParams =
     searchText && searchText.length !== 0
       ? {
@@ -21,10 +42,10 @@ export async function getProductsForPage(queryArgs: { limit: number; offset: num
         }
       : {};
   try {
-    const response = await buildClient()
+    const response = await withClientCredentialsFlow()
       .productProjections()
       .search()
-      .get({ queryArgs: { ...queryArgs, ...searchingParams } })
+      .get({ queryArgs: { ...queryArgs, ...searchingParams, ...queryFilterArgs } })
       .execute();
     return response.body;
   } catch (error) {
