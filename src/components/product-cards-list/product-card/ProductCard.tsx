@@ -11,7 +11,7 @@ export default function ProductCard(props: IProductInfoForCard): JSX.Element {
     <div
       className={styles.product}
       onClick={() => {
-        void navigate(`${ROUTES.PRODUCT_LIST}/${props.id}`, { state: { props } });
+        void navigate(`${ROUTES.PRODUCT_LIST}/${props.id}`);
       }}
     >
       <div className={styles.product__preview}>
