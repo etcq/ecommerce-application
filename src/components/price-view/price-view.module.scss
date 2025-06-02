@@ -1,0 +1,36 @@
+@use '@assets/style/variables' as *;
+
+$c-bg-price-percent: $c-dark-hover;
+$c-font-price-percent: $c-light-main;
+$c-font-price-discount: $c-dark-hover;
+
+.price-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  .discounted {
+    font-weight: 400;
+    color: $c-font-price-discount;
+    text-decoration: line-through;
+  }
+
+  .price-discount-percent {
+    position: absolute;
+    z-index: 8;
+    top: 5%;
+    left: 5%;
+
+    width: 50px;
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    color: $c-font-price-percent;
+    text-align: center;
+
+    background-color: $c-bg-price-percent;
+  }
+}

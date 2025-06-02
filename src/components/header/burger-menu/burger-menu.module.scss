@@ -12,7 +12,7 @@ $c-burger-menu-secondary: $c-dark-hover;
 @media screen and (width <= 699px) {
   .burger-menu {
     position: fixed;
-    z-index: 8;
+    z-index: 10;
     top: 0;
     right: -300px;
 

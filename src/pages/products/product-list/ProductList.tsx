@@ -1,9 +1,24 @@
 import styles from './product-list.module.scss';
+import { JSX } from 'react';
+import ProductCardsList from '@/components/product-cards-list/ProductCardsList';
+import { FilterPanel } from '@components/filter-panel/filter-panel.tsx';
+import { Breadcrumbs } from '@components/breadcrubms/Breadcrumbs.tsx';
+import { handleBreadcrumbClick } from '@/core/utils/breadcrumb-handlers.ts';
 
-export default function ProductList(): React.JSX.Element {
+export default function ProductList(): JSX.Element {
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.title}>The catalog page will be here</h1>
-    </div>
+    <>
+      <div className={styles.breadcrumb}>
+        <Breadcrumbs onBreadcrumbClick={handleBreadcrumbClick} />
+      </div>
+      <div className={styles.wrapper}>
+        <div className={styles.filter}>
+          <FilterPanel />
+        </div>
+        <div className={styles.products}>
+          <ProductCardsList />
+        </div>
+      </div>
+    </>
   );
 }

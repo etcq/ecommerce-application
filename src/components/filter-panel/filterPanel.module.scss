@@ -1,0 +1,21 @@
+@use '../../assets/style/variables' as *;
+
+$c-input-hover: $c-dark-hover;
+$c-wrapper-border: rgba($c-dark-hover, 0.6);
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+}
+
+.filter {
+  display: flex;
+  border: 1px solid $c-wrapper-border;
+  border-radius: 5px;
+}
+
+.button {
+  align-self: center;
+}

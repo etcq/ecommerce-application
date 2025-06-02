@@ -1,0 +1,19 @@
+@use '../../../assets/style/variables' as *;
+
+$c-wrapper-border: rgba($c-dark-hover, 0.6);
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 10px 10px;
+  border: 1px solid $c-wrapper-border;
+  border-radius: 5px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

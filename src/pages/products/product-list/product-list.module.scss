@@ -1,11 +1,37 @@
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-}
-
 .title {
   font-family: Sneakers, sans-serif;
   font-size: 4rem;
+}
+
+.wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.products {
+  width: 100%;
+}
+
+.filter {
+  width: 220px;
+}
+
+.breadcrumb {
+  height: 20px;
+  margin-bottom: 10px;
+  padding: 0 1rem;
+}
+
+@media (width <= 600px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .filter {
+    width: 100%;
+  }
 }
