@@ -10,9 +10,11 @@ import { IPriceRange } from '@/interfaces/interfaces.ts';
 import { TSortOrder } from '@/interfaces/interfaces.ts';
 import Button from '@components/button/Button.tsx';
 import { CategoriesNavigation } from '@components/filter-panel/categories/categories.tsx';
+import { useProductListStore } from '@/core/stores/product-list-store.ts';
 
 export const FilterPanel: React.FC = () => {
   const priceRange: IPriceRange[] = useProductFilterStore((state) => state.priceRanges);
+  const { setPage } = useProductListStore();
   const togglePriceRange: (range: IPriceRange) => void = useProductFilterStore((state) => state.togglePriceRange);
   const setSortOrder: (order: TSortOrder) => void = useProductFilterStore((state) => state.setSortOrder);
   const sortOrder: TSortOrder = useProductFilterStore((state) => state.sortOrder);
@@ -27,6 +29,7 @@ export const FilterPanel: React.FC = () => {
   const handlePriceRangeFilter = (range: IPriceRange | null) => (): void => {
     if (range) {
       togglePriceRange(range);
+      setPage(1);
     }
   };
 
