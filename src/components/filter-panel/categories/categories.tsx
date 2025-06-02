@@ -35,10 +35,6 @@ export function CategoriesNavigation() {
       }
     };
     void fetchCategories();
-
-    return (): void => {
-      setReset();
-    };
   }, [setReset, setAllCategories]);
 
   const handleRootCategoryClick = (name: string): void => {
