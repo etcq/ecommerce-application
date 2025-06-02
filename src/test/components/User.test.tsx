@@ -3,13 +3,11 @@ import { describe, expect, it } from 'vitest';
 import { BrowserRouter } from 'react-router';
 import UserForm from '@/components/form/user/User';
 
+const renderWithRouter = (ui: React.ReactElement) => render(<BrowserRouter>{ui}</BrowserRouter>);
+
 describe('User component', () => {
   it('user form elements', () => {
-    render(
-      <BrowserRouter>
-        <UserForm />
-      </BrowserRouter>,
-    );
+    renderWithRouter(<UserForm />);
     expect(screen.getByLabelText('First Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Last Name')).toBeInTheDocument();
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
@@ -22,11 +20,7 @@ describe('User component', () => {
   });
 
   it('toggles edit mode when Edit button is clicked, enabling and disabling form fields', () => {
-    render(
-      <BrowserRouter>
-        <UserForm />
-      </BrowserRouter>,
-    );
+    renderWithRouter(<UserForm />);
     expect(screen.getByLabelText('First Name')).toBeDisabled();
     expect(screen.getByLabelText('Last Name')).toBeDisabled();
     expect(screen.getByLabelText('Email')).toBeDisabled();
@@ -46,11 +40,7 @@ describe('User component', () => {
   });
 
   it('displays address fields and buttons when Add New Address button is clicked', () => {
-    render(
-      <BrowserRouter>
-        <UserForm />
-      </BrowserRouter>,
-    );
+    renderWithRouter(<UserForm />);
 
     const newAddressButton = screen.getByRole('button', { name: 'Add New Address' });
     fireEvent.click(newAddressButton);

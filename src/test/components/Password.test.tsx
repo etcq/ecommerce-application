@@ -3,13 +3,11 @@ import { describe, expect, it } from 'vitest';
 import { BrowserRouter } from 'react-router';
 import PasswordForm from '@/components/form/user/password/Password';
 
+const renderWithRouter = (ui: React.ReactElement) => render(<BrowserRouter>{ui}</BrowserRouter>);
+
 describe('Password component', () => {
   it('password form elements', () => {
-    render(
-      <BrowserRouter>
-        <PasswordForm />
-      </BrowserRouter>,
-    );
+    renderWithRouter(<PasswordForm />);
     expect(screen.getByLabelText('Current Password')).toBeInTheDocument();
     expect(screen.getByLabelText('New Password')).toBeInTheDocument();
     expect(screen.getByLabelText('Confirm New Password')).toBeInTheDocument();
@@ -17,11 +15,7 @@ describe('Password component', () => {
   });
 
   it('displays error when new password and confirmation do not match', async () => {
-    render(
-      <BrowserRouter>
-        <PasswordForm />
-      </BrowserRouter>,
-    );
+    renderWithRouter(<PasswordForm />);
 
     const newPassword = screen.getByLabelText('New Password');
     const newPasswordConfirm = screen.getByLabelText('Confirm New Password');
