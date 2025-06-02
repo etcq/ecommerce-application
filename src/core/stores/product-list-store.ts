@@ -16,8 +16,20 @@ export const useProductListStore = create<IProductListState>((set) => ({
   page: 1,
   total: null,
   isLastPage: false,
-  incPage: () => set((state) => ({ page: state.page + 1 })),
-  decPage: () => set((state) => ({ page: state.page - 1 })),
+  incPage: () =>
+    set((state) => {
+      if (!state.isLastPage) {
+        return { page: state.page + 1 };
+      }
+      return state;
+    }),
+  decPage: () =>
+    set((state) => {
+      if (state.page !== 1) {
+        return { page: state.page - 1 };
+      }
+      return state;
+    }),
   setPage: (number: number) => set(() => ({ page: number })),
   setTotal: (number: number) => set(() => ({ total: number })),
   setIsLastPage: (status: boolean) => set(() => ({ isLastPage: status })),

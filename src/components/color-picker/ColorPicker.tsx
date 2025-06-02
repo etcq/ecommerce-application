@@ -9,7 +9,6 @@ export default function ColorPicker({ colors }: { colors: string[] }): JSX.Eleme
       const target = event.currentTarget;
       const color = target.getAttribute('id');
       setCheckedColor(color);
-      console.log(checkedColor);
     }
   };
   return (

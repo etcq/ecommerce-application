@@ -11,9 +11,10 @@ $c-button-main: $c-light-main;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  place-self: flex-start center;
   justify-content: space-between;
 
-  width: 240px;
+  width: 250px;
   min-height: 350px;
   border-radius: 1rem;
 

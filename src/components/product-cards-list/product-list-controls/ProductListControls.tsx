@@ -24,15 +24,7 @@ export default function ProductListControls(props: { isLoading: boolean }): JSX.
         Showing {start} - {end} of {total} item(s)
       </span>
       <div className={styles.pagination}>
-        <Button
-          className={styles.pagination__btn}
-          size="x-small"
-          disabled={page === 1 || isLoading}
-          onClick={() => {
-            if (page === 1) return;
-            decPage();
-          }}
-        >
+        <Button className={styles.pagination__btn} size="x-small" disabled={page === 1 || isLoading} onClick={decPage}>
           &lt;
         </Button>
         <div className={styles.pagination__view} style={{ width: `${BASE_PAGINATION_WIDTH}%` }}>
@@ -63,15 +55,7 @@ export default function ProductListControls(props: { isLoading: boolean }): JSX.
             </>
           )}
         </div>
-        <Button
-          size="x-small"
-          className={styles.pagination__btn}
-          disabled={isLastPage || isLoading}
-          onClick={() => {
-            if (isLastPage) return;
-            incPage();
-          }}
-        >
+        <Button size="x-small" className={styles.pagination__btn} disabled={isLastPage || isLoading} onClick={incPage}>
           &gt;
         </Button>
       </div>
