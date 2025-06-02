@@ -29,7 +29,6 @@ export function buildClient(): ByProjectKeyRequestBuilder {
     .withProjectKey(projectKey)
     .withClientCredentialsFlow(authMiddlewareOptions)
     .withHttpMiddleware(httpMiddlewareOptions)
-    .withLoggerMiddleware()
     .build();
 
   return createApiBuilderFromCtpClient(ctpClient).withProjectKey({ projectKey: projectKey });

@@ -18,3 +18,15 @@ export interface IProductInfoForDetailedPage extends IProductInfoForCard {
   sizes: number[];
   colors: string[];
 }
+
+export interface IPriceRange {
+  min: number;
+  max: number;
+}
+
+export type TSortOrder = 'ascending' | 'descending' | null;
+
+export interface IBreadcrumbItem {
+  id: string;
+  name: string;
+}
