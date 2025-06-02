@@ -81,19 +81,19 @@ export const FilterPanel: React.FC = () => {
         </Filter>
         <Filter title={'Sort By'}>
           <Checkbox
-            label={'alphabetically'}
+            label={'By alphabet'}
             id={'price'}
             checked={alphabetically}
             onChange={handleAlphabeticallySort}
           ></Checkbox>
           <Checkbox
-            label={'ascending'}
+            label={'Price low to high'}
             id={'ascending'}
             checked={sortOrder === 'ascending'}
             onChange={handlePriceSort('ascending')}
           ></Checkbox>{' '}
           <Checkbox
-            label={'descending'}
+            label={'Price high to low'}
             id={'descending'}
             checked={sortOrder === 'descending'}
             onChange={handlePriceSort('descending')}
