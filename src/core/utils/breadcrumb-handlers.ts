@@ -31,7 +31,7 @@ export const handleBreadcrumbClick = (categoryId: string): void => {
     clickedCategory.name[LOCALIZATION] === 'Man' || clickedCategory.name[LOCALIZATION] === 'Woman';
 
   if (isRootCategory) {
-    setSelectedFootwearId(null);
+    setSelectedFootwearId(clickedCategory.id);
     setBrandCategories([]);
   } else {
     setSelectedFootwearId(lastItem.id);
