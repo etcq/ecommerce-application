@@ -46,3 +46,9 @@ export enum FilterPrice {
   HEIGHT = '70$ - 100$',
   PREMIUM = '100$ - 120$',
 }
+
+export enum SortingLabels {
+  TO_HIGH = 'Price low to high',
+  TO_LOW = 'Price high to low',
+  BY_ALPHABET = 'By alphabet',
+}

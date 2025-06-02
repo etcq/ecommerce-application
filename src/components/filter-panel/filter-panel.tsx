@@ -2,7 +2,7 @@ import styles from './filterPanel.module.scss';
 import * as React from 'react';
 import { Filter } from '@components/form/filter/filter.tsx';
 import { Checkbox } from '@components/form/checkbox/checkbox.tsx';
-import { FilterPrice } from '@/constants/constants.ts';
+import { FilterPrice, SortingLabels } from '@/constants/constants.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
@@ -81,19 +81,19 @@ export const FilterPanel: React.FC = () => {
         </Filter>
         <Filter title={'Sort By'}>
           <Checkbox
-            label={'By alphabet'}
+            label={SortingLabels.BY_ALPHABET}
             id={'price'}
             checked={alphabetically}
             onChange={handleAlphabeticallySort}
           ></Checkbox>
           <Checkbox
-            label={'Price low to high'}
+            label={SortingLabels.TO_HIGH}
             id={'ascending'}
             checked={sortOrder === 'ascending'}
             onChange={handlePriceSort('ascending')}
           ></Checkbox>{' '}
           <Checkbox
-            label={'Price high to low'}
+            label={SortingLabels.TO_LOW}
             id={'descending'}
             checked={sortOrder === 'descending'}
             onChange={handlePriceSort('descending')}
