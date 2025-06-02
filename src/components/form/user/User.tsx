@@ -73,7 +73,17 @@ const UserForm: React.FC = () => {
   const [isAddAddressModalOpen, setIsAddAddressModalOpen] = useState(false);
 
   const openModal = (index: number) => setModalAddressIndex(index);
-  const closeModal = () => setModalAddressIndex(null);
+  const closeModal = () => {
+    if (modalAddressIndex !== null) {
+      resetField(`addresses.${modalAddressIndex}`);
+    }
+    setModalAddressIndex(null);
+  };
+
+  const closeAddAddressModal = () => {
+    setIsAddAddressModalOpen(false);
+    resetField('address', { defaultValue: undefined });
+  };
 
   const hasAddressErrors = (index?: number) => {
     let error = errors.address;
@@ -192,7 +202,7 @@ const UserForm: React.FC = () => {
 
         <AddressModal
           isOpen={isAddAddressModalOpen}
-          onClose={() => setIsAddAddressModalOpen(false)}
+          onClose={closeAddAddressModal}
           onSave={() => {
             if (newAddress) {
               void handleAddNewAddress(newAddress);
