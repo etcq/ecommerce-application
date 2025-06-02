@@ -23,7 +23,6 @@ export enum AuthMessages {
   LOGIN = 'Your login was successful!',
 }
 
-
 export enum UserUpdateMessages {
   UPDATE = 'Saved successfully!',
   ADDRESS_UPDATE = 'Address updated successfully!',
@@ -35,6 +34,7 @@ export enum UserUpdateMessages {
 
 export const BASE_LIMIT_PER_PAGE = 9;
 export const BASE_PAGINATION_WIDTH = 60;
+export const SEARCH_DEBOUNCE_TIME = 1000;
 
 export const LOCALIZATION = 'en-US';
 
@@ -45,4 +45,10 @@ export enum FilterPrice {
   MEDIUM = '50$ - 70$',
   HEIGHT = '70$ - 100$',
   PREMIUM = '100$ - 120$',
+}
+
+export enum SortingLabels {
+  TO_HIGH = 'Price low to high',
+  TO_LOW = 'Price high to low',
+  BY_ALPHABET = 'By alphabet',
 }

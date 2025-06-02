@@ -13,6 +13,12 @@ export interface IProductInfoForCard {
   prices: { main: number; discount?: number };
 }
 
+export interface IProductInfoForDetailedPage extends IProductInfoForCard {
+  images: string[];
+  sizes: number[];
+  colors: string[];
+}
+
 export interface IPriceRange {
   min: number;
   max: number;

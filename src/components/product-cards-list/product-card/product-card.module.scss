@@ -11,9 +11,10 @@ $c-button-main: $c-light-main;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  place-self: flex-start center;
   justify-content: space-between;
 
-  width: 260px;
+  width: 250px;
   min-height: 350px;
   border-radius: 1rem;
 
@@ -80,9 +81,7 @@ $c-button-main: $c-light-main;
   }
 
   &:hover {
-    cursor: pointer;
-    transform: scale(1.03);
-    box-shadow: 0 0 15px 5px $c-card-hover;
+    @include item-hovered;
 
     .product-description {
       height: 75px;

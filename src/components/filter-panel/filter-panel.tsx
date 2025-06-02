@@ -2,7 +2,7 @@ import styles from './filterPanel.module.scss';
 import * as React from 'react';
 import { Filter } from '@components/form/filter/filter.tsx';
 import { Checkbox } from '@components/form/checkbox/checkbox.tsx';
-import { FilterPrice } from '@/constants/constants.ts';
+import { FilterPrice, SortingLabels } from '@/constants/constants.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
@@ -10,9 +10,11 @@ import { IPriceRange } from '@/interfaces/interfaces.ts';
 import { TSortOrder } from '@/interfaces/interfaces.ts';
 import Button from '@components/button/Button.tsx';
 import { CategoriesNavigation } from '@components/filter-panel/categories/categories.tsx';
+import { useProductListStore } from '@/core/stores/product-list-store.ts';
 
 export const FilterPanel: React.FC = () => {
   const priceRange: IPriceRange[] = useProductFilterStore((state) => state.priceRanges);
+  const { setPage } = useProductListStore();
   const togglePriceRange: (range: IPriceRange) => void = useProductFilterStore((state) => state.togglePriceRange);
   const setSortOrder: (order: TSortOrder) => void = useProductFilterStore((state) => state.setSortOrder);
   const sortOrder: TSortOrder = useProductFilterStore((state) => state.sortOrder);
@@ -27,6 +29,7 @@ export const FilterPanel: React.FC = () => {
   const handlePriceRangeFilter = (range: IPriceRange | null) => (): void => {
     if (range) {
       togglePriceRange(range);
+      setPage(1);
     }
   };
 
@@ -78,19 +81,19 @@ export const FilterPanel: React.FC = () => {
         </Filter>
         <Filter title={'Sort By'}>
           <Checkbox
-            label={'alphabetically'}
+            label={SortingLabels.BY_ALPHABET}
             id={'price'}
             checked={alphabetically}
             onChange={handleAlphabeticallySort}
           ></Checkbox>
           <Checkbox
-            label={'ascending'}
+            label={SortingLabels.TO_HIGH}
             id={'ascending'}
             checked={sortOrder === 'ascending'}
             onChange={handlePriceSort('ascending')}
           ></Checkbox>{' '}
           <Checkbox
-            label={'descending'}
+            label={SortingLabels.TO_LOW}
             id={'descending'}
             checked={sortOrder === 'descending'}
             onChange={handlePriceSort('descending')}

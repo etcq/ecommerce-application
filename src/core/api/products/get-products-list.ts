@@ -1,5 +1,5 @@
 import { IPriceRange } from '@/interfaces/interfaces.ts';
-import { withClientCredentialsFlow } from '@/core/api/middlewere/client-credentials.ts';
+import { buildClient } from '@/core/api/client/client-build.ts';
 
 export async function getProductsForPage(
   queryArgs: { limit: number; offset: number },
@@ -42,7 +42,7 @@ export async function getProductsForPage(
         }
       : {};
   try {
-    const response = await withClientCredentialsFlow()
+    const response = await buildClient()
       .productProjections()
       .search()
       .get({ queryArgs: { ...queryArgs, ...searchingParams, ...queryFilterArgs } })
@@ -50,5 +50,14 @@ export async function getProductsForPage(
     return response.body;
   } catch (error) {
     console.log("Can't get a products-list", error);
+  }
+}
+
+export async function getCurrentProduct(id: string) {
+  try {
+    const response = await buildClient().productProjections().withId({ ID: id }).get().execute();
+    return response.body;
+  } catch (error) {
+    console.log("Can't get current product list", error);
   }
 }

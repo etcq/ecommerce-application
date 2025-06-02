@@ -7,9 +7,11 @@ import { useCategoryNavigationStore } from '@/core/stores/use-category-navigatio
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
 import { CATEGORY_MESSAGE } from '@/constants/constants.ts';
 import { IBreadcrumbItem } from '@/interfaces/interfaces.ts';
+import { useProductListStore } from '@/core/stores/product-list-store.ts';
 
 export function CategoriesNavigation() {
   const { breadcrumb, setBreadcrumb } = useBreadcrumbStore();
+  const { setPage } = useProductListStore();
   const {
     allCategories,
     setAllCategories,
@@ -56,6 +58,7 @@ export function CategoriesNavigation() {
     setActiveRootCategoryId(rootCategory.id);
     setBreadcrumb([{ id: rootCategory.id, name: rootCategory.name[LOCALIZATION] }]);
     setSelectedFootwearId(rootCategory.id);
+    setPage(1);
 
     const children: Category[] = allCategories.filter((category): boolean => category.parent?.id === rootCategory.id);
     setFootwearCategories(children);
@@ -85,6 +88,7 @@ export function CategoriesNavigation() {
 
     setBreadcrumb(updatedBreadcrumb);
     setSelectedFootwearId(categoryId);
+    setPage(1);
 
     const children: Category[] = allCategories.filter(
       (category: Category): boolean => category.parent?.id === categoryId,

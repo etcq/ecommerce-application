@@ -1,0 +1,91 @@
+@use '@assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+
+.slider {
+  --swiper-navigation-color: $c-dark-secondary;
+  --swiper-pagination-color: #282828;
+  --swiper-pagination-bullet-size: 12px;
+
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid $c-light-secondary;
+  border-radius: 20px;
+
+  img {
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
+
+  &:hover {
+    cursor: zoom-in;
+  }
+}
+
+.modal {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(#000, 0.6);
+}
+
+.slider-large {
+  --swiper-navigation-color: $c-dark-secondary;
+  --swiper-pagination-color: #282828;
+  --swiper-pagination-bullet-size: 12px;
+
+  aspect-ratio: 1 / 1;
+  width: 80vw;
+  max-height: 90vh;
+  margin: 0 20px;
+  border-radius: 20px;
+}
+
+.image-large {
+  display: block;
+  max-width: none;
+  max-height: none;
+}
+
+.close {
+  position: absolute;
+  z-index: 11;
+  top: 3%;
+  right: 3%;
+
+  border: none;
+
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+    color: $c-dark-hover;
+  }
+}
+
+.image-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: #fff;
+}
+
+.loader {
+  position: absolute;
+  z-index: 8;
+  font-size: 24px;
+}

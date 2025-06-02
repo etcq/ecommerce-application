@@ -87,3 +87,9 @@
   border: 1px solid $color;
   border-radius: 10px;
 }
+
+@mixin item-hovered {
+  cursor: pointer;
+  transform: scale(1.03);
+  box-shadow: 0 0 15px 1px $c-dark-secondary;
+}
