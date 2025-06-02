@@ -8,7 +8,7 @@ import Button from '@/components/button/Button';
 import React from 'react';
 import { useAuthStore } from '@/core/stores/use-auth-state';
 import { useToastStore } from '@/core/stores/toast';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
 import { changePassword } from '@/core/api/customers/password';
 
@@ -43,7 +43,14 @@ const PasswordForm: React.FC = () => {
   return (
     <div className={styles.form}>
       <div className={formStyles.title}>
-        <h1>Password Settings</h1>
+        <h1 className={styles.header}>Password Settings</h1>
+        <p className={styles['title-subheader']}>
+          Change your mind?
+          <NavLink className={styles['title-link']} to="/profile">
+            Back to Profile
+          </NavLink>
+          .
+        </p>
       </div>
 
       <form className={formStyles.form} onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
