@@ -202,7 +202,7 @@ const UserForm: React.FC = () => {
 
         <AddressModal
           isOpen={isAddAddressModalOpen}
-          onClose={() => closeAddAddressModal()}
+          onClose={closeAddAddressModal}
           onSave={() => {
             if (newAddress) {
               void handleAddNewAddress(newAddress);
