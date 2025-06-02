@@ -1,0 +1,90 @@
+@use '../../../assets/style/variables' as *;
+
+$c-hover-bg: $c-dark-hover;
+$c-text: $c-light-main;
+
+.category {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+}
+
+.text {
+  cursor: pointer;
+
+  transform: rotate(180deg);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 160px;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+
+  writing-mode: vertical-rl;
+  font-size: 18px;
+  font-weight: 600;
+  text-orientation: mixed;
+  letter-spacing: 2px;
+
+  transition: 0.3s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $c-text;
+      background-color: $c-hover-bg;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  cursor: pointer;
+  padding: 0 10px;
+  list-style: none;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $c-text;
+      text-align: end;
+      background-color: $c-hover-bg;
+    }
+  }
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  padding: 5px;
+}
+
+.selected {
+  pointer-events: none;
+  color: $c-text;
+  background-color: $c-hover-bg;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 110px;
+  padding: 10px;
+  border: 1px solid $c-dark-hover;
+  border-radius: 5px;
+
+  font-weight: 100;
+
+  opacity: 0.5;
+}

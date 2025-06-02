@@ -12,3 +12,15 @@ export interface IProductInfoForCard {
   img?: string;
   prices: { main: number; discount?: number };
 }
+
+export interface IPriceRange {
+  min: number;
+  max: number;
+}
+
+export type TSortOrder = 'ascending' | 'descending' | null;
+
+export interface IBreadcrumbItem {
+  id: string;
+  name: string;
+}
