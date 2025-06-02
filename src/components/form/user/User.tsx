@@ -112,7 +112,7 @@ const UserForm: React.FC = () => {
         <div className={styles['header-wrapper']}>
           <h3>User Information</h3>
           <Button type="button" size="x-small" onClick={() => setIsEditUserMode((prev) => !prev)}>
-            Edit
+            {isEditUserMode ? 'Edit' : 'Cancel'}
           </Button>
           <NavLink className={styles.link} to="/password">
             <Button type="button" size="x-small">
