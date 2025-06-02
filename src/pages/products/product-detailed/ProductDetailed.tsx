@@ -54,11 +54,12 @@ export default function ProductDetailed(): JSX.Element {
           <div className={styles.description}>
             <div className={styles.description__header}>
               <h2 className={styles.description__title}>{productInfo.name}</h2>
-              <Button size={'x-small'} className={styles['back-btn']} onClick={() => void navigate(-1)}>
-                <RiArrowGoBackFill />
-              </Button>
               <PriceView prices={productInfo.prices} className={styles.description__price} />
-              <div className={styles.brake}></div>
+              <div className={styles.brake}>
+                <Button size={'x-small'} className={styles['back-btn']} onClick={() => void navigate(-1)}>
+                  <RiArrowGoBackFill />
+                </Button>
+              </div>
             </div>
             <p className={styles.description__text}>{productInfo.description}</p>
             <div className={styles['description__buy-parameters']}>
