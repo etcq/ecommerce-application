@@ -2,7 +2,7 @@ import { JSX, useEffect, useState } from 'react';
 import styles from './product-detailed.module.scss';
 import Button from '@components/button/Button.tsx';
 import PriceView from '@components/price-view/PriceView.tsx';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { getCurrentProduct } from '@/core/api/products/get-products-list.ts';
 import getInfoForDetailedPage from '@/core/utils/get-info-for-detailed-page.ts';
 import { IProductInfoForDetailedPage } from '@/interfaces/interfaces.ts';
@@ -14,11 +14,13 @@ import shippingIcon from '@assets/images/product-detailed/shipping-icon.png';
 import 'swiper/swiper-bundle.css';
 import EmptyCatalog from '@/empty-catalog/EmptyCatalog.tsx';
 import ImageSlider from '@components/slider/Slider.tsx';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 
 export default function ProductDetailed(): JSX.Element {
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState<IProductInfoForDetailedPage | null>(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -52,6 +54,9 @@ export default function ProductDetailed(): JSX.Element {
           <div className={styles.description}>
             <div className={styles.description__header}>
               <h2 className={styles.description__title}>{productInfo.name}</h2>
+              <Button size={'x-small'} className={styles['back-btn']} onClick={() => void navigate(-1)}>
+                <RiArrowGoBackFill />
+              </Button>
               <PriceView prices={productInfo.prices} className={styles.description__price} />
               <div className={styles.brake}></div>
             </div>
