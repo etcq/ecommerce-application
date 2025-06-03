@@ -40,12 +40,28 @@ export const LOCALIZATION = 'en-US';
 
 export const CATEGORY_MESSAGE = "Don't know what to choose? Select a category...";
 
-export enum FilterPrice {
-  LOW = '20$ - 50$',
-  MEDIUM = '50$ - 70$',
-  HEIGHT = '70$ - 100$',
-  PREMIUM = '100$ - 120$',
-}
+export const PriceFiltersArray = [
+  {
+    key: 'LOW',
+    label: '20$ - 50$',
+    range: { min: 2000, max: 5000 },
+  },
+  {
+    key: 'MEDIUM',
+    label: '50$ - 70$',
+    range: { min: 5000, max: 7000 },
+  },
+  {
+    key: 'HEIGHT',
+    label: '70$ - 100$',
+    range: { min: 7000, max: 10000 },
+  },
+  {
+    key: 'PREMIUM',
+    label: '100$ - 120$',
+    range: { min: 10000, max: 12000 },
+  },
+];
 
 export enum SortingLabels {
   TO_HIGH = 'Price low to high',
