@@ -1,21 +1,27 @@
 import styles from './item.module.scss';
 import { Minus, Plus, X } from 'lucide-react';
 
-interface IProps {
+export interface IItemProps {
   image: string;
   name: string;
   price: number;
   quantity: number;
+  size: number;
+  color: string;
 }
 
-const Item: React.FC<IProps> = ({ image, name, price, quantity }) => {
+const Item: React.FC<IItemProps> = ({ image, name, price, quantity, size, color }) => {
   return (
     <div className={styles.item}>
       <div className={styles.delete}>
         <X />
       </div>
       <img className={styles.image} src={image} />
-      <div className={styles.name}>{name}</div>
+      <div className={styles.info}>
+        <div className={styles.name}>{name}</div>
+        <div className={styles.size}>Size: {size}</div>
+        <div className={styles.color}>Color: {color}</div>
+      </div>
       <div className={styles.price}>{`$${price}`}</div>
       <div className={styles['quantity-wrapper']}>
         <div className={styles.minus}>

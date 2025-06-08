@@ -29,13 +29,27 @@
   object-fit: contain;
 }
 
-.name {
+.info {
   flex-grow: 1;
+}
+
+.name {
+  margin-bottom: 10px;
+}
+
+.size,
+.color {
+  font-size: 14px;
+  color: $c-dark-hover;
 }
 
 .price {
   width: 50px;
   color: $c-dark-hover;
+
+  @media (width <= 1100px) {
+    display: none;
+  }
 }
 
 .quantity-wrapper {
