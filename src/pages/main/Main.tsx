@@ -1,12 +1,16 @@
 import { JSX } from 'react';
-import MainPromo from '@components/mainpage-items/main-page-promo/MainPromo.tsx';
-import PromocodePreview from '@components/mainpage-items/promocode-preview/PromocodePreview.tsx';
+import PromoSection from '@/components/mainpage-sections/promo-section/PromoSection';
+import PromocodeSection from '@/components/mainpage-sections/promocode-section/PromocodeSection';
+import Labels from '@/components/mainpage-sections/labels-section/Labels';
+import CategorySection from '@components/mainpage-sections/category-section/CategorySection.tsx';
 
 export default function MainPage(): JSX.Element {
   return (
     <div>
-      <MainPromo />
-      <PromocodePreview />
+      <PromoSection />
+      <PromocodeSection />
+      <Labels />
+      <CategorySection />
     </div>
   );
 }

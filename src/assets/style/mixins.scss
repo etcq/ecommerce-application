@@ -99,3 +99,12 @@
   --swiper-pagination-color: #282828;
   --swiper-pagination-bullet-size: 12px;
 }
+
+@mixin section-header {
+  margin-top: 0;
+
+  font-size: 32px;
+  color: $c-light-main;
+  text-align: center;
+  text-transform: uppercase;
+}
