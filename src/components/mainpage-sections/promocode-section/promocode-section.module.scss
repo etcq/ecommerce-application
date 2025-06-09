@@ -12,12 +12,7 @@
   background-color: #2d2d2d;
 
   &__header {
-    margin-top: 0;
-
-    font-size: 32px;
-    color: white;
-    text-align: center;
-    text-transform: uppercase;
+    @include section-header;
   }
 
   &__slider {

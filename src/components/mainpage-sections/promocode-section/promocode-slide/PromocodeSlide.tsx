@@ -6,10 +6,12 @@ import { DiscountSliderAlign } from '@/constants/constants.ts';
 import summerSneakerImgPath from '@assets/images/main-page/slider/summer-sneaker.jpg';
 import greenSneakersImgPath from '@assets/images/main-page/slider/green-sneakers.webp';
 import manySneakerImgPath from '@assets/images/main-page/slider/many-sneaker.webp';
+import { useToastStore } from '@/core/stores/toast';
 
 export default function PromocodeSlide(props: IDiscountInfo): JSX.Element {
   const { name, description, code } = props;
   const codeInput = useRef<HTMLInputElement | null>(null);
+  const { setMessage } = useToastStore();
 
   const getContentImageAndAlign = (): { img: string; align: DiscountSliderAlign } => {
     const alignVariants = [DiscountSliderAlign.LEFT, DiscountSliderAlign.RIGHT, DiscountSliderAlign.CENTER];
@@ -25,7 +27,7 @@ export default function PromocodeSlide(props: IDiscountInfo): JSX.Element {
     if (!codeInput.current?.value) return;
     try {
       await navigator.clipboard.writeText(codeInput.current.value);
-      console.log(codeInput.current.value);
+      setMessage('Code copied to clipboard');
     } catch (error) {
       console.error(error);
     }

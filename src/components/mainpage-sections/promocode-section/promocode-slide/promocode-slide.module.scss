@@ -106,14 +106,14 @@
   }
 }
 
-@media screen and (width <= 600px) {
+@media screen and (width <= 700px) {
   .slide {
     font-size: 12px;
 
-    &__content {
+    &-content {
       align-items: center !important;
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       border-radius: 0 !important;
 
       &-description {
@@ -121,7 +121,7 @@
       }
     }
 
-    &__code {
+    &-code {
       gap: 6px;
     }
   }

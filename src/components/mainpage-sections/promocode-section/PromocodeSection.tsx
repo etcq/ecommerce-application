@@ -1,15 +1,15 @@
-import styles from './promocode-preview.module.scss';
+import styles from './promocode-section.module.scss';
 import { JSX, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Pagination } from 'swiper/modules';
-import PromocodeSlide from '@components/mainpage-items/promocode-preview/promocode-slide/PromocodeSlide.tsx';
+import PromocodeSlide from './promocode-slide/PromocodeSlide';
 import { getDiscount } from '@/core/api/discount/get-discount.ts';
 import getDiscountsInfo from '@/core/utils/get-discounts-info.ts';
 import { IDiscountInfo } from '@/interfaces/interfaces.ts';
 import Loading from '@components/loading/Loading.tsx';
 
-export default function PromocodePreview(): JSX.Element {
+export default function PromocodeSection(): JSX.Element {
   const [discounts, setDiscounts] = useState<IDiscountInfo[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function PromocodePreview(): JSX.Element {
   }, []);
 
   return (
-    <div className={styles.promocode}>
+    <section className={styles.promocode}>
       <h3 className={styles.promocode__header}>Our active promo codes</h3>
       {loading ? (
         <Loading />
@@ -47,6 +47,6 @@ export default function PromocodePreview(): JSX.Element {
           )}
         </Swiper>
       )}
-    </div>
+    </section>
   );
 }

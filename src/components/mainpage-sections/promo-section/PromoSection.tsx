@@ -1,12 +1,12 @@
 import { JSX, useEffect } from 'react';
-import styles from './main-promo.module.scss';
+import styles from './promo-section.module.scss';
 import promoVideo from '@assets/video/Promo Background ver2.mp4';
 import { useHeaderState } from '@/core/stores/state-header.ts';
 import Button from '@components/button/Button.tsx';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 
-export default function MainPromo(): JSX.Element {
+export default function PromoSection(): JSX.Element {
   const { setIsDarkTheme } = useHeaderState();
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function MainPromo(): JSX.Element {
   }, [setIsDarkTheme]);
 
   return (
-    <div className={styles.promo}>
+    <section className={styles.promo}>
       <div className={styles.promo__bg}>
         <div className={styles['promo__bg-overlay']}></div>
         <video loop muted autoPlay className={styles['promo__bg-video']}>
@@ -34,6 +34,6 @@ export default function MainPromo(): JSX.Element {
           Shop now
         </Button>
       </div>
-    </div>
+    </section>
   );
 }

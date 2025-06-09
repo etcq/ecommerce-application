@@ -1,0 +1,29 @@
+@use '@assets/style/mixins' as *;
+
+.labels {
+  padding: 40px;
+
+  @include container;
+
+  h3 {
+    @include section-header;
+
+    color: black;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  &__item {
+    width: 100px;
+    height: 100px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
