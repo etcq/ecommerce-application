@@ -52,3 +52,9 @@ export enum SortingLabels {
   TO_LOW = 'Price high to low',
   BY_ALPHABET = 'By alphabet',
 }
+
+export enum DiscountSliderAlign {
+  LEFT = 'left',
+  RIGHT = 'right',
+  CENTER = 'center',
+}

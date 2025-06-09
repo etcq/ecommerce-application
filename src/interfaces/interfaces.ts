@@ -30,3 +30,10 @@ export interface IBreadcrumbItem {
   id: string;
   name: string;
 }
+
+export interface IDiscountInfo {
+  name: string;
+  description: string;
+  isActive: boolean;
+  code: string;
+}

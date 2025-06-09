@@ -1,9 +1,12 @@
-import styles from './main.module.scss';
+import { JSX } from 'react';
+import MainPromo from '@components/mainpage-items/main-page-promo/MainPromo.tsx';
+import PromocodePreview from '@components/mainpage-items/promocode-preview/PromocodePreview.tsx';
 
-export default function MainPage(): React.JSX.Element {
+export default function MainPage(): JSX.Element {
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.title}>The main page will be here</h1>
+    <div>
+      <MainPromo />
+      <PromocodePreview />
     </div>
   );
 }

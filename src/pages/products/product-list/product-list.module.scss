@@ -1,9 +1,13 @@
+@use '@assets/style/mixins' as *;
+
 .title {
   font-family: Sneakers, sans-serif;
   font-size: 4rem;
 }
 
 .wrapper {
+  @include container;
+
   display: flex;
   gap: 20px;
   justify-content: center;

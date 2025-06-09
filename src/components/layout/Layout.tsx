@@ -1,9 +1,9 @@
 import { Outlet, useLocation } from 'react-router';
 import Header from '../header/Header';
-import { Suspense } from 'react';
+import { Suspense, JSX } from 'react';
 import Loading from '../loading/Loading';
 
-export default function Layout(): React.JSX.Element {
+export default function Layout(): JSX.Element {
   const location = useLocation();
   return (
     <>

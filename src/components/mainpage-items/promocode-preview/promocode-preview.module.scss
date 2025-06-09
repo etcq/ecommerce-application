@@ -1,0 +1,34 @@
+@use '@assets/style/mixins' as *;
+
+.promocode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 480px;
+  padding: 40px;
+
+  background-color: #2d2d2d;
+
+  &__header {
+    margin-top: 0;
+
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__slider {
+    @include container;
+    @include slider-dark;
+
+    width: 80%;
+    max-width: 1000px;
+    height: 100%;
+    border-radius: 20px;
+
+    background-color: white;
+  }
+}

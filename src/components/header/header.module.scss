@@ -17,8 +17,8 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
   align-items: center;
   justify-content: space-between;
 
-  height: 101px;
-  padding: 0 40px;
+  height: 15%;
+  padding: 15px 40px;
 
   &__logo {
     display: flex;
@@ -126,8 +126,6 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 }
 
 .dark-theme {
-  background-color: $c-header-dark-theme-bgc;
-
   .header {
     &__logo {
       &-title {
@@ -137,11 +135,11 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 
     .nav-menu {
       a {
-        @include link($c-header-dark-theme-main, $c-header-main);
+        @include link($c-header-dark-theme-main, $c-header-hover);
       }
 
       &-item {
-        @include link-item($c-header-dark-theme-main, $c-header-main);
+        @include link-item($c-header-dark-theme-main, $c-header-hover);
       }
     }
 
@@ -159,12 +157,12 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 
         &:hover {
           svg {
-            fill: $c-header-main;
+            fill: $c-header-hover;
           }
 
           .arrow {
             &__line {
-              background-color: $c-header-main;
+              background-color: $c-header-hover;
             }
           }
         }
