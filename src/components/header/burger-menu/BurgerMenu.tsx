@@ -4,10 +4,12 @@ import styles from './burger-menu.module.scss';
 import { NavLink, Link } from 'react-router';
 import { useAuthStore } from '@/core/stores/use-auth-state';
 import { ROUTES } from '@/constants/constants';
+import { useCartStore } from '@/core/stores/use-cart-state.ts';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
   const { isLoggedIn, logout } = useAuthStore();
+  const { clearCart } = useCartStore();
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
   useEffect(() => {
@@ -69,6 +71,7 @@ export default function BurgerMenu(): React.JSX.Element {
                 onClick={() => {
                   setOpened(false);
                   logout();
+                  clearCart();
                 }}
               >
                 <li className={styles['burger-menu__list_item']}>
