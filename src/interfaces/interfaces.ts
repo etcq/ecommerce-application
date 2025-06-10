@@ -1,4 +1,5 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
+import { ProductVariant } from '@commercetools/platform-sdk';
 
 export interface ITokenCacheState extends TokenStore {
   setTokenData: (newTokenData: TokenStore) => void;
@@ -17,6 +18,7 @@ export interface IProductInfoForDetailedPage extends IProductInfoForCard {
   images: string[];
   sizes: number[];
   colors: string[];
+  variants: ProductVariant[];
 }
 
 export interface IPriceRange {
@@ -30,3 +32,4 @@ export interface IBreadcrumbItem {
   id: string;
   name: string;
 }
+
