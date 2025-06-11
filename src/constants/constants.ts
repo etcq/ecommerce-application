@@ -15,7 +15,10 @@ export enum CartSignInModeEnum {
 
 export enum LocalStorageKeys {
   TOKEN = 'ctp-auth-token',
+  CART_ID = 'cartId',
+  CART_VERSION = 'cartVersion',
   ANONYMOUS_CART_ID = 'anonymousCartId',
+  ANONYMOUS_ID = 'anonymousId',
 }
 
 export enum AuthMessages {
@@ -51,4 +54,10 @@ export enum SortingLabels {
   TO_HIGH = 'Price low to high',
   TO_LOW = 'Price high to low',
   BY_ALPHABET = 'By alphabet',
+}
+
+export enum ACTIONS {
+  ADD_LINE_ITEM = 'addLineItem',
+  CHANGE_LINE_ITEM_QUANTITY = 'changeLineItemQuantity',
+  REMOVE_LINE_ITEM = 'removeLineItem',
 }
