@@ -1,4 +1,5 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
+import { ROUTES } from '@/constants/constants.ts';
 
 export interface ITokenCacheState extends TokenStore {
   setTokenData: (newTokenData: TokenStore) => void;
@@ -36,4 +37,9 @@ export interface IDiscountInfo {
   description: string;
   isActive: boolean;
   code: string;
+}
+
+export interface IMenuLinks {
+  route: ROUTES | string;
+  caption: string;
 }

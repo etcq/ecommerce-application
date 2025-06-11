@@ -28,7 +28,9 @@ export default function PromocodeSection(): JSX.Element {
     <section className={styles.promocode}>
       <h3 className={styles.promocode__header}>Our active promo codes</h3>
       {loading ? (
-        <Loading />
+        <div className={styles.promocode__loading}>
+          <Loading />
+        </div>
       ) : (
         <Swiper
           className={styles.promocode__slider}

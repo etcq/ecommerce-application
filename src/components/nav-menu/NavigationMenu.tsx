@@ -1,0 +1,25 @@
+import { JSX } from 'react';
+import styles from './navigation-menu.module.scss';
+import { NavLink } from 'react-router';
+import { IMenuLinks } from '@/interfaces/interfaces.ts';
+
+interface INavProps {
+  links: IMenuLinks[];
+  isDarkTheme: boolean;
+  className?: string;
+}
+
+export default function NavigationMenu({ links, isDarkTheme, className }: INavProps): JSX.Element {
+  return (
+    <ul className={`${styles['nav-menu']} ${className}`} role="menu" data-darkTheme={isDarkTheme}>
+      {links.map((link) => (
+        <NavLink to={link.route} className={({ isActive }) => (isActive ? styles.active : '')} key={link.route}>
+          <li className={styles['nav-menu-item']}>
+            {link.caption}
+            <div className={styles.underline}></div>
+          </li>
+        </NavLink>
+      ))}
+    </ul>
+  );
+}

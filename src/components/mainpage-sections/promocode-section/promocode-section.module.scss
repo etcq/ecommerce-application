@@ -26,4 +26,12 @@
 
     background-color: white;
   }
+
+  &__loading {
+    @include container;
+
+    position: relative;
+    bottom: 120px;
+    height: 70%;
+  }
 }

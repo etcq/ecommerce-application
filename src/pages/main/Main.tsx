@@ -9,8 +9,8 @@ export default function MainPage(): JSX.Element {
     <div>
       <PromoSection />
       <PromocodeSection />
-      <Labels />
       <CategorySection />
+      <Labels />
     </div>
   );
 }

@@ -39,28 +39,6 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
     }
   }
 
-  .nav-menu {
-    display: flex;
-    gap: 40px;
-    padding: 0;
-    list-style: none;
-
-    a {
-      @include link($c-header-main, $c-header-hover);
-    }
-
-    .active {
-      .underline {
-        width: 100%;
-        background-color: $c-header-main;
-      }
-    }
-
-    &-item {
-      @include link-item($c-header-main, $c-header-hover);
-    }
-  }
-
   &__user {
     display: flex;
     gap: 30px;
@@ -133,16 +111,6 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
       }
     }
 
-    .nav-menu {
-      a {
-        @include link($c-header-dark-theme-main, $c-header-hover);
-      }
-
-      &-item {
-        @include link-item($c-header-dark-theme-main, $c-header-hover);
-      }
-    }
-
     &__user {
       &-icon {
         .arrow {
@@ -173,7 +141,7 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 
 @media screen and (width <= 699px) {
   .header {
-    .nav-menu {
+    &__nav {
       display: none;
     }
 
