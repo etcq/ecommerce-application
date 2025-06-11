@@ -6,7 +6,7 @@ import { LocalStorageKeys } from '@/constants/constants.ts';
 export const handleAddProductToCart = async (cartId: string, version: number, productId: string, variantId: number) => {
   try {
     const userToken = localStorage.getItem(LocalStorageKeys.TOKEN);
-    const response = await addProductToCart(cartId, version, productId, variantId, userToken);
+    const response = await addProductToCart({ cartId, version, productId, variantId, userToken });
     useCartStore.getState().setCartVersion(response.version);
 
     const lineItems = response.lineItems.map((item) => ({
