@@ -6,10 +6,12 @@ import Button from '@/components/button/Button';
 import { ROUTES } from '@/constants/constants';
 import { useAuthStore } from '@/core/stores/use-auth-state';
 import editNameView from '@/core/utils/edit-name-view';
+import { useCartStore } from '@/core/stores/use-cart-state.ts';
 
 export default function LoginMenu(): React.JSX.Element {
   const { isLoginMenuOpened, toggleLoginMenuOpened } = useHeaderState();
   const { isLoggedIn, logout, customer } = useAuthStore();
+  const { clearCart } = useCartStore();
   const [isByeMessageShown, setByeMessageShown] = useState(false);
 
   const menu: React.RefObject<null | HTMLDivElement> = useRef(null);
@@ -67,6 +69,7 @@ export default function LoginMenu(): React.JSX.Element {
                 void navigate(ROUTES.MAIN);
                 setByeMessageShown(false);
                 logout();
+                clearCart();
                 toggleLoginMenuOpened();
               }, 800);
             }}
