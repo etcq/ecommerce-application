@@ -1,16 +1,17 @@
 import { MyCartChangeLineItemQuantityAction, Cart, ClientResponse } from '@commercetools/platform-sdk';
 import { ACTIONS } from '@/constants/constants.ts';
 import { getApiClientForUser } from '@/core/services/api-client-options.ts';
+import { IProductParams } from '@/interfaces/interfaces.ts';
 
-export const changeProductQuantity = async (
-  cartId: string,
-  version: number,
-  lineItemId: string,
-  quantity: number,
-  userToken?: string,
-): Promise<Cart> => {
+type TSetQuantityParams = Omit<IProductParams, 'variantId' | 'productId'> & {
+  lineItemId: string;
+  quantity: number;
+};
+
+export const changeProductQuantity = async (params: TSetQuantityParams, userToken?: string): Promise<Cart> => {
+  const { cartId, version, lineItemId, quantity } = params;
   const cartData: MyCartChangeLineItemQuantityAction = {
-    action: ACTIONS.changeLineItemQuantity,
+    action: ACTIONS.CHANGE_LINE_ITEM_QUANTITY,
     lineItemId,
     quantity,
   };

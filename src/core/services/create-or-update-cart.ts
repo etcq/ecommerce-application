@@ -23,7 +23,7 @@ export const createOrUpdateCart = async (
     const sizeAttr = variant.attributes?.find((a): boolean => a.name === 'size');
 
     const color: string = typeof colorAttr?.value === 'string' ? colorAttr.value : '';
-    const size: number = typeof sizeAttr?.value === 'number' ? sizeAttr.value : NaN;
+    const size: number | null = typeof sizeAttr?.value === 'number' ? sizeAttr.value : null;
     return color === selectedColor && size === sizeToMatch;
   });
 

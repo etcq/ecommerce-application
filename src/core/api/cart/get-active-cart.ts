@@ -6,8 +6,7 @@ import { useCartStore } from '@/core/stores/use-cart-state.ts';
 export const getActiveCart = async (): Promise<Cart | null> => {
   const token: string | null = localStorage.getItem(LocalStorageKeys.TOKEN);
   if (!token) {
-    console.warn('No refresh token found');
-    return null;
+    throw new Error('No refresh token found in localStorage');
   }
 
   try {

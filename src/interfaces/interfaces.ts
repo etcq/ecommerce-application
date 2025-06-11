@@ -33,3 +33,10 @@ export interface IBreadcrumbItem {
   name: string;
 }
 
+export interface IProductParams {
+  cartId: string;
+  version: number;
+  productId: string;
+  variantId: number;
+  userToken?: string | null;
+}

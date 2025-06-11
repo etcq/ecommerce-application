@@ -9,7 +9,7 @@ export const removeLineItem = async (
   userToken?: string,
 ): Promise<Cart> => {
   const cartData: MyCartRemoveLineItemAction = {
-    action: ACTIONS.removeLineItem,
+    action: ACTIONS.REMOVE_LINE_ITEM,
     lineItemId,
   };
 

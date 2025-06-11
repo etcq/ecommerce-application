@@ -57,7 +57,7 @@ export enum SortingLabels {
 }
 
 export enum ACTIONS {
-  addLineItem = 'addLineItem',
-  changeLineItemQuantity = 'changeLineItemQuantity',
-  removeLineItem = 'removeLineItem',
+  ADD_LINE_ITEM = 'addLineItem',
+  CHANGE_LINE_ITEM_QUANTITY = 'changeLineItemQuantity',
+  REMOVE_LINE_ITEM = 'removeLineItem',
 }

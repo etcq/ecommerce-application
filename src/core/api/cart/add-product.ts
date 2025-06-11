@@ -1,19 +1,14 @@
-// import { withAnonymousSessionFlow } from '@/core/api/middlewere/anonymous-session-flow.ts';
 import { MyCartAddLineItemAction, Cart, ClientResponse } from '@commercetools/platform-sdk';
 import { ACTIONS } from '@/constants/constants.ts';
 import { getApiClientForUser } from '@/core/services/api-client-options.ts';
+import { IProductParams } from '@/interfaces/interfaces.ts';
 
-export const addProductToCart = async (
-  cartId: string,
-  version: number,
-  productId: string,
-  variantId: number,
-  userToken?: string | null,
-  quantity = 1,
-): Promise<Cart> => {
+export const addProductToCart = async (productParams: IProductParams, quantity = 1): Promise<Cart> => {
+  const { cartId, version, productId, variantId, userToken } = productParams;
+
   try {
     const cartData: MyCartAddLineItemAction = {
-      action: ACTIONS.addLineItem,
+      action: ACTIONS.ADD_LINE_ITEM,
       productId,
       variantId,
       quantity,
