@@ -15,12 +15,18 @@ import 'swiper/swiper-bundle.css';
 import EmptyCatalog from '@/empty-catalog/EmptyCatalog.tsx';
 import ImageSlider from '@components/slider/Slider.tsx';
 import { RiArrowGoBackFill } from 'react-icons/ri';
+import { createOrUpdateCart } from '@/core/services/create-or-update-cart.ts';
+import { useCartStore } from '@/core/stores/use-cart-state.ts';
 
 export default function ProductDetailed(): JSX.Element {
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState<IProductInfoForDetailedPage | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { productId, setProductId } = useCartStore();
+
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -32,13 +38,14 @@ export default function ProductDetailed(): JSX.Element {
             return;
           }
           setProductInfo(getInfoForDetailedPage(response));
+          setProductId(response.id);
         })
         .catch((error: Error) => {
           console.error(error);
         })
         .finally(() => setLoading(false));
     }
-  }, [id]);
+  }, [id, setProductId]);
 
   return (
     <div className={styles.wrapper}>
@@ -54,17 +61,18 @@ export default function ProductDetailed(): JSX.Element {
           <div className={styles.description}>
             <div className={styles.description__header}>
               <h2 className={styles.description__title}>{productInfo.name}</h2>
-              <Button size={'x-small'} className={styles['back-btn']} onClick={() => void navigate(-1)}>
-                <RiArrowGoBackFill />
-              </Button>
               <PriceView prices={productInfo.prices} className={styles.description__price} />
-              <div className={styles.brake}></div>
+              <div className={styles.brake}>
+                <Button size={'x-small'} className={styles['back-btn']} onClick={() => void navigate(-1)}>
+                  <RiArrowGoBackFill />
+                </Button>
+              </div>
             </div>
             <p className={styles.description__text}>{productInfo.description}</p>
             <div className={styles['description__buy-parameters']}>
               <FormControl variant="standard" sx={{ m: 1, minWidth: 100, textAlign: 'center' }}>
                 <InputLabel id="size-label">Size</InputLabel>
-                <Select labelId="size-label" defaultValue="">
+                <Select labelId="size-label" value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}>
                   <MenuItem value="">None</MenuItem>
                   {productInfo.sizes.map((size) => (
                     <MenuItem value={size} key={size}>
@@ -73,9 +81,18 @@ export default function ProductDetailed(): JSX.Element {
                   ))}
                 </Select>
               </FormControl>
-              <ColorPicker colors={productInfo.colors} />
+              <ColorPicker
+                colors={productInfo.colors}
+                selectedColor={selectedColor}
+                onChange={(color) => setSelectedColor(color)}
+              />
             </div>
-            <Button size={'large'}>Add to cart</Button>
+            <Button
+              size="large"
+              onClick={() => void createOrUpdateCart(selectedSize, selectedColor, productInfo, productId)}
+            >
+              Add to cart
+            </Button>
             <div className={styles.description__benefits}>
               <span className={styles.description__benefits_item}>
                 <img src={shippingIcon} alt="Shipping" />

@@ -15,7 +15,10 @@ export enum CartSignInModeEnum {
 
 export enum LocalStorageKeys {
   TOKEN = 'ctp-auth-token',
+  CART_ID = 'cartId',
+  CART_VERSION = 'cartVersion',
   ANONYMOUS_CART_ID = 'anonymousCartId',
+  ANONYMOUS_ID = 'anonymousId',
 }
 
 export enum AuthMessages {
@@ -79,3 +82,10 @@ export const FilterCheckboxIds = {
   PRICE_ASCENDING_SORT: 'ascending',
   PRICE_DESCENDING_SORT: 'descending',
 };
+
+export enum ACTIONS {
+  ADD_LINE_ITEM = 'addLineItem',
+  CHANGE_LINE_ITEM_QUANTITY = 'changeLineItemQuantity',
+  REMOVE_LINE_ITEM = 'removeLineItem',
+}
+
