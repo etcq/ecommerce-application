@@ -11,7 +11,7 @@ interface INavProps {
 
 export default function NavigationMenu({ links, isDarkTheme, className }: INavProps): JSX.Element {
   return (
-    <ul className={`${styles['nav-menu']} ${className}`} role="menu" data-darkTheme={isDarkTheme}>
+    <ul className={`${styles['nav-menu']} ${className}`} role="menu" data-darktheme={isDarkTheme}>
       {links.map((link) => (
         <NavLink to={link.route} className={({ isActive }) => (isActive ? styles.active : '')} key={link.route}>
           <li className={styles['nav-menu-item']}>

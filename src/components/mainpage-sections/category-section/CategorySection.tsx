@@ -1,26 +1,14 @@
-import { JSX, useEffect } from 'react';
+import { JSX } from 'react';
 import styles from './category-section.module.scss';
-import { getCategories } from '@/core/api/products/get-categories.ts';
 import { ROUTES } from '@/constants/constants.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useNavigate } from 'react-router';
 
 export default function CategorySection(): JSX.Element {
   const navigate = useNavigate();
-  const { setAllCategories, setReset, setRedirectInToMainPage } = useCategoryNavigationStore();
+  const { setRedirectInToMainPage } = useCategoryNavigationStore();
   const rootCategories = ['Man', 'Woman'];
   const footwearCategories = ['running', 'casual'];
-  useEffect(() => {
-    getCategories()
-      .then((categories) => {
-        if (categories) {
-          setAllCategories(categories);
-        } else {
-          setReset();
-        }
-      })
-      .catch((e: Error) => console.error("can't get categories", e));
-  }, [setReset, setAllCategories]);
 
   return (
     <section className={styles.categories}>
@@ -31,8 +19,8 @@ export default function CategorySection(): JSX.Element {
             className={styles['categories__list-item']}
             key={category}
             onClick={() => {
-              void navigate(ROUTES.PRODUCT_LIST);
               setRedirectInToMainPage(category);
+              void navigate(ROUTES.PRODUCT_LIST);
             }}
             style={{ backgroundImage: `url(/categories/${category}.webp)` }}
           >
@@ -44,8 +32,8 @@ export default function CategorySection(): JSX.Element {
             className={styles['categories__list-item']}
             key={category}
             onClick={() => {
-              void navigate(ROUTES.PRODUCT_LIST);
               setRedirectInToMainPage(category);
+              void navigate(ROUTES.PRODUCT_LIST);
             }}
             style={{ backgroundImage: `url(/categories/${category}.webp)` }}
           >

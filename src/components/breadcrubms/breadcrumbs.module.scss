@@ -1,4 +1,9 @@
 @use '../../assets/style/variables' as *;
+@use '../../assets/style/mixins' as *;
+
+.wrapper {
+  @include container;
+}
 
 .path {
   cursor: pointer;
