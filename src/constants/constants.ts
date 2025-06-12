@@ -63,8 +63,19 @@ export const PriceFiltersArray = [
   },
 ];
 
+export enum FilterTitle {
+  PRICE_RANGE = 'Price Range',
+  SORT_BY = 'Sort By',
+}
+
 export enum SortingLabels {
   TO_HIGH = 'Price low to high',
   TO_LOW = 'Price high to low',
   BY_ALPHABET = 'By alphabet',
 }
+
+export const FilterCheckboxIds = {
+  ALPHABETICAL_SORT: 'alphabetical',
+  PRICE_ASCENDING_SORT: 'ascending',
+  PRICE_DESCENDING_SORT: 'descending',
+};

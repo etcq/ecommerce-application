@@ -2,7 +2,7 @@ import styles from './filterPanel.module.scss';
 import * as React from 'react';
 import { Filter } from '@components/form/filter/filter.tsx';
 import { Checkbox } from '@components/form/checkbox/checkbox.tsx';
-import { SortingLabels } from '@/constants/constants.ts';
+import { SortingLabels, PriceFiltersArray, FilterTitle, FilterCheckboxIds } from '@/constants/constants.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
@@ -10,7 +10,6 @@ import { IPriceRange, TSortOrder } from '@/interfaces/interfaces.ts';
 import Button from '@components/button/Button.tsx';
 import { CategoriesNavigation } from '@components/filter-panel/categories/categories.tsx';
 import { useProductListStore } from '@/core/stores/product-list-store.ts';
-import { PriceFiltersArray } from '@/constants/constants.ts';
 
 export const FilterPanel: React.FC = () => {
   const priceRange: IPriceRange[] = useProductFilterStore((state) => state.priceRanges);
@@ -53,7 +52,7 @@ export const FilterPanel: React.FC = () => {
         <div className={styles.filter}>
           <CategoriesNavigation />
         </div>
-        <Filter title={'Price Range'}>
+        <Filter title={FilterTitle.PRICE_RANGE}>
           {PriceFiltersArray.map(({ key, label, range }) => (
             <Checkbox
               key={key}
@@ -67,23 +66,23 @@ export const FilterPanel: React.FC = () => {
             />
           ))}
         </Filter>
-        <Filter title={'Sort By'}>
+        <Filter title={FilterTitle.SORT_BY}>
           <Checkbox
             label={SortingLabels.BY_ALPHABET}
-            id={'price'}
+            id={FilterCheckboxIds.ALPHABETICAL_SORT}
             checked={alphabetically}
             onChange={handleAlphabeticallySort}
           ></Checkbox>
           <Checkbox
             label={SortingLabels.TO_HIGH}
-            id={'ascending'}
-            checked={sortOrder === 'ascending'}
+            id={FilterCheckboxIds.PRICE_ASCENDING_SORT}
+            checked={sortOrder === FilterCheckboxIds.PRICE_ASCENDING_SORT}
             onChange={handlePriceSort('ascending')}
           ></Checkbox>{' '}
           <Checkbox
             label={SortingLabels.TO_LOW}
-            id={'descending'}
-            checked={sortOrder === 'descending'}
+            id={FilterCheckboxIds.PRICE_DESCENDING_SORT}
+            checked={sortOrder === FilterCheckboxIds.PRICE_DESCENDING_SORT}
             onChange={handlePriceSort('descending')}
           ></Checkbox>
         </Filter>
