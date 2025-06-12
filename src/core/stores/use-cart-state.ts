@@ -104,7 +104,6 @@ export const useCartStore = create<ICartStore>((set) => ({
     const resultCart: Cart = await addDiscountCode(cartId, version, code);
     localStorage.setItem(LocalStorageKeys.CART_VERSION, resultCart.version.toString());
 
-    // Обновим в store
     set({
       currentCart: resultCart,
       cartVersion: resultCart.version,
