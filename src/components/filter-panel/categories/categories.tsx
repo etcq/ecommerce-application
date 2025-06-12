@@ -1,18 +1,20 @@
 import styles from './categories.module.scss';
 import { useEffect } from 'react';
 import { Category } from '@commercetools/platform-sdk';
-import { LOCALIZATION } from '@/constants/constants.ts';
+import { CATEGORY_MESSAGE, LOCALIZATION } from '@/constants/constants.ts';
 import { getCategories } from '@/core/api/products/get-categories.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
-import { CATEGORY_MESSAGE } from '@/constants/constants.ts';
 import { IBreadcrumbItem } from '@/interfaces/interfaces.ts';
 import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import getCategoryIdByName from '@/core/utils/get-category-id.ts';
 
 export function CategoriesNavigation() {
   const { breadcrumb, setBreadcrumb } = useBreadcrumbStore();
   const { setPage } = useProductListStore();
   const {
+    activeRootCategoryId,
+    redirectInToMainPage,
     allCategories,
     setAllCategories,
     setActiveRootCategoryId,
@@ -24,20 +26,46 @@ export function CategoriesNavigation() {
     setBrandCategories,
     setReset,
   } = useCategoryNavigationStore();
-
   useEffect(() => {
-    const fetchCategories = async (): Promise<void> => {
-      const categories: Category[] = await getCategories();
-      if (categories) {
-        setAllCategories(categories);
-      } else {
-        setReset();
-      }
-    };
-    void fetchCategories();
-  }, [setReset, setAllCategories]);
+    getCategories()
+      .then((categories) => {
+        if (categories) {
+          setAllCategories(categories);
+        } else {
+          setReset();
+        }
+      })
+      .catch((e: Error) => console.error("can't get categories", e))
+      .finally(() => {
+        if (redirectInToMainPage) {
+          handleCategoryRedirect(redirectInToMainPage);
+        }
+      });
+  }, [setReset, setAllCategories, redirectInToMainPage]);
 
-  const handleRootCategoryClick = (name: string): void => {
+  function handleCategoryRedirect(redirectInToMainPage: string) {
+    if (redirectInToMainPage === 'Man' || redirectInToMainPage === 'Woman') {
+      handleRootCategoryClick(redirectInToMainPage);
+    } else if (redirectInToMainPage === 'running' || redirectInToMainPage === 'casual') {
+      setActiveRootCategoryId(getCategoryIdByName('Man', allCategories));
+      setBreadcrumb([
+        {
+          id: getCategoryIdByName('Man', allCategories),
+          name: 'Man',
+        },
+        { id: getCategoryIdByName(redirectInToMainPage, allCategories), name: redirectInToMainPage },
+      ]);
+      setSelectedFootwearId(getCategoryIdByName(redirectInToMainPage, allCategories));
+      const children: Category[] = allCategories.filter(
+        (category): boolean => category.parent?.id === activeRootCategoryId,
+      );
+      setFootwearCategories(children);
+      setBrandCategories([]);
+      setPage(1);
+    }
+  }
+
+  function handleRootCategoryClick(name: string): void {
     const rootCategory: Category | undefined = allCategories.find(
       (category: Category): boolean => category.name[LOCALIZATION] === name,
     );
@@ -59,9 +87,9 @@ export function CategoriesNavigation() {
     const children: Category[] = allCategories.filter((category): boolean => category.parent?.id === rootCategory.id);
     setFootwearCategories(children);
     setBrandCategories([]);
-  };
+  }
 
-  const handleCategoryClick = (categoryId: string): void => {
+  function handleCategoryClick(categoryId: string): void {
     if (selectedFootwearCategoryId === categoryId) {
       setSelectedFootwearId(null);
       setBrandCategories([]);
@@ -92,7 +120,7 @@ export function CategoriesNavigation() {
     if (children.length > 0) {
       setBrandCategories(children);
     }
-  };
+  }
 
   const isBreadcrumbSelected = (id: string): boolean => {
     return breadcrumb.some((item: IBreadcrumbItem): boolean => item.id === id);

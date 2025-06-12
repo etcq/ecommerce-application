@@ -9,7 +9,7 @@ interface ICategoryNavigationState {
   footwearCategories: Category[];
   brandCategories: Category[];
   productsInCategory: ProductProjection[];
-
+  redirectInToMainPage: string;
   setAllCategories: (allCategories: Category[]) => void;
   setActiveRootCategoryId: (id: string | null) => void;
   setSelectedFootwearId: (id: string | null) => void;
@@ -17,6 +17,7 @@ interface ICategoryNavigationState {
   setFootwearCategories: (categories: Category[]) => void;
   setBrandCategories: (categories: Category[]) => void;
   setProductsInCategory: (products: ProductProjection[] | undefined) => void;
+  setRedirectInToMainPage: (redirectInToMainPage: string) => void;
   setReset: () => void;
 }
 
@@ -28,7 +29,7 @@ export const useCategoryNavigationStore = create<ICategoryNavigationState>((set)
   footwearCategories: [],
   brandCategories: [],
   productsInCategory: [],
-
+  redirectInToMainPage: '',
   setAllCategories: (categories: Category[]): void => set({ allCategories: categories }),
   setActiveRootCategoryId: (id: string | null): void =>
     set({ activeRootCategoryId: id, selectedFootwearCategoryId: null, brandCategories: [] }),
@@ -37,6 +38,7 @@ export const useCategoryNavigationStore = create<ICategoryNavigationState>((set)
   setFootwearCategories: (categories: Category[]): void => set({ footwearCategories: categories }),
   setBrandCategories: (categories: Category[]): void => set({ brandCategories: categories }),
   setProductsInCategory: (products: ProductProjection[] | undefined): void => set({ productsInCategory: products }),
+  setRedirectInToMainPage: (name: string) => set({ redirectInToMainPage: name }),
   setReset: (): void =>
     set({
       activeRootCategoryId: null,
