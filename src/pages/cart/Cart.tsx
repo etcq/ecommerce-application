@@ -1,5 +1,5 @@
 import styles from './cart.module.scss';
-import * as React from 'react'; // Добавил явный импорт React
+import * as React from 'react';
 import { useCartStore } from '@/core/stores/use-cart-state.ts';
 import { useToastStore } from '@/core/stores/toast.ts';
 import { ChangeEvent, useState } from 'react';
