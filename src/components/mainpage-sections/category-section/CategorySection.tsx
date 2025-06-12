@@ -9,7 +9,6 @@ export default function CategorySection(): JSX.Element {
   const navigate = useNavigate();
   const { setRedirectInToMainPage } = useCategoryNavigationStore();
   const rootCategories = ['Man', 'Woman'];
-  const footwearCategories = ['running', 'casual'];
 
   return (
     <section className={styles.categories}>
@@ -22,20 +21,7 @@ export default function CategorySection(): JSX.Element {
             onClick={() => {
               setRedirectInToMainPage(category);
               void navigate(ROUTES.PRODUCT_LIST);
-            }}
-            style={{ backgroundImage: `url(/categories/${category}.webp)` }}
-          >
-            <h4>{category}</h4>
-          </div>
-        ))}
-        {footwearCategories.map((category) => (
-          <div
-            className={styles['categories__list-item']}
-            key={category}
-            onClick={() => {
               scrollToTop();
-              setRedirectInToMainPage(category);
-              void navigate(ROUTES.PRODUCT_LIST);
             }}
             style={{ backgroundImage: `url(/categories/${category}.webp)` }}
           >

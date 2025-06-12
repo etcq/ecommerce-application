@@ -1,7 +1,7 @@
 @use '@assets/style/mixins' as *;
 
 .categories {
-  padding: 20px;
+  padding: 30px;
   background-color: #2d2d2d;
 
   h3 {
@@ -29,13 +29,13 @@
       align-items: center;
       justify-content: center;
 
-      width: 20%;
-      height: 300px;
+      width: 40%;
+      height: 250px;
       border-radius: 10px;
 
       visibility: visible;
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: top center;
       background-size: cover;
 
       transition: opacity 0.45s ease;

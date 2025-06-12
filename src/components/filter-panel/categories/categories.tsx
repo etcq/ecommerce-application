@@ -26,6 +26,7 @@ export function CategoriesNavigation() {
     setBrandCategories,
     setReset,
   } = useCategoryNavigationStore();
+
   useEffect(() => {
     getCategories()
       .then((categories) => {
@@ -44,24 +45,11 @@ export function CategoriesNavigation() {
   }, [setReset, setAllCategories, redirectInToMainPage]);
 
   function handleCategoryRedirect(redirectInToMainPage: string) {
-    if (redirectInToMainPage === 'Man' || redirectInToMainPage === 'Woman') {
+    if (
+      (redirectInToMainPage === 'Man' || redirectInToMainPage === 'Woman') &&
+      activeRootCategoryId !== getCategoryIdByName(redirectInToMainPage, allCategories)
+    ) {
       handleRootCategoryClick(redirectInToMainPage);
-    } else if (redirectInToMainPage === 'running' || redirectInToMainPage === 'casual') {
-      setActiveRootCategoryId(getCategoryIdByName('Man', allCategories));
-      setBreadcrumb([
-        {
-          id: getCategoryIdByName('Man', allCategories),
-          name: 'Man',
-        },
-        { id: getCategoryIdByName(redirectInToMainPage, allCategories), name: redirectInToMainPage },
-      ]);
-      setSelectedFootwearId(getCategoryIdByName(redirectInToMainPage, allCategories));
-      const children: Category[] = allCategories.filter(
-        (category): boolean => category.parent?.id === activeRootCategoryId,
-      );
-      setFootwearCategories(children);
-      setBrandCategories([]);
-      setPage(1);
     }
   }
 
