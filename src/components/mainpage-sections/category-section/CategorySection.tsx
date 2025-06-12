@@ -3,6 +3,7 @@ import styles from './category-section.module.scss';
 import { ROUTES } from '@/constants/constants.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useNavigate } from 'react-router';
+import scrollToTop from '@/core/utils/scrollToTop.ts';
 
 export default function CategorySection(): JSX.Element {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function CategorySection(): JSX.Element {
             className={styles['categories__list-item']}
             key={category}
             onClick={() => {
+              scrollToTop();
               setRedirectInToMainPage(category);
               void navigate(ROUTES.PRODUCT_LIST);
             }}
