@@ -42,6 +42,7 @@ export const SEARCH_DEBOUNCE_TIME = 1000;
 export const LOCALIZATION = 'en-US';
 
 export const CATEGORY_MESSAGE = "Don't know what to choose? Select a category...";
+export const DISCOUNT_CODE_MESSAGE = 'Your code has been successfully accepted.';
 
 export const PriceFiltersArray = [
   {
@@ -87,5 +88,7 @@ export enum ACTIONS {
   ADD_LINE_ITEM = 'addLineItem',
   CHANGE_LINE_ITEM_QUANTITY = 'changeLineItemQuantity',
   REMOVE_LINE_ITEM = 'removeLineItem',
+  ADD_DISCOUNT_CODE = 'addDiscountCode',
+  REMOVE_DISCOUNT_CODE = 'removeDiscountCode',
 }
 
