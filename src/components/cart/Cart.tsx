@@ -8,19 +8,34 @@ import { useEffect } from 'react';
 import { useCartStore } from '@/core/stores/use-cart-state';
 import { removeLineItem } from '@/core/api/cart/remove-product';
 import { getActiveCart } from '@/core/api/cart/get-active-cart';
+import { useToastStore } from '@/core/stores/toast.ts';
+import { ChangeEvent, useState } from 'react';
+import { CartMessages } from '@/constants/constants.ts';
 
 const Cart: React.FC = () => {
   const { setCart, currentCart, setLineItems } = useCartStore.getState();
+  const [inputDiscountCode, setInputDiscountCode] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [activePromo, setActivePromo] = useState<string | null>(() => {
+    return localStorage.getItem('activePromo');
+  });
   const cartVersion = useCartStore((state) => state.cartVersion);
   const cartItems = currentCart?.lineItems;
+  const totalPrice = currentCart?.totalPrice.centAmount;
+  const discountCode = currentCart?.discountCodes;
 
   useEffect(() => {
+    setErrorMessage(null);
     const fetchCart = async () => {
       try {
         const cart = await getActiveCart();
         setCart(cart!);
       } catch (error) {
-        console.error('Failed to get cart:', error);
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage('Failed to get cart');
+        }
       }
     };
 
@@ -28,6 +43,7 @@ const Cart: React.FC = () => {
   }, [setCart, setLineItems]);
 
   const handleClearCart = async () => {
+    setErrorMessage(null);
     if (!currentCart) return;
     try {
       let updatedCart = currentCart;
@@ -35,9 +51,36 @@ const Cart: React.FC = () => {
         updatedCart = await removeLineItem(updatedCart.id, updatedCart.version, item.id);
       }
       setCart(updatedCart);
+      useToastStore.getState().setMessage(CartMessages.CART_CLEAR);
     } catch (error) {
-      console.error('Failed to clear cart:', error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Failed to clear cart.');
+      }
     }
+  };
+
+  const handleAddDiscount = async (): Promise<void> => {
+    setErrorMessage(null);
+    try {
+      await useCartStore.getState().applyDiscountCode(inputDiscountCode);
+      setActivePromo(inputDiscountCode);
+      localStorage.setItem('activePromo', inputDiscountCode);
+      setInputDiscountCode('');
+      useToastStore.getState().setMessage(CartMessages.DISCOUNT_CODE);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Unexpected error while applying the discount code.');
+      }
+    }
+  };
+
+  const handleInputCode = (event: ChangeEvent<HTMLInputElement>): void => {
+    setInputDiscountCode(event.target.value);
+    setErrorMessage(null);
   };
 
   return cartItems && cartItems.length > 0 ? (
@@ -75,14 +118,12 @@ const Cart: React.FC = () => {
       </div>
 
       {(() => {
-        const discount = null;
         const subtotal = cartItems.reduce(
           (total, item) => total + (item.price.value.centAmount * item.quantity) / 100,
           0,
         );
-        const calculateDiscount = (discount: number) => Math.round(subtotal * (discount / 100) * 100) / 100;
-        const discountValue = discount ? calculateDiscount(discount) : 0;
-        const total = subtotal - discountValue;
+        const total = totalPrice! / 100;
+        const discount = subtotal - total;
 
         return (
           <div className={styles.total}>
@@ -94,7 +135,7 @@ const Cart: React.FC = () => {
               </div>
               <div className={`${itemStyles.item} ${styles.item}`}>
                 <div>DISCOUNT</div>
-                <div>{discount ? `-$${discountValue.toFixed(2)}` : '---'}</div>
+                <div>{discount ? `-$${discount.toFixed(2)}` : '---'}</div>
               </div>
               <div className={`${itemStyles.item} ${styles.item}`}>
                 <div>TOTAL</div>
@@ -102,12 +143,15 @@ const Cart: React.FC = () => {
               </div>
             </div>
 
+            {discountCode![0] && <div className={styles['promo-active']}> PROMO CODE: {activePromo}</div>}
+
             <div className={styles.promo}>
-              <Input placeholder="Promo Code" />
-              <Button size="small" children="Apply" />
+              <Input placeholder="Promo Code" value={inputDiscountCode} onChange={handleInputCode} />
+              <Button size="small" children="Apply" onClick={() => void handleAddDiscount()} />
             </div>
 
             <Button size="medium" children="Clear Cart" onClick={() => void handleClearCart()} />
+            {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           </div>
         );
       })()}

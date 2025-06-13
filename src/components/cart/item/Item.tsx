@@ -3,6 +3,8 @@ import { Minus, Plus, X } from 'lucide-react';
 import { useCartStore } from '@/core/stores/use-cart-state';
 import { removeLineItem } from '@/core/api/cart/remove-product';
 import { changeProductQuantity } from '@/core/api/cart/quantity-product';
+import { useToastStore } from '@/core/stores/toast';
+import { CartMessages } from '@/constants/constants';
 
 export interface IItemProps {
   id: string;
@@ -23,6 +25,7 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
     try {
       const updatedCart = await removeLineItem(cartId, version, id);
       setCart(updatedCart);
+      useToastStore.getState().setMessage(CartMessages.ITEM_DELETE);
     } catch (error) {
       console.error('Failed to remove item:', error);
     }

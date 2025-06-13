@@ -1,5 +1,7 @@
 @use '@assets/style/variables' as *;
 
+$c-error-message: $c-error-text;
+
 .cart {
   display: flex;
   gap: 30px;
@@ -68,8 +70,25 @@
   margin-left: 55px;
 }
 
+.discount {
+  flex-direction: column;
+  width: 100%;
+}
+
 .promo {
   display: flex;
   gap: 10px;
   width: 100%;
+}
+
+.promo-active {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: $c-dark-hover;
+}
+
+.error {
+  align-self: center;
+  margin-top: 15px;
+  color: $c-error-message;
 }
