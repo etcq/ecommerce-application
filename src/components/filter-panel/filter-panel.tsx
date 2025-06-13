@@ -2,12 +2,11 @@ import styles from './filterPanel.module.scss';
 import * as React from 'react';
 import { Filter } from '@components/form/filter/filter.tsx';
 import { Checkbox } from '@components/form/checkbox/checkbox.tsx';
-import { FilterPrice, SortingLabels } from '@/constants/constants.ts';
+import { SortingLabels, PriceFiltersArray, FilterTitle, FilterCheckboxIds } from '@/constants/constants.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
-import { IPriceRange } from '@/interfaces/interfaces.ts';
-import { TSortOrder } from '@/interfaces/interfaces.ts';
+import { IPriceRange, TSortOrder } from '@/interfaces/interfaces.ts';
 import Button from '@components/button/Button.tsx';
 import { CategoriesNavigation } from '@components/filter-panel/categories/categories.tsx';
 import { useProductListStore } from '@/core/stores/product-list-store.ts';
@@ -53,49 +52,37 @@ export const FilterPanel: React.FC = () => {
         <div className={styles.filter}>
           <CategoriesNavigation />
         </div>
-        <Filter title={'Price Range'}>
-          <Checkbox
-            label={FilterPrice.LOW}
-            id={'range-1'}
-            checked={priceRange.some((range: IPriceRange): boolean => range.min === 2000 && range.max === 5000)}
-            onChange={handlePriceRangeFilter({ min: 2000, max: 5000 })}
-          ></Checkbox>
-          <Checkbox
-            label={FilterPrice.MEDIUM}
-            id={'range-2'}
-            checked={priceRange.some((range: IPriceRange): boolean => range.min === 5000 && range.max === 7000)}
-            onChange={handlePriceRangeFilter({ min: 5000, max: 7000 })}
-          ></Checkbox>
-          <Checkbox
-            label={FilterPrice.HEIGHT}
-            id={'range-3'}
-            checked={priceRange.some((range: IPriceRange): boolean => range.min === 7000 && range.max === 10000)}
-            onChange={handlePriceRangeFilter({ min: 7000, max: 10000 })}
-          ></Checkbox>
-          <Checkbox
-            label={FilterPrice.PREMIUM}
-            id={'range-4'}
-            checked={priceRange.some((range: IPriceRange): boolean => range.min === 10000 && range.max === 12000)}
-            onChange={handlePriceRangeFilter({ min: 10000, max: 12000 })}
-          ></Checkbox>
+        <Filter title={FilterTitle.PRICE_RANGE}>
+          {PriceFiltersArray.map(({ key, label, range }) => (
+            <Checkbox
+              key={key}
+              id={`range-${key.toLowerCase()}`}
+              label={label}
+              checked={priceRange.some(
+                (selectedRange: IPriceRange): boolean =>
+                  selectedRange.min === range.min && selectedRange.max === range.max,
+              )}
+              onChange={handlePriceRangeFilter(range)}
+            />
+          ))}
         </Filter>
-        <Filter title={'Sort By'}>
+        <Filter title={FilterTitle.SORT_BY}>
           <Checkbox
             label={SortingLabels.BY_ALPHABET}
-            id={'price'}
+            id={FilterCheckboxIds.ALPHABETICAL_SORT}
             checked={alphabetically}
             onChange={handleAlphabeticallySort}
           ></Checkbox>
           <Checkbox
             label={SortingLabels.TO_HIGH}
-            id={'ascending'}
-            checked={sortOrder === 'ascending'}
+            id={FilterCheckboxIds.PRICE_ASCENDING_SORT}
+            checked={sortOrder === FilterCheckboxIds.PRICE_ASCENDING_SORT}
             onChange={handlePriceSort('ascending')}
           ></Checkbox>{' '}
           <Checkbox
             label={SortingLabels.TO_LOW}
-            id={'descending'}
-            checked={sortOrder === 'descending'}
+            id={FilterCheckboxIds.PRICE_DESCENDING_SORT}
+            checked={sortOrder === FilterCheckboxIds.PRICE_DESCENDING_SORT}
             onChange={handlePriceSort('descending')}
           ></Checkbox>
         </Filter>
