@@ -1,3 +1,9 @@
+@use '@assets/style/variables' as *;
+
+$c-promocode-light: $c-light-main;
+$c-promocode-dark: $c-dark-secondary;
+$c-promocode-hover: $c-dark-hover;
+
 .slide {
   display: flex;
   align-items: center;
@@ -23,10 +29,6 @@
     &-header {
       margin: 0;
       font-size: 2.4em;
-
-      b {
-        color: green;
-      }
     }
 
     &-description {
@@ -51,9 +53,9 @@
 
       &:hover {
         cursor: copy;
-        color: white;
-        background-color: black;
-        box-shadow: 0 0 10px 0 gray;
+        color: $c-promocode-light;
+        background-color: $c-dark-hover;
+        box-shadow: 0 0 10px 0 $c-promocode-dark;
       }
     }
 

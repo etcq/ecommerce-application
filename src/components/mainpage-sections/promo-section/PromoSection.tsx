@@ -1,6 +1,7 @@
 import { JSX, useEffect } from 'react';
 import styles from './promo-section.module.scss';
-import promoVideo from '@assets/video/Promo Background ver2.mp4';
+import promoVideo from '@assets/video/Promo Background.mp4';
+import promoImg from '@assets/images/main-page/promo/promo-poster.png';
 import { useHeaderState } from '@/core/stores/state-header.ts';
 import Button from '@components/button/Button.tsx';
 import { useNavigate } from 'react-router';
@@ -21,7 +22,7 @@ export default function PromoSection(): JSX.Element {
     <section className={styles.promo}>
       <div className={styles.promo__bg}>
         <div className={styles['promo__bg-overlay']}></div>
-        <video loop muted autoPlay className={styles['promo__bg-video']}>
+        <video loop muted autoPlay className={styles['promo__bg-video']} poster={promoImg}>
           <source src={promoVideo} />
         </video>
       </div>

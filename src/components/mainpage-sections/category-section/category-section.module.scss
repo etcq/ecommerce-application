@@ -1,8 +1,12 @@
 @use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-category-bg: $c-font-name;
+$c-category-light: $c-light-main;
 
 .categories {
   padding: 30px;
-  background-color: #2d2d2d;
+  background-color: $c-category-bg;
 
   h3 {
     @include section-header;
@@ -47,7 +51,7 @@
       h4 {
         padding: 2px;
         border-radius: 5px;
-        background-color: white;
+        background-color: $c-category-light;
       }
     }
   }

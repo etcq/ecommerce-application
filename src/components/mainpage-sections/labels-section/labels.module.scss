@@ -1,4 +1,7 @@
 @use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-labels-header: $c-font-name;
 
 .labels {
   padding: 40px;
@@ -8,7 +11,7 @@
   h3 {
     @include section-header;
 
-    color: black;
+    color: $c-labels-header;
   }
 
   &__wrapper {

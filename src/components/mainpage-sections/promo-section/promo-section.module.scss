@@ -1,4 +1,10 @@
 @use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-promo-light: $c-light-main;
+$c-promo-dark: $c-dark-main;
+$c-promo-dark-secondary: $c-font-name;
+$bg-img: url('@assets/images/main-page/promo/promo-poster.png');
 
 .promo {
   @include container;
@@ -48,7 +54,7 @@
 
     padding: 20px 150px;
 
-    color: white;
+    color: $c-promo-light;
 
     h1 {
       margin: 20px 0;
@@ -64,13 +70,13 @@
 
   &__btn {
     margin: 40px 20px 0 0;
-    color: black;
-    background-color: white;
+    color: $c-promo-dark;
+    background-color: $c-promo-light;
 
     &:hover {
-      color: white;
-      background-color: black;
-      box-shadow: 0 0 20px 0 white;
+      color: $c-promo-light;
+      background-color: $c-promo-dark;
+      box-shadow: 0 0 20px 0 $c-promo-light;
     }
   }
 }
