@@ -2,6 +2,7 @@ import styles from './item.module.scss';
 import { Minus, Plus, X } from 'lucide-react';
 import { useCartStore } from '@/core/stores/use-cart-state';
 import { removeLineItem } from '@/core/api/cart/remove-product';
+import { changeProductQuantity } from '@/core/api/cart/quantity-product';
 
 export interface IItemProps {
   id: string;
@@ -9,8 +10,8 @@ export interface IItemProps {
   name: string;
   price: number;
   quantity: number;
-  size: number;
-  color: string;
+  size?: number;
+  color?: string;
   version: number;
   cartId: string;
 }
@@ -24,6 +25,21 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
       setCart(updatedCart);
     } catch (error) {
       console.error('Failed to remove item:', error);
+    }
+  };
+
+  const handleQuantityChange = async (newQuantity: number) => {
+    if (newQuantity <= 0) return;
+    try {
+      const updatedCart = await changeProductQuantity({
+        cartId,
+        version,
+        lineItemId: id,
+        quantity: newQuantity,
+      });
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Failed to update quantity:', error);
     }
   };
 
@@ -41,11 +57,11 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
       <div className={styles.price}>{`$${price}`}</div>
       <div className={styles['quantity-wrapper']}>
         <div className={styles.minus}>
-          <Minus />
+          <Minus onClick={() => void handleQuantityChange(quantity - 1)} />
         </div>
         <div className={styles.quantity}>{quantity}</div>
         <div className={styles.plus}>
-          <Plus />
+          <Plus onClick={() => void handleQuantityChange(quantity + 1)} />
         </div>
       </div>
       <div className={styles.price}>{`$${price * quantity}`}</div>
