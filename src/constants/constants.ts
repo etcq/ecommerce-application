@@ -42,12 +42,34 @@ export const SEARCH_DEBOUNCE_TIME = 1000;
 export const LOCALIZATION = 'en-US';
 
 export const CATEGORY_MESSAGE = "Don't know what to choose? Select a category...";
+export const DISCOUNT_CODE_MESSAGE = 'Your code has been successfully accepted.';
 
-export enum FilterPrice {
-  LOW = '20$ - 50$',
-  MEDIUM = '50$ - 70$',
-  HEIGHT = '70$ - 100$',
-  PREMIUM = '100$ - 120$',
+export const PriceFiltersArray = [
+  {
+    key: 'LOW',
+    label: '20$ - 50$',
+    range: { min: 2000, max: 5000 },
+  },
+  {
+    key: 'MEDIUM',
+    label: '50$ - 70$',
+    range: { min: 5000, max: 7000 },
+  },
+  {
+    key: 'HEIGHT',
+    label: '70$ - 100$',
+    range: { min: 7000, max: 10000 },
+  },
+  {
+    key: 'PREMIUM',
+    label: '100$ - 120$',
+    range: { min: 10000, max: 12000 },
+  },
+];
+
+export enum FilterTitle {
+  PRICE_RANGE = 'Price Range',
+  SORT_BY = 'Sort By',
 }
 
 export enum SortingLabels {
@@ -56,8 +78,16 @@ export enum SortingLabels {
   BY_ALPHABET = 'By alphabet',
 }
 
+export const FilterCheckboxIds = {
+  ALPHABETICAL_SORT: 'alphabetical',
+  PRICE_ASCENDING_SORT: 'ascending',
+  PRICE_DESCENDING_SORT: 'descending',
+};
+
 export enum ACTIONS {
   ADD_LINE_ITEM = 'addLineItem',
   CHANGE_LINE_ITEM_QUANTITY = 'changeLineItemQuantity',
   REMOVE_LINE_ITEM = 'removeLineItem',
+  ADD_DISCOUNT_CODE = 'addDiscountCode',
+  REMOVE_DISCOUNT_CODE = 'removeDiscountCode',
 }
