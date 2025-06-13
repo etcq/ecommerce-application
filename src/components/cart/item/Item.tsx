@@ -1,20 +1,36 @@
 import styles from './item.module.scss';
 import { Minus, Plus, X } from 'lucide-react';
+import { useCartStore } from '@/core/stores/use-cart-state';
+import { removeLineItem } from '@/core/api/cart/remove-product';
 
 export interface IItemProps {
+  id: string;
   image: string;
   name: string;
   price: number;
   quantity: number;
   size: number;
   color: string;
+  version: number;
+  cartId: string;
 }
 
-const Item: React.FC<IItemProps> = ({ image, name, price, quantity, size, color }) => {
+const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, color, version, cartId }) => {
+  const setCart = useCartStore((state) => state.setCart);
+
+  const handleRemove = async () => {
+    try {
+      const updatedCart = await removeLineItem(cartId, version, id);
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Failed to remove item:', error);
+    }
+  };
+
   return (
     <div className={styles.item}>
       <div className={styles.delete}>
-        <X />
+        <X onClick={() => void handleRemove()} />
       </div>
       <img className={styles.image} src={image} />
       <div className={styles.info}>
