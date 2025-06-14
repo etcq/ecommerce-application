@@ -3,7 +3,7 @@ import { JSX } from 'react';
 import TeamMember from '@components/team-member/TeamMember.tsx';
 import { ITeamMemberProps } from '@/interfaces/interfaces.ts';
 
-const data: ITeamMemberProps = {
+const Anton: ITeamMemberProps = {
   name: 'Anton Sushnikov',
   role: 'lead',
   github: 'https://github.com/etcq',
@@ -16,34 +16,64 @@ const data: ITeamMemberProps = {
     'FullStack development with Node.js.',
 };
 
+const Siarhei: ITeamMemberProps = {
+  name: 'Siarhei Buiko',
+  role: 'CommerceToolsGod',
+  github: 'https://github.com/aqafresca',
+  contribution: 'setup commerce tools api, login page, product list page, login page, testing',
+  bio: 'Live in Belarus',
+};
+
+const Artur: ITeamMemberProps = {
+  name: 'Artur Bazaluk',
+  role: 'DesignNinja',
+  github: 'https://github.com/turik777',
+  contribution: 'App design, testing, registration page, cart page, profile page, basic UI components',
+  bio: 'Live in Moscow',
+};
+
 export default function AboutPage(): JSX.Element {
   return (
     <div className={style.about}>
       <h2 className={style.about__header}>const team = new Team();</h2>
       <div className={style.about__members}>
-        <TeamMember {...data}>
+        <TeamMember {...Anton}>
           <pre className={style['team-member__content']}>
             {`massiveCall( GoogleMeet ) {
     const call = new GoogleMeet();
     call.join(Artur, Sergei, Aleksey);
     return mindStorm;
   }
-  scrumAttack() {
+scrumAttack() {
     let kanbanItem = ...;
     return Kanban.push(kanbanItem);
   }`}
           </pre>
         </TeamMember>
-        <TeamMember {...data}>
+        <TeamMember {...Siarhei}>
           <pre className={style['team-member__content']}>
-            {`massiveCall( GoogleMeet ) {
-    const call = new GoogleMeet();
-    call.join(Artur, Sergei, Aleksey);
+            {`neeeedMoreeeeSneakers() {
+    const superParse = parse all sneakers commerce apps in WWW;
+    
     return mindStorm;
   }
-  scrumAttack() {
+scrumAttack() {
     let kanbanItem = ...;
     return Kanban.push(kanbanItem);
+  }`}
+          </pre>
+        </TeamMember>
+        <TeamMember {...Artur}>
+          <pre className={style['team-member__content']}>
+            {`silentCheck( crossCheckApps ) {
+    crossCheckApps.forEach(app => {
+      Check the work sent for cross-checking when the whole team is asleep.
+    }
+    return Evaluations;
+  }
+youngQA() {
+  
+{
   }`}
           </pre>
         </TeamMember>

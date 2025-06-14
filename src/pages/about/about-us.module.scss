@@ -13,11 +13,13 @@
 
     width: 24ch;
     height: 100%;
+    margin: 20px auto;
     border-right: 3px solid white;
 
     font-family: monospace;
-    font-size: 32px;
+    font-size: 40px;
     color: black;
+    text-align: center;
     white-space: nowrap;
 
     animation:
@@ -27,7 +29,7 @@
 
   &__members {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
   }
 }

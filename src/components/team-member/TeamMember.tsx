@@ -6,19 +6,26 @@ import { ITeamMemberProps } from '@/interfaces/interfaces.ts';
 export default function TeamMember({ name, role, github, contribution, bio, children }: ITeamMemberProps): JSX.Element {
   return (
     <div className={style['team-member']}>
-      <h3 className={style['team-member__header']}>{`team.${role} = {`}</h3>
-      <p className={style['team-member__content']}>name: {name}</p>
-      <p className={style['team-member__content']}>
-        github:{' '}
-        <a className={style['team-member__github']} href={github} target="_blank" rel="noopener noreferrer">
-          <FaGithub />
-          <span>{github.slice(github.lastIndexOf('/'))}</span>
-        </a>
-      </p>
-      <p className={style['team-member__content']}>contribution: [{contribution}]</p>
-      <p className={style['team-member__content']}>bio: {bio}</p>
-      {children}
-      <h3 className={style['team-member__header']}>{`}`}</h3>
+      <div className={style['team-member__header']}>
+        <img src={`${github}.png?size=50`} alt={`${name} github avatar`} />
+        {name}
+      </div>
+
+      <div className={style['team-member__content']}>
+        <h3 className={style['team-member__role']}>{`team.${role} = {`}</h3>
+        <p className={style['team-member__content-item']}>name: {name}</p>
+        <p className={style['team-member__content-item']}>
+          github:{' '}
+          <a className={style['team-member__github']} href={github} target="_blank" rel="noopener noreferrer">
+            <FaGithub />
+            <span>{github.slice(github.lastIndexOf('/') + 1)}</span>
+          </a>
+        </p>
+        <p className={style['team-member__content-item']}>contribution: [{contribution}]</p>
+        <p className={style['team-member__content-item']}>bio: {bio}</p>
+        {children}
+        <h3 className={style['team-member__role']}>{`}`}</h3>
+      </div>
     </div>
   );
 }
