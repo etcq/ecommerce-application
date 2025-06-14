@@ -3,8 +3,8 @@ import BurgerButton from './burger-button/BurgerButton';
 import styles from './burger-menu.module.scss';
 import { NavLink, Link } from 'react-router';
 import { useAuthStore } from '@/core/stores/use-auth-state';
-import { ROUTES } from '@/constants/constants';
 import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { menuDefaultLinks, ROUTES } from '@/constants/constants';
 
 export default function BurgerMenu(): React.JSX.Element {
   const [burgerOpen, setOpened] = useState(false);
@@ -27,13 +27,6 @@ export default function BurgerMenu(): React.JSX.Element {
       document.removeEventListener('click', closeMenu);
     };
   }, [burgerOpen, isLoggedIn]);
-
-  const menuDefaultLinks = [
-    { route: ROUTES.MAIN, caption: 'Home' },
-    { route: ROUTES.PRODUCT_LIST, caption: 'Catalog' },
-    { route: ROUTES.ABOUT, caption: 'About Us' },
-    { route: ROUTES.CART, caption: 'Cart' },
-  ];
 
   return (
     <>

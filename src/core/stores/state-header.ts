@@ -3,12 +3,12 @@ interface HeaderState {
   isLoginMenuOpened: boolean;
   isDarkTheme: boolean;
   toggleLoginMenuOpened: () => void;
-  toggleTheme: () => void;
+  setIsDarkTheme: (active: boolean) => void;
 }
 
 export const useHeaderState = create<HeaderState>((set) => ({
   isLoginMenuOpened: false,
   isDarkTheme: false,
   toggleLoginMenuOpened: () => set((state) => ({ isLoginMenuOpened: !state.isLoginMenuOpened })),
-  toggleTheme: () => set((state) => ({ isDarkTheme: !state.isDarkTheme })),
+  setIsDarkTheme: (active: boolean) => set(() => ({ isDarkTheme: active })),
 }));

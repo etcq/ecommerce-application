@@ -1,0 +1,32 @@
+@use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-labels-header: $c-font-name;
+
+.labels {
+  padding: 40px;
+
+  @include container;
+
+  h3 {
+    @include section-header;
+
+    color: $c-labels-header;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  &__item {
+    width: 100px;
+    height: 100px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

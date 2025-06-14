@@ -2,9 +2,7 @@
 @use '@assets/style/mixins' as *;
 
 .slider {
-  --swiper-navigation-color: $c-dark-secondary;
-  --swiper-pagination-color: #282828;
-  --swiper-pagination-bullet-size: 12px;
+  @include slider-dark;
 
   width: 100%;
   max-width: 500px;

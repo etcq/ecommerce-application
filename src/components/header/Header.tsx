@@ -2,12 +2,12 @@ import { Link, NavLink } from 'react-router';
 
 import LoginMenu from './login-menu/LoginMenu';
 import logoImg from '../../assets/images/header/logo.png';
-
+import { JSX } from 'react';
 import styles from './header.module.scss';
-
-import { useHeaderState } from '../../core/stores/state-header';
 import { ROUTES } from '@/constants/constants';
 import BurgerMenu from './burger-menu/BurgerMenu';
+import NavigationMenu from '@components/nav-menu/NavigationMenu.tsx';
+import { useHeaderState } from '@/core/stores/state-header.ts';
 
 const menuLinks = [
   { route: ROUTES.MAIN, caption: 'Home' },
@@ -15,7 +15,7 @@ const menuLinks = [
   { route: ROUTES.ABOUT, caption: 'About Us' },
 ];
 
-export default function Header(): React.JSX.Element {
+export default function Header(): JSX.Element {
   const { isLoginMenuOpened, toggleLoginMenuOpened, isDarkTheme } = useHeaderState();
 
   return (
@@ -27,16 +27,9 @@ export default function Header(): React.JSX.Element {
           </NavLink>
           <span className={styles['header__logo-title']}>SNEAKHUB</span>
         </div>
-        <ul className={styles['nav-menu']} role="menu">
-          {menuLinks.map((link) => (
-            <NavLink to={link.route} className={({ isActive }) => (isActive ? styles.active : '')} key={link.route}>
-              <li className={styles['nav-menu-item']}>
-                {link.caption}
-                <div className={styles.underline}></div>
-              </li>
-            </NavLink>
-          ))}
-        </ul>
+        <div className={styles.header__nav}>
+          <NavigationMenu links={menuLinks} isDarkTheme={isDarkTheme} />
+        </div>
         <div className={styles.header__user}>
           <div className={styles['header__user-wrapper']}>
             <div
