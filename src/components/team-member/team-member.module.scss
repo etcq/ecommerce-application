@@ -1,0 +1,27 @@
+.team-member {
+  width: 32%;
+  padding: 25px;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  &__header {
+    font-size: 1.5rem;
+  }
+
+  &__content {
+    margin-bottom: 10px;
+    font-family: monospace;
+    font-size: 1rem;
+    line-height: 24px;
+  }
+
+  &__github {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 7px;
+    align-items: center;
+
+    color: gray;
+    text-decoration: none;
+  }
+}

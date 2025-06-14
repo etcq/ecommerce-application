@@ -1,6 +1,7 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
 import { ROUTES } from '@/constants/constants.ts';
 import { ProductVariant } from '@commercetools/platform-sdk';
+import { ReactNode } from 'react';
 
 export interface ITokenCacheState extends TokenStore {
   setTokenData: (newTokenData: TokenStore) => void;
@@ -52,4 +53,13 @@ export interface IProductParams {
   productId: string;
   variantId: number;
   userToken?: string | null;
+}
+
+export interface ITeamMemberProps {
+  name: string;
+  role: string;
+  github: string;
+  contribution: string;
+  bio: string;
+  children?: ReactNode;
 }

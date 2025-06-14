@@ -1,11 +1,53 @@
-.wrapper {
+@use '@assets/style/mixins' as *;
+
+.about {
+  @include container;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
+  flex-direction: column;
+  min-height: 60vh;
+  padding: 20px;
+
+  &__header {
+    overflow: hidden;
+
+    width: 24ch;
+    height: 100%;
+    border-right: 3px solid white;
+
+    font-family: monospace;
+    font-size: 32px;
+    color: black;
+    white-space: nowrap;
+
+    animation:
+      cursor 0.75s step-end infinite,
+      printed-text 5s steps(24);
+  }
+
+  &__members {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 }
 
-.title {
-  font-family: Sneakers, sans-serif;
-  font-size: 4rem;
+@keyframes cursor {
+  0% {
+    border-color: black;
+  }
+
+  50% {
+    border-color: transparent;
+  }
+
+  100% {
+    border-color: black;
+  }
+}
+
+@keyframes printed-text {
+  from {
+    width: 0;
+  }
 }
