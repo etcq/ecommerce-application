@@ -1,4 +1,5 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
+import { ROUTES } from '@/constants/constants.ts';
 import { ProductVariant } from '@commercetools/platform-sdk';
 
 export interface ITokenCacheState extends TokenStore {
@@ -33,10 +34,26 @@ export interface IBreadcrumbItem {
   name: string;
 }
 
+export interface IDiscountInfo {
+  name: string;
+  description: string;
+  isActive: boolean;
+  code: string;
+}
+
+export interface IMenuLinks {
+  route: ROUTES | string;
+  caption: string;
+}
+
 export interface IProductParams {
   cartId: string;
   version: number;
   productId: string;
   variantId: number;
   userToken?: string | null;
+}
+
+export interface ICategoryRedirectState {
+  redirectCategory?: string;
 }

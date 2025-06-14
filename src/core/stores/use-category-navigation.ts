@@ -9,7 +9,6 @@ interface ICategoryNavigationState {
   footwearCategories: Category[];
   brandCategories: Category[];
   productsInCategory: ProductProjection[];
-
   setAllCategories: (allCategories: Category[]) => void;
   setActiveRootCategoryId: (id: string | null) => void;
   setSelectedFootwearId: (id: string | null) => void;
@@ -28,7 +27,6 @@ export const useCategoryNavigationStore = create<ICategoryNavigationState>((set)
   footwearCategories: [],
   brandCategories: [],
   productsInCategory: [],
-
   setAllCategories: (categories: Category[]): void => set({ allCategories: categories }),
   setActiveRootCategoryId: (id: string | null): void =>
     set({ activeRootCategoryId: id, selectedFootwearCategoryId: null, brandCategories: [] }),

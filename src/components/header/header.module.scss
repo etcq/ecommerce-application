@@ -17,8 +17,8 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
   align-items: center;
   justify-content: space-between;
 
-  height: 101px;
-  padding: 0 40px;
+  height: 15%;
+  padding: 15px 40px;
 
   &__logo {
     display: flex;
@@ -36,28 +36,6 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
     &-title {
       font-family: Sneakers, sans-serif;
       font-size: 2rem;
-    }
-  }
-
-  .nav-menu {
-    display: flex;
-    gap: 40px;
-    padding: 0;
-    list-style: none;
-
-    a {
-      @include link($c-header-main, $c-header-hover);
-    }
-
-    .active {
-      .underline {
-        width: 100%;
-        background-color: $c-header-main;
-      }
-    }
-
-    &-item {
-      @include link-item($c-header-main, $c-header-hover);
     }
   }
 
@@ -126,22 +104,10 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 }
 
 .dark-theme {
-  background-color: $c-header-dark-theme-bgc;
-
   .header {
     &__logo {
       &-title {
         color: $c-header-dark-theme-main;
-      }
-    }
-
-    .nav-menu {
-      a {
-        @include link($c-header-dark-theme-main, $c-header-main);
-      }
-
-      &-item {
-        @include link-item($c-header-dark-theme-main, $c-header-main);
       }
     }
 
@@ -159,12 +125,12 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 
         &:hover {
           svg {
-            fill: $c-header-main;
+            fill: $c-header-hover;
           }
 
           .arrow {
             &__line {
-              background-color: $c-header-main;
+              background-color: $c-header-hover;
             }
           }
         }
@@ -175,7 +141,7 @@ $c-header-dark-theme-bgc: $c-secondary-bg;
 
 @media screen and (width <= 699px) {
   .header {
-    .nav-menu {
+    &__nav {
       display: none;
     }
 

@@ -92,3 +92,20 @@ export enum ACTIONS {
   REMOVE_DISCOUNT_CODE = 'removeDiscountCode',
 }
 
+export enum DiscountSliderAlign {
+  LEFT = 'left',
+  RIGHT = 'right',
+  CENTER = 'center',
+}
+
+export const menuDefaultLinks = [
+  { route: ROUTES.MAIN, caption: 'Home' },
+  { route: ROUTES.PRODUCT_LIST, caption: 'Catalog' },
+  { route: ROUTES.ABOUT, caption: 'About Us' },
+  { route: ROUTES.CART, caption: 'Cart' },
+];
+
+export enum RootCategories {
+  MAN = 'Man',
+  WOMAN = 'Woman',
+}

@@ -1,6 +1,8 @@
 @use '@assets/style/mixins' as *;
 
 .wrapper {
+  @include container;
+
   position: relative;
 
   display: flex;

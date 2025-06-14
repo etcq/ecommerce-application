@@ -1,0 +1,41 @@
+@use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-promocode-bg: $c-font-name;
+$c-promocode-light: $c-light-main;
+
+.promocode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 480px;
+  padding: 40px;
+
+  background-color: $c-promocode-bg;
+
+  &__header {
+    @include section-header;
+  }
+
+  &__slider {
+    @include container;
+    @include slider-dark;
+
+    width: 80%;
+    max-width: 1000px;
+    height: 100%;
+    border-radius: 20px;
+
+    background-color: $c-promocode-light;
+  }
+
+  &__loading {
+    @include container;
+
+    position: relative;
+    bottom: 120px;
+    height: 70%;
+  }
+}

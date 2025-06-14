@@ -1,0 +1,130 @@
+@use '@assets/style/variables' as *;
+
+$c-promocode-light: $c-light-main;
+$c-promocode-dark: $c-dark-secondary;
+$c-promocode-hover: $c-dark-hover;
+
+.slide {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 16px;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+
+    box-sizing: border-box !important;
+    max-width: 450px;
+    height: 100%;
+    padding: 0 8%;
+
+    background-color: rgb(255 255 255 / 80%);
+
+    &-header {
+      margin: 0;
+      font-size: 2.4em;
+    }
+
+    &-description {
+      font-size: 1.1em;
+      font-weight: 600;
+      line-height: 26px;
+    }
+  }
+
+  &-code {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+
+    height: 30px;
+
+    &-icon {
+      padding: 6px;
+      border-radius: 10px;
+      font-size: 1.5em;
+
+      &:hover {
+        cursor: copy;
+        color: $c-promocode-light;
+        background-color: $c-dark-hover;
+        box-shadow: 0 0 10px 0 $c-promocode-dark;
+      }
+    }
+
+    &-input {
+      pointer-events: none;
+
+      width: 80%;
+      border: none;
+
+      font-size: 1.4em;
+
+      background: transparent;
+      outline: none;
+    }
+  }
+}
+
+[data-align='left'] {
+  .slide-content {
+    border-radius: 0 60% 20% 0;
+  }
+}
+
+[data-align='center'] {
+  .slide-content {
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 50%;
+
+    &-description {
+      text-align: center;
+    }
+  }
+
+  .slide-code {
+    justify-content: center;
+  }
+}
+
+[data-align='right'] {
+  justify-content: flex-end;
+
+  .slide-content {
+    align-items: flex-end;
+    border-radius: 60% 0 0 20%;
+
+    &-description {
+      text-align: right;
+    }
+  }
+}
+
+@media screen and (width <= 600px) {
+  .slide {
+    font-size: 12px;
+
+    &-content {
+      align-items: center !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
+
+      &-description {
+        text-align: center;
+      }
+    }
+
+    &-code {
+      gap: 6px;
+    }
+  }
+}

@@ -1,18 +1,29 @@
 import styles from './categories.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Category } from '@commercetools/platform-sdk';
-import { LOCALIZATION } from '@/constants/constants.ts';
+import { CATEGORY_MESSAGE, LOCALIZATION } from '@/constants/constants.ts';
 import { getCategories } from '@/core/api/products/get-categories.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
-import { CATEGORY_MESSAGE } from '@/constants/constants.ts';
 import { IBreadcrumbItem } from '@/interfaces/interfaces.ts';
 import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import getCategoryIdByName from '@/core/utils/get-category-id.ts';
+import { useLocation } from 'react-router';
+import { isLocationState } from '@/core/utils/type-guards.ts';
 
 export function CategoriesNavigation() {
   const { breadcrumb, setBreadcrumb } = useBreadcrumbStore();
   const { setPage } = useProductListStore();
+  const location = useLocation();
+
+  const redirectCategory = useMemo(() => {
+    if (isLocationState(location.state, 'redirectCategory')) {
+      return location.state.redirectCategory;
+    }
+  }, [location]);
+
   const {
+    activeRootCategoryId,
     allCategories,
     setAllCategories,
     setActiveRootCategoryId,
@@ -26,18 +37,29 @@ export function CategoriesNavigation() {
   } = useCategoryNavigationStore();
 
   useEffect(() => {
-    const fetchCategories = async (): Promise<void> => {
-      const categories: Category[] = await getCategories();
-      if (categories) {
-        setAllCategories(categories);
-      } else {
-        setReset();
-      }
-    };
-    void fetchCategories();
-  }, [setReset, setAllCategories]);
+    getCategories()
+      .then((categories) => {
+        if (categories) {
+          setAllCategories(categories);
+        } else {
+          setReset();
+        }
+      })
+      .catch((e: Error) => console.error("can't get categories", e))
+      .finally(() => {
+        if (redirectCategory) {
+          handleCategoryRedirect(redirectCategory);
+        }
+      });
+  }, [setReset, setAllCategories, redirectCategory]);
 
-  const handleRootCategoryClick = (name: string): void => {
+  function handleCategoryRedirect(redirectInToMainPage: string) {
+    if (activeRootCategoryId !== getCategoryIdByName(redirectInToMainPage, allCategories)) {
+      handleRootCategoryClick(redirectInToMainPage);
+    }
+  }
+
+  function handleRootCategoryClick(name: string): void {
     const rootCategory: Category | undefined = allCategories.find(
       (category: Category): boolean => category.name[LOCALIZATION] === name,
     );
@@ -59,9 +81,9 @@ export function CategoriesNavigation() {
     const children: Category[] = allCategories.filter((category): boolean => category.parent?.id === rootCategory.id);
     setFootwearCategories(children);
     setBrandCategories([]);
-  };
+  }
 
-  const handleCategoryClick = (categoryId: string): void => {
+  function handleCategoryClick(categoryId: string): void {
     if (selectedFootwearCategoryId === categoryId) {
       setSelectedFootwearId(null);
       setBrandCategories([]);
@@ -92,7 +114,7 @@ export function CategoriesNavigation() {
     if (children.length > 0) {
       setBrandCategories(children);
     }
-  };
+  }
 
   const isBreadcrumbSelected = (id: string): boolean => {
     return breadcrumb.some((item: IBreadcrumbItem): boolean => item.id === id);
