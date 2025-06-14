@@ -101,3 +101,8 @@ export const menuDefaultLinks = [
   { route: ROUTES.ABOUT, caption: 'About Us' },
   { route: ROUTES.CART, caption: 'Cart' },
 ];
+
+export enum RootCategories {
+  MAN = 'Man',
+  WOMAN = 'Woman',
+}

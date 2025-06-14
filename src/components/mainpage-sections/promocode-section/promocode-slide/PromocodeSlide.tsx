@@ -2,26 +2,17 @@ import { JSX, useRef, useMemo } from 'react';
 import styles from './promocode-slide.module.scss';
 import { FaRegCopy } from 'react-icons/fa';
 import { IDiscountInfo } from '@/interfaces/interfaces.ts';
-import { DiscountSliderAlign } from '@/constants/constants.ts';
 import summerSneakerImgPath from '@assets/images/main-page/slider/summer-sneaker.jpg';
 import greenSneakersImgPath from '@assets/images/main-page/slider/green-sneakers.webp';
 import manySneakerImgPath from '@assets/images/main-page/slider/many-sneaker.webp';
 import { useToastStore } from '@/core/stores/toast';
+import getSlideSetup from '@/core/utils/get-slide-setup.ts';
 
 export default function PromocodeSlide(props: IDiscountInfo): JSX.Element {
   const { name, description, code } = props;
   const codeInput = useRef<HTMLInputElement | null>(null);
   const { setMessage } = useToastStore();
-
-  const getContentImageAndAlign = (): { img: string; align: DiscountSliderAlign } => {
-    const alignVariants = [DiscountSliderAlign.LEFT, DiscountSliderAlign.RIGHT, DiscountSliderAlign.CENTER];
-    const imageVariants = [summerSneakerImgPath, greenSneakersImgPath, manySneakerImgPath];
-    return {
-      img: imageVariants[Math.floor(Math.random() * imageVariants.length)],
-      align: alignVariants[Math.floor(Math.random() * alignVariants.length)],
-    };
-  };
-  const slideSetup = useMemo(() => getContentImageAndAlign(), []);
+  const slideSetup = useMemo(() => getSlideSetup([summerSneakerImgPath, greenSneakersImgPath, manySneakerImgPath]), []);
 
   const copyPromocode = async () => {
     if (!codeInput.current?.value) return;

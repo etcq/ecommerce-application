@@ -53,3 +53,7 @@ export interface IProductParams {
   variantId: number;
   userToken?: string | null;
 }
+
+export interface ICategoryRedirectState {
+  redirectCategory?: string;
+}
