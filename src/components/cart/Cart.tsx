@@ -11,6 +11,7 @@ import { getActiveCart } from '@/core/api/cart/get-active-cart';
 import { useToastStore } from '@/core/stores/toast.ts';
 import { ChangeEvent, useState } from 'react';
 import { CartMessages } from '@/constants/constants.ts';
+import Loading from '../loading/Loading';
 
 const Cart: React.FC = () => {
   const { setCart, currentCart, setLineItems } = useCartStore.getState();
@@ -19,6 +20,7 @@ const Cart: React.FC = () => {
   const [activePromo, setActivePromo] = useState<string | null>(() => {
     return localStorage.getItem('activePromo');
   });
+  const [loading, setLoading] = useState(true);
   const cartVersion = useCartStore((state) => state.cartVersion);
   const cartItems = currentCart?.lineItems;
   const totalPrice = currentCart?.totalPrice.centAmount;
@@ -26,9 +28,11 @@ const Cart: React.FC = () => {
 
   useEffect(() => {
     setErrorMessage(null);
+    setLoading(true);
     getActiveCart()
       .then((cart) => setCart(cart!))
-      .catch((error: Error) => setErrorMessage(error.message ?? 'Failed to get cart'));
+      .catch((error: Error) => setErrorMessage(error.message ?? 'Failed to get cart'))
+      .finally(() => setLoading(false));
   }, [setCart, setLineItems]);
 
   const handleClearCart = async () => {
@@ -71,6 +75,10 @@ const Cart: React.FC = () => {
     setInputDiscountCode(event.target.value);
     setErrorMessage(null);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return cartItems && cartItems.length > 0 ? (
     <div className={styles.cart}>
