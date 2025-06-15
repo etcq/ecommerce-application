@@ -26,20 +26,9 @@ const Cart: React.FC = () => {
 
   useEffect(() => {
     setErrorMessage(null);
-    const fetchCart = async () => {
-      try {
-        const cart = await getActiveCart();
-        setCart(cart!);
-      } catch (error) {
-        if (error instanceof Error) {
-          setErrorMessage(error.message);
-        } else {
-          setErrorMessage('Failed to get cart');
-        }
-      }
-    };
-
-    fetchCart().catch((error) => console.error('Error while fetch cart:', error));
+    getActiveCart()
+      .then((cart) => setCart(cart!))
+      .catch((error: Error) => setErrorMessage(error.message ?? 'Failed to get cart'));
   }, [setCart, setLineItems]);
 
   const handleClearCart = async () => {
