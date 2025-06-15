@@ -1,1 +1,8 @@
-/* cart */
+@use '@assets/style/mixins' as *;
+
+.wrapper {
+  @include container;
+
+  display: flex;
+  justify-content: center;
+}
