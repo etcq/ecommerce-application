@@ -5,6 +5,7 @@ import { removeLineItem } from '@/core/api/cart/remove-product';
 import { changeProductQuantity } from '@/core/api/cart/quantity-product';
 import { useToastStore } from '@/core/stores/toast';
 import { CartMessages } from '@/constants/constants';
+import { GiConverseShoe } from 'react-icons/gi';
 
 export interface IItemProps {
   id: string;
@@ -51,7 +52,11 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
       <div className={styles.delete}>
         <X onClick={() => void handleRemove()} />
       </div>
-      <img className={styles.image} src={image} />
+      {image ? (
+        <img className={styles.image} src={image} />
+      ) : (
+        <GiConverseShoe style={{ transform: 'scaleX(-1)' }} className={styles.image} />
+      )}
       <div className={styles.info}>
         <div className={styles.name}>{name}</div>
         <div className={styles.size}>Size: {size}</div>
