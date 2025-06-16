@@ -96,6 +96,15 @@ $c-footer-unused-links: $c-dark-hover;
     font-size: 12px;
     color: $c-footer-light;
     text-align: center;
+
+    a {
+      color: $c-footer-light;
+      text-decoration: underline;
+
+      &:hover {
+        color: $c-footer-unused-links;
+      }
+    }
   }
 }
 
