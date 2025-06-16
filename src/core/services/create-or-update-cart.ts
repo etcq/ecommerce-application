@@ -17,15 +17,22 @@ export const createOrUpdateCart = async (
   const { setAnonymousCartId, setAnonymousId, setCartVersion, setCart, currentCart } = useCartStore.getState();
   const isLoggedIn: boolean = useAuthStore.getState().isLoggedIn;
 
-  const sizeToMatch = selectedSize === '' ? '' : Number(selectedSize);
-  const matchedVariant: ProductVariant | undefined = productInfo?.variants.find((variant): boolean => {
-    const colorAttr = variant.attributes?.find((a): boolean => a.name === 'color');
-    const sizeAttr = variant.attributes?.find((a): boolean => a.name === 'size');
+  let matchedVariant: ProductVariant | undefined;
 
-    const color: string = typeof colorAttr?.value === 'string' ? colorAttr.value : '';
-    const size: number | null = typeof sizeAttr?.value === 'number' ? sizeAttr.value : null;
-    return color === selectedColor && size === sizeToMatch;
-  });
+  if (selectedSize === '' && selectedColor === '') {
+    matchedVariant = productInfo?.variants?.[0];
+    console.log(matchedVariant);
+  } else {
+    const sizeToMatch = selectedSize === '' ? '' : Number(selectedSize);
+    matchedVariant = productInfo?.variants.find((variant): boolean => {
+      const colorAttr = variant.attributes?.find((a): boolean => a.name === 'color');
+      const sizeAttr = variant.attributes?.find((a): boolean => a.name === 'size');
+
+      const color: string = typeof colorAttr?.value === 'string' ? colorAttr.value : '';
+      const size: number | null = typeof sizeAttr?.value === 'number' ? sizeAttr.value : null;
+      return color === selectedColor && size === sizeToMatch;
+    });
+  }
 
   if (!matchedVariant) {
     console.error('No matching variant found for selected color and size');

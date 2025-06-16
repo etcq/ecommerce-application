@@ -13,6 +13,7 @@ export interface IProductInfoForCard {
   description: string | undefined;
   img?: string;
   prices: { main: number; discount?: number };
+  productInfo: IProductInfoForDetailedPage;
 }
 
 export interface IProductInfoForDetailedPage extends IProductInfoForCard {
