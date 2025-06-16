@@ -3,6 +3,7 @@ import memberStyle from '@components/team-member/team-member.module.scss';
 import { JSX } from 'react';
 import TeamMember from '@components/team-member/TeamMember.tsx';
 import { ITeamMemberProps } from '@/interfaces/interfaces.ts';
+import logoImg from '@assets/images/about-us/Rsschool.png';
 
 const Anton: ITeamMemberProps = {
   name: 'Anton Sushnikov',
@@ -89,6 +90,9 @@ export default function AboutPage(): JSX.Element {
  }`}
           </pre>
         </TeamMember>
+        <a href={'https://rs.school/'}>
+          <img src={logoImg} alt="Rsschool log" />
+        </a>
       </div>
     </div>
   );
