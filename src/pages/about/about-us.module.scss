@@ -29,8 +29,9 @@
 
   &__members {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
   }
 }
 
@@ -51,5 +52,23 @@
 @keyframes printed-text {
   from {
     width: 0;
+  }
+}
+
+@media screen and (width <= 700px) {
+  .about {
+    &__header {
+      width: 24ch;
+      font-size: 30px;
+    }
+  }
+}
+
+@media screen and (width <= 500px) {
+  .about {
+    &__header {
+      width: 24ch;
+      font-size: 20px;
+    }
   }
 }

@@ -1,8 +1,12 @@
 .team-member {
   overflow: hidden;
-  width: 32%;
+  width: 100%;
   border: 1px solid gray;
   border-radius: 10px;
+
+  &__var {
+    color: #bb02bb;
+  }
 
   &__header {
     display: flex;
@@ -29,6 +33,7 @@
 
   &__content {
     padding: 0 15px;
+    white-space: pre-wrap;
 
     &-item {
       margin-bottom: 10px;
