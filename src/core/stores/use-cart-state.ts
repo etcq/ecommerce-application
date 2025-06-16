@@ -1,6 +1,9 @@
 import { create } from 'zustand';
-import { Cart } from '@commercetools/platform-sdk';
+import { Cart, DiscountCodeInfo } from '@commercetools/platform-sdk';
 import { LocalStorageKeys } from '@/constants/constants';
+import { getActiveCart } from '@/core/api/cart/get-active-cart.ts';
+import { addDiscountCode } from '@/core/api/cart/add-discount-code.ts';
+import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
   lineItemId: string;
@@ -26,6 +29,7 @@ interface ICartStore {
   setCartVersion: (version: number | null) => void;
   setLineItems: (items: LineItem[]) => void;
   updateLineItemQuantity: (lineItemId: string, quantity: number) => void;
+  applyDiscountCode: (code: string) => Promise<Cart>;
 }
 
 export const useCartStore = create<ICartStore>((set) => ({
@@ -39,6 +43,8 @@ export const useCartStore = create<ICartStore>((set) => ({
   setCart: (cart: Cart): void => {
     localStorage.setItem(LocalStorageKeys.CART_ID, cart.id);
     localStorage.setItem(LocalStorageKeys.CART_VERSION, cart.version.toString());
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_CART_ID);
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_ID);
     set({ currentCart: cart, cartVersion: cart.version });
   },
   clearCart: () => {
@@ -80,6 +86,31 @@ export const useCartStore = create<ICartStore>((set) => ({
     set({ productId });
   },
   setLineItems: (items: LineItem[]): void => set({ lineItems: items }),
+  applyDiscountCode: async (code: string): Promise<Cart> => {
+    const cart: Cart | null = await getActiveCart();
+    if (!cart) {
+      throw new Error('No cart found');
+    }
+
+    let version: number = cart.version;
+    const cartId: string = cart.id;
+
+    const existingCode: DiscountCodeInfo = cart.discountCodes?.[0];
+    if (existingCode) {
+      const updatedCart: Cart = await removeDiscountCode(cartId, version, existingCode.discountCode.id);
+      version = updatedCart.version;
+    }
+
+    const resultCart: Cart = await addDiscountCode(cartId, version, code);
+    localStorage.setItem(LocalStorageKeys.CART_VERSION, resultCart.version.toString());
+
+    set({
+      currentCart: resultCart,
+      cartVersion: resultCart.version,
+    });
+
+    return resultCart;
+  },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
     set((state: ICartStore) => ({
       lineItems: state.lineItems.map((item) => (item.lineItemId === lineItemId ? { ...item, quantity } : item)),

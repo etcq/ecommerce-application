@@ -1,0 +1,23 @@
+@use '../../../assets/style/variables' as *;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+
+  font-size: 20px;
+}
+
+.link {
+  margin-left: 5px;
+  color: $c-dark-main;
+  text-decoration: underline;
+
+  &:hover {
+    color: $c-dark-hover;
+  }
+}

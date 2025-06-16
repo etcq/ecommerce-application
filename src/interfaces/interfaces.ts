@@ -63,3 +63,7 @@ export interface ITeamMemberProps {
   bio: string;
   children?: ReactNode;
 }
+
+export interface ICategoryRedirectState {
+  redirectCategory?: string;
+}

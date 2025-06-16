@@ -1,5 +1,5 @@
 import styles from './categories.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Category } from '@commercetools/platform-sdk';
 import { CATEGORY_MESSAGE, LOCALIZATION } from '@/constants/constants.ts';
 import { getCategories } from '@/core/api/products/get-categories.ts';
@@ -8,13 +8,22 @@ import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
 import { IBreadcrumbItem } from '@/interfaces/interfaces.ts';
 import { useProductListStore } from '@/core/stores/product-list-store.ts';
 import getCategoryIdByName from '@/core/utils/get-category-id.ts';
+import { useLocation } from 'react-router';
+import { isLocationState } from '@/core/utils/type-guards.ts';
 
 export function CategoriesNavigation() {
   const { breadcrumb, setBreadcrumb } = useBreadcrumbStore();
   const { setPage } = useProductListStore();
+  const location = useLocation();
+
+  const redirectCategory = useMemo(() => {
+    if (isLocationState(location.state, 'redirectCategory')) {
+      return location.state.redirectCategory;
+    }
+  }, [location]);
+
   const {
     activeRootCategoryId,
-    redirectInToMainPage,
     allCategories,
     setAllCategories,
     setActiveRootCategoryId,
@@ -38,17 +47,14 @@ export function CategoriesNavigation() {
       })
       .catch((e: Error) => console.error("can't get categories", e))
       .finally(() => {
-        if (redirectInToMainPage) {
-          handleCategoryRedirect(redirectInToMainPage);
+        if (redirectCategory) {
+          handleCategoryRedirect(redirectCategory);
         }
       });
-  }, [setReset, setAllCategories, redirectInToMainPage]);
+  }, [setReset, setAllCategories, redirectCategory]);
 
   function handleCategoryRedirect(redirectInToMainPage: string) {
-    if (
-      (redirectInToMainPage === 'Man' || redirectInToMainPage === 'Woman') &&
-      activeRootCategoryId !== getCategoryIdByName(redirectInToMainPage, allCategories)
-    ) {
+    if (activeRootCategoryId !== getCategoryIdByName(redirectInToMainPage, allCategories)) {
       handleRootCategoryClick(redirectInToMainPage);
     }
   }
