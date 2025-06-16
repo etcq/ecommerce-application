@@ -17,6 +17,10 @@ import ImageSlider from '@components/slider/Slider.tsx';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { createOrUpdateCart } from '@/core/services/create-or-update-cart.ts';
 import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { getVariant } from '@/core/utils/get-variant.ts';
+import { getActiveCart } from '@/core/api/cart/get-active-cart.ts';
+import CartButton from '@components/cartButton/CartButton.tsx';
+import handleRemoveFromCart from '@/core/utils/handle-remove-from-cart.ts';
 
 export default function ProductDetailed(): JSX.Element {
   const { id } = useParams();
@@ -24,9 +28,30 @@ export default function ProductDetailed(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { productId, setProductId } = useCartStore();
-
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
+  const [productInCart, setProductInCart] = useState('');
+  const { setCart, currentCart } = useCartStore.getState();
+  const cartVersion = useCartStore((state) => state.cartVersion);
+
+  useEffect(() => {
+    getActiveCart()
+      .then((response) => {
+        if (response && selectedColor && selectedSize) {
+          const answer = response.lineItems.find(
+            (item) => item.variant.sku === getVariant(productInfo, selectedColor, selectedSize)?.sku,
+          );
+          if (answer) {
+            setProductInCart(answer.id);
+          } else {
+            setProductInCart('');
+          }
+        }
+      })
+      .catch((error) => {
+        console.error('Error loading cart:', error);
+      });
+  }, [selectedSize, selectedColor, productInfo]);
 
   useEffect(() => {
     setLoading(true);
@@ -87,12 +112,21 @@ export default function ProductDetailed(): JSX.Element {
                 onChange={(color) => setSelectedColor(color)}
               />
             </div>
-            <Button
-              size="large"
-              onClick={() => void createOrUpdateCart(selectedSize, selectedColor, productInfo, productId)}
-            >
-              Add to cart
-            </Button>
+            <CartButton
+              size={'large'}
+              productInCart={productInCart}
+              addFunction={() => {
+                void createOrUpdateCart(selectedSize, selectedColor, productInfo, productId);
+              }}
+              removeFunction={() => {
+                void handleRemoveFromCart({
+                  cartId: currentCart!.id,
+                  version: cartVersion!,
+                  id: productInCart,
+                  setCart,
+                });
+              }}
+            />
             <div className={styles.description__benefits}>
               <span className={styles.description__benefits_item}>
                 <img src={shippingIcon} alt="Shipping" />

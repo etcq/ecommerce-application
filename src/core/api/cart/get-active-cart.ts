@@ -13,7 +13,16 @@ export const getActiveCart = async () => {
     const response: ClientResponse<Cart> = await withRefreshTokenFlow(token).me().activeCart().get().execute();
 
     useCartStore.getState().setCart(response.body);
-
+    useCartStore.getState().setLineItems(
+      response.body.lineItems.map((item) => {
+        return {
+          lineItemId: item.id,
+          sku: item.variant.sku,
+          productId: item.productId,
+          quantity: item.quantity,
+        };
+      }),
+    );
     return response.body;
   } catch {
     return null;

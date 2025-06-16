@@ -7,6 +7,7 @@ import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
   lineItemId: string;
+  sku: string | undefined;
   productId: string;
   quantity: number;
 }

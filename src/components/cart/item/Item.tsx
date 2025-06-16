@@ -1,11 +1,10 @@
 import styles from './item.module.scss';
 import { Minus, Plus, X } from 'lucide-react';
 import { useCartStore } from '@/core/stores/use-cart-state';
-import { removeLineItem } from '@/core/api/cart/remove-product';
 import { changeProductQuantity } from '@/core/api/cart/quantity-product';
-import { useToastStore } from '@/core/stores/toast';
-import { CartMessages } from '@/constants/constants';
+
 import { GiConverseShoe } from 'react-icons/gi';
+import handleRemoveFromCart from '@/core/utils/handle-remove-from-cart.ts';
 
 export interface IItemProps {
   id: string;
@@ -22,15 +21,15 @@ export interface IItemProps {
 const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, color, version, cartId }) => {
   const setCart = useCartStore((state) => state.setCart);
 
-  const handleRemove = async () => {
-    try {
-      const updatedCart = await removeLineItem(cartId, version, id);
-      setCart(updatedCart);
-      useToastStore.getState().setMessage(CartMessages.ITEM_DELETE);
-    } catch (error) {
-      console.error('Failed to remove item:', error);
-    }
-  };
+  // const handleRemove = async () => {
+  //   try {
+  //     const updatedCart = await removeLineItem(cartId, version, id);
+  //     setCart(updatedCart);
+  //     useToastStore.getState().setMessage(CartMessages.ITEM_DELETE);
+  //   } catch (error) {
+  //     console.error('Failed to remove item:', error);
+  //   }
+  // };
 
   const handleQuantityChange = async (newQuantity: number) => {
     if (newQuantity <= 0) return;
@@ -50,7 +49,7 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
   return (
     <div className={styles.item}>
       <div className={styles.delete}>
-        <X onClick={() => void handleRemove()} />
+        <X onClick={() => void handleRemoveFromCart({ cartId, version, id, setCart })} />
       </div>
       {image ? (
         <img className={styles.image} src={image} />

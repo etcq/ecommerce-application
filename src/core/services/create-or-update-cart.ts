@@ -7,6 +7,7 @@ import { useCartStore } from '@/core/stores/use-cart-state';
 import { LocalStorageKeys } from '@/constants/constants';
 import { IProductInfoForDetailedPage } from '@/interfaces/interfaces';
 import { Cart, ProductVariant } from '@commercetools/platform-sdk';
+import { getVariant } from '@/core/utils/get-variant.ts';
 
 export const createOrUpdateCart = async (
   selectedSize: string,
@@ -18,19 +19,10 @@ export const createOrUpdateCart = async (
   const isLoggedIn: boolean = useAuthStore.getState().isLoggedIn;
 
   let matchedVariant: ProductVariant | undefined;
-
   if (selectedSize === '' && selectedColor === '') {
     matchedVariant = productInfo?.masterVariant;
   } else {
-    const sizeToMatch = selectedSize === '' ? '' : Number(selectedSize);
-    matchedVariant = productInfo?.variants.find((variant): boolean => {
-      const colorAttr = variant.attributes?.find((a): boolean => a.name === 'color');
-      const sizeAttr = variant.attributes?.find((a): boolean => a.name === 'size');
-
-      const color: string = typeof colorAttr?.value === 'string' ? colorAttr.value : '';
-      const size: number | null = typeof sizeAttr?.value === 'number' ? sizeAttr.value : null;
-      return color === selectedColor && size === sizeToMatch;
-    });
+    matchedVariant = getVariant(productInfo, selectedColor, selectedSize);
   }
   if (!matchedVariant) {
     console.error('No matching variant found for selected color and size');
