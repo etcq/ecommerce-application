@@ -44,6 +44,7 @@ const Cart: React.FC = () => {
         updatedCart = await removeLineItem(updatedCart.id, updatedCart.version, item.id);
       }
       setCart(updatedCart);
+      await useCartStore.getState().removeActiveDiscount();
       useToastStore.getState().setMessage(CartMessages.CART_CLEAR);
     } catch (error) {
       if (error instanceof Error) {
