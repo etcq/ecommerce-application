@@ -1,0 +1,66 @@
+@use '@assets/style/variables' as *;
+
+.item {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+  padding: 10px 20px;
+  border-top: 1px solid $c-dark-hover;
+
+  font-size: 18px;
+}
+
+.delete,
+.minus,
+.plus {
+  &:hover {
+    cursor: pointer;
+    color: $c-dark-hover;
+  }
+}
+
+.image {
+  width: 75px;
+  height: 75px;
+  border: 1px solid $c-dark-hover;
+  border-radius: 10px;
+
+  object-fit: contain;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  margin-bottom: 10px;
+}
+
+.size,
+.color {
+  font-size: 14px;
+  color: $c-dark-hover;
+}
+
+.price {
+  width: 50px;
+  color: $c-dark-hover;
+
+  @media (width <= 1100px) {
+    display: none;
+  }
+}
+
+.quantity-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 80px;
+  padding: 5px 10px;
+  border: 1px solid $c-dark-hover;
+  border-radius: 20px;
+}

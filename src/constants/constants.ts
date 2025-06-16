@@ -35,6 +35,12 @@ export enum UserUpdateMessages {
   ADDRESS_BILLING = 'Default billing address updated!',
 }
 
+export enum CartMessages {
+  DISCOUNT_CODE = 'Your code has been successfully accepted!',
+  CART_CLEAR = 'Cart cleared successfully!',
+  ITEM_DELETE = 'Product removed successfully!',
+}
+
 export const BASE_LIMIT_PER_PAGE = 9;
 export const BASE_PAGINATION_WIDTH = 60;
 export const SEARCH_DEBOUNCE_TIME = 1000;
@@ -42,7 +48,6 @@ export const SEARCH_DEBOUNCE_TIME = 1000;
 export const LOCALIZATION = 'en-US';
 
 export const CATEGORY_MESSAGE = "Don't know what to choose? Select a category...";
-export const DISCOUNT_CODE_MESSAGE = 'Your code has been successfully accepted.';
 
 export const PriceFiltersArray = [
   {
