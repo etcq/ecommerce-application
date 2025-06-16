@@ -28,7 +28,7 @@
   }
 
   &__role {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   &__content {
@@ -36,10 +36,10 @@
     white-space: pre-wrap;
 
     &-item {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       font-family: monospace;
-      font-size: 1rem;
-      line-height: 24px;
+      font-size: 0.8rem;
+      line-height: 1rem;
     }
   }
 
