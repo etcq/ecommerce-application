@@ -95,9 +95,7 @@ $c-cart-hover: $c-dark-hover;
   cursor: pointer;
   border: none;
   background-color: transparent;
-  svg {
-    fill: black;
-  }
+  font-size: 24px;
   &:hover {
     svg {
       fill:$c-cart-hover;

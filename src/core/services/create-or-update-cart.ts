@@ -21,7 +21,6 @@ export const createOrUpdateCart = async (
 
   if (selectedSize === '' && selectedColor === '') {
     matchedVariant = productInfo?.masterVariant;
-    console.log(matchedVariant);
   } else {
     const sizeToMatch = selectedSize === '' ? '' : Number(selectedSize);
     matchedVariant = productInfo?.variants.find((variant): boolean => {
@@ -33,7 +32,6 @@ export const createOrUpdateCart = async (
       return color === selectedColor && size === sizeToMatch;
     });
   }
-  console.log('Matched variant:', matchedVariant);
   if (!matchedVariant) {
     console.error('No matching variant found for selected color and size');
     return;
