@@ -15,9 +15,7 @@ export const getActiveCart = async () => {
     useCartStore.getState().setCart(response.body);
 
     return response.body;
-  } catch (error) {
-    if (error instanceof Error) {
-      return null;
-    }
+  } catch {
+    return null;
   }
 };
