@@ -43,8 +43,6 @@ export const useCartStore = create<ICartStore>((set) => ({
   setCart: (cart: Cart): void => {
     localStorage.setItem(LocalStorageKeys.CART_ID, cart.id);
     localStorage.setItem(LocalStorageKeys.CART_VERSION, cart.version.toString());
-    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_CART_ID);
-    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_ID);
     set({ currentCart: cart, cartVersion: cart.version });
   },
   clearCart: () => {

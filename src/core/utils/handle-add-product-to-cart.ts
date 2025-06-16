@@ -18,7 +18,6 @@ export const handleAddProductToCart = async (cartId: string, version: number, pr
     if (response) {
       useToastStore.getState().setMessage('added');
     }
-    console.log(lineItems);
     useCartStore.getState().setLineItems(lineItems);
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error));
