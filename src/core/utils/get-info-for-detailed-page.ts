@@ -23,5 +23,7 @@ export default function getInfoForDetailedPage(item: ProductProjection): IProduc
     colors,
     sizes,
     variants: allVariants,
+    productInfo: item,
+    masterVariant: item.masterVariant,
   };
 }

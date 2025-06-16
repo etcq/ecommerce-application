@@ -13,6 +13,7 @@ export default function getInfoForCard(item: ProductProjection) {
     prices: prices
       ? { main: prices[0].value.centAmount, discount: prices[0].discounted?.value.centAmount }
       : { main: 0 },
+    productInfo: item,
   };
 
   return productInfo;

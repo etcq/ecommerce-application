@@ -4,6 +4,9 @@ import PriceView from '@components/price-view/PriceView.tsx';
 import { JSX } from 'react';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
+import { createOrUpdateCart } from '@/core/services/create-or-update-cart.ts';
+import getInfoForDetailedPage from '@/core/utils/get-info-for-detailed-page.ts';
+import { FaShoppingBasket } from 'react-icons/fa';
 
 export default function ProductCard(props: IProductInfoForCard): JSX.Element {
   const navigate = useNavigate();
@@ -21,6 +24,17 @@ export default function ProductCard(props: IProductInfoForCard): JSX.Element {
         <h4 className={styles.product__name}>{props.name}</h4>
         <div className={styles.product__price}>
           <PriceView prices={props.prices} />
+          <button
+            className={styles.cart}
+            type={'button'}
+            onClick={(event) => {
+              event.stopPropagation();
+              const detailedInfo = getInfoForDetailedPage(props.productInfo);
+              void createOrUpdateCart('', '', detailedInfo, props.id);
+            }}
+          >
+            <FaShoppingBasket className={styles.cart} />
+          </button>
         </div>
         <div className={styles['product-description']}>{props.description ?? ''}</div>
       </div>

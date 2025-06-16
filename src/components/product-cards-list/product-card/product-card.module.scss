@@ -4,6 +4,7 @@
 $c-card-hover: $c-dark-secondary;
 $c-font-name: $c-font-name;
 $c-button-main: $c-light-main;
+$c-cart-hover: $c-dark-hover;
 
 .product {
   position: relative;
@@ -89,3 +90,16 @@ $c-button-main: $c-light-main;
     }
   }
 }
+
+.cart {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  &:hover {
+    svg {
+      fill:$c-cart-hover;
+    }
+  }
+}
+
