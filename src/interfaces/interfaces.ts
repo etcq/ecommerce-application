@@ -1,6 +1,5 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
 import { ROUTES } from '@/constants/constants.ts';
-import { ProductVariant } from '@commercetools/platform-sdk';
 import { ReactNode } from 'react';
 import { ProductProjection, ProductVariant } from '@commercetools/platform-sdk';
 
