@@ -49,6 +49,8 @@ export async function loginCustomers(email: string, password: string): Promise<C
       return null;
     }
     await getActiveCart();
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_CART_ID);
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_ID);
     return response.body;
   } catch (error) {
     if (error instanceof Error) {

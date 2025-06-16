@@ -3,7 +3,7 @@ import { Cart, ClientResponse } from '@commercetools/platform-sdk';
 import { LocalStorageKeys } from '@/constants/constants.ts';
 import { useCartStore } from '@/core/stores/use-cart-state.ts';
 
-export const getActiveCart = async (): Promise<Cart | null> => {
+export const getActiveCart = async () => {
   const token: string | null = localStorage.getItem(LocalStorageKeys.TOKEN);
   if (!token) {
     throw new Error('No refresh token found in localStorage');
@@ -16,7 +16,8 @@ export const getActiveCart = async (): Promise<Cart | null> => {
 
     return response.body;
   } catch (error) {
-    console.error('Error fetching active currentCart:', error);
-    return null;
+    if (error instanceof Error) {
+      return null;
+    }
   }
 };
