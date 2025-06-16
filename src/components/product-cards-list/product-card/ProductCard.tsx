@@ -5,6 +5,7 @@ import { JSX } from 'react';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 import { createOrUpdateCart } from '@/core/services/create-or-update-cart.ts';
+import getInfoForDetailedPage from '@/core/utils/get-info-for-detailed-page.ts';
 
 export default function ProductCard(props: IProductInfoForCard): JSX.Element {
   const navigate = useNavigate();
@@ -27,7 +28,8 @@ export default function ProductCard(props: IProductInfoForCard): JSX.Element {
             type={'button'}
             onClick={(event) => {
               event.stopPropagation();
-              void createOrUpdateCart('', '', props.productInfo, props.id);
+              const detailedInfo = getInfoForDetailedPage(props.productInfo);
+              void createOrUpdateCart('', '', detailedInfo, props.id);
             }}
           >
             <svg width="27" height="27" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">

@@ -20,7 +20,7 @@ export const createOrUpdateCart = async (
   let matchedVariant: ProductVariant | undefined;
 
   if (selectedSize === '' && selectedColor === '') {
-    matchedVariant = productInfo?.variants?.[0];
+    matchedVariant = productInfo?.masterVariant;
     console.log(matchedVariant);
   } else {
     const sizeToMatch = selectedSize === '' ? '' : Number(selectedSize);
@@ -33,7 +33,7 @@ export const createOrUpdateCart = async (
       return color === selectedColor && size === sizeToMatch;
     });
   }
-
+  console.log('Matched variant:', matchedVariant);
   if (!matchedVariant) {
     console.error('No matching variant found for selected color and size');
     return;

@@ -1,6 +1,6 @@
 import type { TokenStore } from '@commercetools/sdk-client-v2';
 import { ROUTES } from '@/constants/constants.ts';
-import { ProductVariant } from '@commercetools/platform-sdk';
+import { ProductProjection, ProductVariant } from '@commercetools/platform-sdk';
 
 export interface ITokenCacheState extends TokenStore {
   setTokenData: (newTokenData: TokenStore) => void;
@@ -13,7 +13,7 @@ export interface IProductInfoForCard {
   description: string | undefined;
   img?: string;
   prices: { main: number; discount?: number };
-  productInfo: IProductInfoForDetailedPage;
+  productInfo: ProductProjection;
 }
 
 export interface IProductInfoForDetailedPage extends IProductInfoForCard {
@@ -21,6 +21,8 @@ export interface IProductInfoForDetailedPage extends IProductInfoForCard {
   sizes: number[];
   colors: string[];
   variants: ProductVariant[];
+  productInfo: ProductProjection;
+  masterVariant: ProductVariant;
 }
 
 export interface IPriceRange {
