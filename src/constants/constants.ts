@@ -19,6 +19,7 @@ export enum LocalStorageKeys {
   CART_VERSION = 'cartVersion',
   ANONYMOUS_CART_ID = 'anonymousCartId',
   ANONYMOUS_ID = 'anonymousId',
+  ACTIVE_PROMO = 'activePromo'
 }
 
 export enum AuthMessages {
