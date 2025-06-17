@@ -35,7 +35,6 @@ export default function ProductDetailed(): JSX.Element {
   const cartVersion = useCartStore((state) => state.cartVersion);
 
   useEffect(() => {
-    console.log('effect');
     getActiveCart()
       .then((response) => {
         if (response && selectedColor && selectedSize) {

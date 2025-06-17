@@ -9,7 +9,6 @@ export const handleAddProductToCart = async (cartId: string, version: number, pr
 
     const response = await addProductToCart({ cartId, version, productId, variantId, userToken });
     useCartStore.getState().setCartVersion(response.version);
-    console.log(response);
     const lineItems = response.lineItems.map((item) => ({
       lineItemId: item.id,
       sku: item.variant.sku,
