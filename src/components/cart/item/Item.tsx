@@ -21,16 +21,6 @@ export interface IItemProps {
 const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, color, version, cartId }) => {
   const setCart = useCartStore((state) => state.setCart);
 
-  // const handleRemove = async () => {
-  //   try {
-  //     const updatedCart = await removeLineItem(cartId, version, id);
-  //     setCart(updatedCart);
-  //     useToastStore.getState().setMessage(CartMessages.ITEM_DELETE);
-  //   } catch (error) {
-  //     console.error('Failed to remove item:', error);
-  //   }
-  // };
-
   const handleQuantityChange = async (newQuantity: number) => {
     if (newQuantity <= 0) return;
     try {

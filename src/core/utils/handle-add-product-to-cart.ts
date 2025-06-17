@@ -2,6 +2,7 @@ import { addProductToCart } from '@/core/api/cart/add-product.ts';
 import { useCartStore } from '@/core/stores/use-cart-state.ts';
 import { useToastStore } from '@/core/stores/toast.ts';
 import { tokenCache } from '@/core/api/token/token-store.ts';
+import { CartMessages } from '@/constants/constants';
 
 export const handleAddProductToCart = async (cartId: string, version: number, productId: string, variantId: number) => {
   try {
@@ -16,7 +17,7 @@ export const handleAddProductToCart = async (cartId: string, version: number, pr
       quantity: item.quantity,
     }));
     if (response) {
-      useToastStore.getState().setMessage('Product added to cart successfully');
+      useToastStore.getState().setMessage(CartMessages.ADD_ITEM);
     }
     useCartStore.getState().setLineItems(lineItems);
   } catch (error) {
