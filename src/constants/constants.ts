@@ -19,7 +19,7 @@ export enum LocalStorageKeys {
   CART_VERSION = 'cartVersion',
   ANONYMOUS_CART_ID = 'anonymousCartId',
   ANONYMOUS_ID = 'anonymousId',
-  ACTIVE_PROMO = 'activePromo'
+  ACTIVE_PROMO = 'activePromo',
 }
 
 export enum AuthMessages {
@@ -40,6 +40,7 @@ export enum CartMessages {
   DISCOUNT_CODE = 'Your code has been successfully accepted!',
   CART_CLEAR = 'Cart cleared successfully!',
   ITEM_DELETE = 'Product removed successfully!',
+  ADD_ITEM = 'Product added to cart successfully',
 }
 
 export const BASE_LIMIT_PER_PAGE = 9;
