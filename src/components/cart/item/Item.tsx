@@ -52,7 +52,7 @@ const Item: React.FC<IItemProps> = ({ id, image, name, price, quantity, size, co
         <X onClick={() => void handleRemoveFromCart({ cartId, version, id, setCart })} />
       </div>
       {image ? (
-        <img className={styles.image} src={image} />
+        <img className={styles.image} src={image} alt={'product img'} />
       ) : (
         <GiConverseShoe style={{ transform: 'scaleX(-1)' }} className={styles.image} />
       )}

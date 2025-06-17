@@ -75,7 +75,7 @@ export default function Footer(): JSX.Element {
       <div className={styles.underline}></div>
       <div className={styles.footer__copyright}>
         <span>
-          Study project for <a href={'https://rs.school/'}>RSSchool</a> 2025 &copy;
+          Study project for <a href={'https://rs.school/'}>RSSchool</a> {new Date().getFullYear()} &copy;
         </span>
       </div>
     </footer>

@@ -31,6 +31,7 @@ interface ICartStore {
   setLineItems: (items: LineItem[]) => void;
   updateLineItemQuantity: (lineItemId: string, quantity: number) => void;
   applyDiscountCode: (code: string) => Promise<Cart>;
+  removeActiveDiscount: () => Promise<Cart>;
 }
 
 export const useCartStore = create<ICartStore>((set) => ({
@@ -109,6 +110,24 @@ export const useCartStore = create<ICartStore>((set) => ({
     });
 
     return resultCart;
+  },
+  removeActiveDiscount: async (): Promise<Cart> => {
+    const cart = await getActiveCart();
+    if (!cart) throw new Error('No cart found');
+
+    const cartId: string = cart.id;
+    const cartVersion: number = cart.version;
+
+    const existingDiscountCode: DiscountCodeInfo = cart.discountCodes?.[0];
+    if (!existingDiscountCode) throw new Error('No discount code to remove');
+
+    const updateCart = await removeDiscountCode(cartId, cartVersion, existingDiscountCode.discountCode.id);
+
+    set({
+      currentCart: updateCart,
+      cartVersion: updateCart.version,
+    });
+    return updateCart;
   },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
     set((state: ICartStore) => ({

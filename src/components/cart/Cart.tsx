@@ -10,7 +10,7 @@ import { removeLineItem } from '@/core/api/cart/remove-product';
 import { getActiveCart } from '@/core/api/cart/get-active-cart';
 import { useToastStore } from '@/core/stores/toast.ts';
 import { ChangeEvent, useState } from 'react';
-import { CartMessages } from '@/constants/constants.ts';
+import { CartMessages, LocalStorageKeys } from '@/constants/constants.ts';
 import Loading from '../loading/Loading';
 
 const Cart: React.FC = () => {
@@ -35,6 +35,14 @@ const Cart: React.FC = () => {
       .finally(() => setLoading(false));
   }, [setCart, setLineItems]);
 
+  useEffect(() => {
+    if (currentCart && currentCart.lineItems.length === 0 && activePromo) {
+      void useCartStore.getState().removeActiveDiscount();
+      setActivePromo(null);
+      localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
+    }
+  }, [currentCart, activePromo]);
+
   const handleClearCart = async () => {
     setErrorMessage(null);
     if (!currentCart) return;
@@ -44,7 +52,10 @@ const Cart: React.FC = () => {
         updatedCart = await removeLineItem(updatedCart.id, updatedCart.version, item.id);
       }
       setCart(updatedCart);
+      await useCartStore.getState().removeActiveDiscount();
       useToastStore.getState().setMessage(CartMessages.CART_CLEAR);
+      localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
+      setActivePromo(null);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -59,7 +70,7 @@ const Cart: React.FC = () => {
     try {
       await useCartStore.getState().applyDiscountCode(inputDiscountCode);
       setActivePromo(inputDiscountCode);
-      localStorage.setItem('activePromo', inputDiscountCode);
+      localStorage.setItem(LocalStorageKeys.ACTIVE_PROMO, inputDiscountCode);
       setInputDiscountCode('');
       useToastStore.getState().setMessage(CartMessages.DISCOUNT_CODE);
     } catch (error) {
