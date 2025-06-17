@@ -35,6 +35,7 @@ export default function ProductDetailed(): JSX.Element {
   const cartVersion = useCartStore((state) => state.cartVersion);
 
   useEffect(() => {
+    console.log('effect');
     getActiveCart()
       .then((response) => {
         if (response && selectedColor && selectedSize) {
@@ -115,8 +116,11 @@ export default function ProductDetailed(): JSX.Element {
             <CartButton
               size={'large'}
               productInCart={productInCart}
+              disabled={!selectedSize || !selectedColor}
               addFunction={() => {
                 void createOrUpdateCart(selectedSize, selectedColor, productInfo, productId);
+                setSelectedSize('');
+                setSelectedColor('');
               }}
               removeFunction={() => {
                 void handleRemoveFromCart({
@@ -125,6 +129,8 @@ export default function ProductDetailed(): JSX.Element {
                   id: productInCart,
                   setCart,
                 });
+                setSelectedSize('');
+                setSelectedColor('');
               }}
             />
             <div className={styles.description__benefits}>

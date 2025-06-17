@@ -3,7 +3,8 @@ import Button from '@components/button/Button.tsx';
 
 interface ICartButtonProps {
   size: 'large' | 'medium' | 'small' | 'x-small';
-  productInCart: string;
+  productInCart: string | null;
+  disabled: boolean;
   addFunction: () => void;
   removeFunction: () => void;
 }
@@ -11,21 +12,22 @@ interface ICartButtonProps {
 export default function CartButton({
   size,
   productInCart,
+  disabled,
   addFunction,
   removeFunction,
 }: ICartButtonProps): JSX.Element {
   const [message, setMessage] = useState('Add to cart');
   useEffect(() => {
-    console.log(productInCart);
-    if (!productInCart) {
-      setMessage('Remove from cart');
-    } else {
+    if (!productInCart || disabled) {
       setMessage('Add to cart');
+    } else {
+      setMessage('Remove from cart');
     }
-  }, [productInCart]);
+  }, [productInCart, disabled]);
   return (
     <Button
       size={size}
+      disabled={disabled}
       onClick={() => {
         if (!productInCart) {
           addFunction();
