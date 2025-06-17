@@ -1,5 +1,5 @@
-import { JSX, useEffect, useState, useMemo } from 'react';
-import { IProductInfoForCard, IPriceRange, TSortOrder } from '@/interfaces/interfaces.ts';
+import { JSX, useEffect, useMemo, useState } from 'react';
+import { IPriceRange, IProductInfoForCard, TSortOrder } from '@/interfaces/interfaces.ts';
 import ProductCard from '@components/product-cards-list/product-card/ProductCard.tsx';
 import { getProductsForPage } from '@/core/api/products/get-products-list.ts';
 import getInfoForCard from '@/core/utils/get-info-for-card.ts';
@@ -58,20 +58,7 @@ export default function ProductCardsList(): JSX.Element {
       })
       .catch(() => setTotal(0))
       .finally(() => setIsLoading(false));
-  }, [
-    page,
-    total,
-    debouched,
-    resetList,
-    setIsLastPage,
-    setTotal,
-    sortOrder,
-    priceRanges,
-    alphabetically,
-    allCategories,
-    selectedCategoryId,
-    categoryIds,
-  ]);
+  }, [page, total, debouched, resetList, setIsLastPage, setTotal, sortOrder, priceRanges, alphabetically, categoryIds]);
   return (
     <>
       <Input

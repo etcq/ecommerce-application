@@ -1,0 +1,40 @@
+@use '@assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+
+.nav-menu {
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  list-style: none;
+
+  a {
+    @include link($c-dark-main, $c-dark-hover);
+  }
+
+  .active {
+    .underline {
+      width: 100%;
+      background-color: $c-dark-main;
+    }
+  }
+
+  &-item {
+    @include link-item($c-dark-main, $c-dark-hover);
+  }
+}
+
+[data-darktheme='true'].nav-menu {
+  .active {
+    .underline {
+      background-color: $c-light-main;
+    }
+  }
+
+  a {
+    @include link($c-light-main, $c-dark-hover);
+  }
+
+  &-item {
+    @include link-item($c-light-main, $c-dark-hover);
+  }
+}

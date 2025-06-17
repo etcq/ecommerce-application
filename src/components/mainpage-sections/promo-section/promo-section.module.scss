@@ -1,0 +1,120 @@
+@use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
+
+$c-promo-light: $c-light-main;
+$c-promo-dark: $c-dark-main;
+$c-promo-dark-secondary: $c-font-name;
+$bg-img: url('@assets/images/main-page/promo/promo-poster.png');
+
+.promo {
+  @include container;
+
+  max-height: 700px;
+
+  &__bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    max-height: 700px;
+
+    object-fit: fill;
+    object-position: center;
+
+    &-video {
+      width: 100%;
+      min-width: 1100px;
+      height: 100%;
+      object-position: center;
+    }
+
+    &-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: rgb(0 0 0 / 65%);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 20px 150px;
+
+    color: $c-promo-light;
+
+    h1 {
+      margin: 20px 0;
+      font-family: Sneakers, sans-serif;
+      font-size: 4rem;
+      text-align: right;
+    }
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__btn {
+    margin: 40px 20px 0 0;
+    color: $c-promo-dark;
+    background-color: $c-promo-light;
+
+    &:hover {
+      color: $c-promo-light;
+      background-color: $c-promo-dark;
+      box-shadow: 0 0 20px 0 $c-promo-light;
+    }
+  }
+}
+
+@media screen and (width <= 700px) {
+  .promo {
+    &__content {
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      span {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 480px) {
+  .promo {
+    padding: 20px 60px;
+
+    &__content {
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+
+      h1 {
+        text-align: center;
+      }
+
+      span {
+        text-align: center;
+      }
+    }
+
+    &__btn {
+      margin: 30px 0 0;
+    }
+  }
+}

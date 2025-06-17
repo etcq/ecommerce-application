@@ -4,6 +4,7 @@ import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.t
 import { CartSignInModeEnum, LocalStorageKeys } from '@/constants/constants';
 import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';
 import { ClientResponse } from '@commercetools/ts-client';
+import { getActiveCart } from '@/core/api/cart/get-active-cart.ts';
 
 export async function loginCustomers(email: string, password: string): Promise<CustomerSignInResult | null> {
   try {
@@ -47,6 +48,9 @@ export async function loginCustomers(email: string, password: string): Promise<C
     if (!response.body) {
       return null;
     }
+    await getActiveCart();
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_CART_ID);
+    localStorage.removeItem(LocalStorageKeys.ANONYMOUS_ID);
     return response.body;
   } catch (error) {
     if (error instanceof Error) {
