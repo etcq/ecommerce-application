@@ -7,6 +7,7 @@ import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
   lineItemId: string;
+  sku: string | undefined;
   productId: string;
   quantity: number;
 }
@@ -110,6 +111,7 @@ export const useCartStore = create<ICartStore>((set) => ({
 
     return resultCart;
   },
+
   removeActiveDiscount: async (cartId: string, version: number): Promise<Cart> => {
     const cart = useCartStore.getState().currentCart;
     const existingDiscountCode: DiscountCodeInfo | undefined = cart?.discountCodes?.[0];
@@ -123,6 +125,7 @@ export const useCartStore = create<ICartStore>((set) => ({
     });
 
     return updatedCart;
+
   },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
     set((state: ICartStore) => ({

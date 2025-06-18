@@ -1,0 +1,55 @@
+.team-member {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 10px;
+
+  &__var {
+    color: #bb02bb;
+  }
+
+  &__header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+    height: 60px;
+    padding: 10px 40px;
+
+    font-size: 1.3rem;
+
+    background-color: #7b7b7b;
+
+    img {
+      width: auto;
+      height: 100%;
+      border-radius: 25%;
+    }
+  }
+
+  &__role {
+    font-size: 1.2rem;
+  }
+
+  &__content {
+    padding: 0 15px;
+    white-space: pre-wrap;
+
+    &-item {
+      margin-bottom: 5px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      line-height: 1rem;
+    }
+  }
+
+  &__github {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 7px;
+    align-items: center;
+
+    color: gray;
+    text-decoration: none;
+  }
+}
