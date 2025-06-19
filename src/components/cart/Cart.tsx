@@ -21,6 +21,7 @@ const Cart: React.FC = () => {
     return localStorage.getItem('activePromo');
   });
   const [loading, setLoading] = useState(true);
+  const [showClearModal, setShowClearModal] = useState(false);
   const cartVersion = useCartStore((state) => state.cartVersion);
   const cartItems = currentCart?.lineItems;
   const totalPrice = currentCart?.totalPrice.centAmount;
@@ -169,11 +170,30 @@ const Cart: React.FC = () => {
               <Button size="small" children="Apply" onClick={() => void handleAddDiscount()} />
             </div>
 
-            <Button size="medium" children="Clear Cart" onClick={() => void handleClearCart()} />
+            <Button size="medium" children="Clear Cart" onClick={() => setShowClearModal(true)} />
             {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           </div>
         );
       })()}
+
+      {showClearModal && (
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <p>Do you want to empty your cart?</p>
+            <div className={styles.actions}>
+              <Button size="small" children={'Cancel'} onClick={() => setShowClearModal(false)} />
+              <Button
+                size="small"
+                children={'Clear'}
+                onClick={() => {
+                  setShowClearModal(false);
+                  void handleClearCart();
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   ) : (
     <EmptyCart />
