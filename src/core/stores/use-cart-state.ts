@@ -6,8 +6,8 @@ import { addDiscountCode } from '@/core/api/cart/add-discount-code.ts';
 import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
-  lineItemId: string;
-  sku: string | undefined;
+  lineItemId?: string;
+  sku?: string | undefined;
   productId: string;
   quantity: number;
 }
@@ -31,7 +31,7 @@ interface ICartStore {
   setLineItems: (items: LineItem[]) => void;
   updateLineItemQuantity: (lineItemId: string, quantity: number) => void;
   applyDiscountCode: (code: string) => Promise<Cart>;
-  removeActiveDiscount: () => Promise<Cart>;
+  removeActiveDiscount: (cartId: string, version: number) => Promise<Cart>;
 }
 
 export const useCartStore = create<ICartStore>((set) => ({
@@ -111,23 +111,20 @@ export const useCartStore = create<ICartStore>((set) => ({
 
     return resultCart;
   },
-  removeActiveDiscount: async (): Promise<Cart> => {
-    const cart = await getActiveCart();
-    if (!cart) throw new Error('No cart found');
 
-    const cartId: string = cart.id;
-    const cartVersion: number = cart.version;
-
-    const existingDiscountCode: DiscountCodeInfo = cart.discountCodes?.[0];
+  removeActiveDiscount: async (cartId: string, version: number): Promise<Cart> => {
+    const cart = useCartStore.getState().currentCart;
+    const existingDiscountCode: DiscountCodeInfo | undefined = cart?.discountCodes?.[0];
     if (!existingDiscountCode) throw new Error('No discount code to remove');
 
-    const updateCart = await removeDiscountCode(cartId, cartVersion, existingDiscountCode.discountCode.id);
+    const updatedCart = await removeDiscountCode(cartId, version, existingDiscountCode.discountCode.id);
 
     set({
-      currentCart: updateCart,
-      cartVersion: updateCart.version,
+      currentCart: updatedCart,
+      cartVersion: updatedCart.version,
     });
-    return updateCart;
+
+    return updatedCart;
   },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
     set((state: ICartStore) => ({

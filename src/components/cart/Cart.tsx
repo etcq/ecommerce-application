@@ -21,6 +21,7 @@ const Cart: React.FC = () => {
     return localStorage.getItem('activePromo');
   });
   const [loading, setLoading] = useState(true);
+  const [showClearModal, setShowClearModal] = useState(false);
   const cartVersion = useCartStore((state) => state.cartVersion);
   const cartItems = currentCart?.lineItems;
   const totalPrice = currentCart?.totalPrice.centAmount;
@@ -36,26 +37,39 @@ const Cart: React.FC = () => {
   }, [setCart, setLineItems]);
 
   useEffect(() => {
-    if (currentCart && currentCart.lineItems.length === 0 && activePromo) {
-      void useCartStore.getState().removeActiveDiscount();
-      setActivePromo(null);
-      localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
+    if (currentCart && currentCart.lineItems.length === 0 && activePromo && currentCart.discountCodes.length > 0) {
+      void useCartStore
+        .getState()
+        .removeActiveDiscount(currentCart.id, currentCart.version)
+        .then(() => {
+          setActivePromo(null);
+          localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
+        })
+        .catch((error: Error) => {
+          console.error('Failed to remove discount:', error.message);
+        });
     }
   }, [currentCart, activePromo]);
 
-  const handleClearCart = async () => {
+  const handleClearCart = async (): Promise<void> => {
     setErrorMessage(null);
     if (!currentCart) return;
+
     try {
       let updatedCart = currentCart;
+
       for (const item of currentCart.lineItems) {
         updatedCart = await removeLineItem(updatedCart.id, updatedCart.version, item.id);
       }
-      setCart(updatedCart);
-      await useCartStore.getState().removeActiveDiscount();
+
+      if (currentCart.discountCodes.length > 0) {
+        updatedCart = await useCartStore.getState().removeActiveDiscount(updatedCart.id, updatedCart.version);
+      }
+
       useToastStore.getState().setMessage(CartMessages.CART_CLEAR);
       localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
       setActivePromo(null);
+      setCart(updatedCart);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -158,11 +172,30 @@ const Cart: React.FC = () => {
               <Button size="small" children="Apply" onClick={() => void handleAddDiscount()} />
             </div>
 
-            <Button size="medium" children="Clear Cart" onClick={() => void handleClearCart()} />
+            <Button size="medium" children="Clear Cart" onClick={() => setShowClearModal(true)} />
             {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           </div>
         );
       })()}
+
+      {showClearModal && (
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <p>Do you want to empty your cart?</p>
+            <div className={styles.actions}>
+              <Button size="small" children={'Cancel'} onClick={() => setShowClearModal(false)} />
+              <Button
+                size="small"
+                children={'Clear'}
+                onClick={() => {
+                  setShowClearModal(false);
+                  void handleClearCart();
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   ) : (
     <EmptyCart />
