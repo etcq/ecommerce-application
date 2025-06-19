@@ -15,12 +15,7 @@ export default async function handleRemoveFromCart({ cartId, version, id, setCar
   try {
     const updatedCart = await removeLineItem(cartId, version, id);
     setCart(updatedCart);
-    useCartStore.setState({
-      lineItems: updatedCart.lineItems.map((item) => ({
-        ...item,
-        lineItemId: item.id,
-      })),
-    });
+    useCartStore.getState().setLineItems(updatedCart.lineItems);
     useToastStore.getState().setMessage(CartMessages.ITEM_DELETE);
   } catch (error) {
     console.error('Failed to remove item:', error);

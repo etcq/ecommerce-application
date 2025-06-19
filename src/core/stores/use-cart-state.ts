@@ -6,8 +6,8 @@ import { addDiscountCode } from '@/core/api/cart/add-discount-code.ts';
 import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
-  lineItemId: string;
-  sku: string | undefined;
+  lineItemId?: string;
+  sku?: string | undefined;
   productId: string;
   quantity: number;
 }
@@ -125,7 +125,6 @@ export const useCartStore = create<ICartStore>((set) => ({
     });
 
     return updatedCart;
-
   },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
     set((state: ICartStore) => ({
