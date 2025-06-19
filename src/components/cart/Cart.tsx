@@ -62,7 +62,9 @@ const Cart: React.FC = () => {
         updatedCart = await removeLineItem(updatedCart.id, updatedCart.version, item.id);
       }
 
-      updatedCart = await useCartStore.getState().removeActiveDiscount(updatedCart.id, updatedCart.version);
+      if (currentCart.discountCodes.length > 0) {
+        updatedCart = await useCartStore.getState().removeActiveDiscount(updatedCart.id, updatedCart.version);
+      }
 
       useToastStore.getState().setMessage(CartMessages.CART_CLEAR);
       localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
