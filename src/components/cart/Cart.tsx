@@ -70,6 +70,7 @@ const Cart: React.FC = () => {
       localStorage.removeItem(LocalStorageKeys.ACTIVE_PROMO);
       setActivePromo(null);
       setCart(updatedCart);
+      setLineItems(updatedCart.lineItems);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
