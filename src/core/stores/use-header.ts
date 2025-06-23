@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-interface HeaderState {
+interface IHeaderState {
   isLoginMenuOpened: boolean;
   isDarkTheme: boolean;
   toggleLoginMenuOpened: () => void;
   setIsDarkTheme: (active: boolean) => void;
 }
 
-export const useHeaderState = create<HeaderState>((set) => ({
+export const useHeaderStore = create<IHeaderState>((set) => ({
   isLoginMenuOpened: false,
   isDarkTheme: false,
   toggleLoginMenuOpened: () => set((state) => ({ isLoginMenuOpened: !state.isLoginMenuOpened })),

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './address-modal.module.scss';
+import styles from './addressModal.module.scss';
 import Button from '@/components/button/Button';
 
 interface AddressModalProps {

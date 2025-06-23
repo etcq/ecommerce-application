@@ -1,6 +1,6 @@
 import { JSX, HTMLAttributes } from 'react';
 import { IProductInfoForCard } from '@/interfaces/interfaces.ts';
-import styles from './price-view.module.scss';
+import styles from './priceView.module.scss';
 
 type TPrice = Pick<IProductInfoForCard, 'prices'> & Pick<HTMLAttributes<HTMLAttributes<HTMLDivElement>>, 'className'>;
 

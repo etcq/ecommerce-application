@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './registration-form.module.scss';
+import styles from './registration.module.scss';
 import Input from '../input/Input';
 import Button from '@/components/button/Button';
 import inputStyles from '../../../components/form/input/input.module.scss';
@@ -11,9 +11,9 @@ import { useEffect, useState, ChangeEvent } from 'react';
 import { createAddresses, IAddressDataResult } from '@/core/utils/create-addresses.ts';
 import { createCustomerDraft } from '@/core/utils/create-customer-draft.ts';
 import { registerCustomer } from '@/core/api/customers/registration.ts';
-import { useAuthStore } from '@/core/stores/use-auth-state.ts';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
 import { CustomerSignInResult, MyCustomerDraft } from '@commercetools/platform-sdk';
-import { useToastStore } from '@/core/stores/toast.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { AuthMessages } from '@/constants/constants.ts';
 
 const RegistrationForm: React.FC = () => {

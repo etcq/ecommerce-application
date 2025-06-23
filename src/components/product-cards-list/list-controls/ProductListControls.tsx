@@ -1,7 +1,7 @@
 import { JSX, useEffect, useState, useRef } from 'react';
-import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import { useProductListStore } from '@/core/stores/use-product-list.ts';
 import Button from '@components/button/Button.tsx';
-import styles from './product-list-controls.module.scss';
+import styles from './productListControls.module.scss';
 import { BASE_PAGINATION_WIDTH } from '@/constants/constants.ts';
 import { getPageCount, getPageRange, getWidthPaginationElement } from '@/core/utils/pagination-utilities.ts';
 

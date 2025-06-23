@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import styles from './empty-cart.module.scss';
+import styles from './emptyCart.module.scss';
 
 const EmptyCart: React.FC = () => {
   return (

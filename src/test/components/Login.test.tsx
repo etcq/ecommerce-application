@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { LoginForm } from '@components/form/login/login.tsx';
+import { LoginForm } from '@components/form/login/Login.tsx';
 import { describe, expect, it } from 'vitest';
 import { BrowserRouter } from 'react-router';
 import * as React from 'react';

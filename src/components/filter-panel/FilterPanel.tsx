@@ -1,7 +1,7 @@
 import styles from './filterPanel.module.scss';
 import * as React from 'react';
-import { Filter } from '@components/form/filter/filter.tsx';
-import { Checkbox } from '@components/form/checkbox/checkbox.tsx';
+import { Filter } from '@components/form/filter/Filter.tsx';
+import { Checkbox } from '@components/form/checkbox/Checkbox.tsx';
 import { SortingLabels, PriceFiltersArray, FilterTitle, FilterCheckboxIds } from '@/constants/constants.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
@@ -9,7 +9,7 @@ import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
 import { IPriceRange, TSortOrder } from '@/interfaces/interfaces.ts';
 import Button from '@components/button/Button.tsx';
 import { CategoriesNavigation } from '@components/filter-panel/categories/categories.tsx';
-import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import { useProductListStore } from '@/core/stores/use-product-list.ts';
 
 export const FilterPanel: React.FC = () => {
   const priceRange: IPriceRange[] = useProductFilterStore((state) => state.priceRanges);

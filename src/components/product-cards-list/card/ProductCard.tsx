@@ -1,4 +1,4 @@
-import styles from './product-card.module.scss';
+import styles from './productCard.module.scss';
 import { IProductInfoForCard } from '@/interfaces/interfaces.ts';
 import PriceView from '@components/price-view/PriceView.tsx';
 import { JSX } from 'react';

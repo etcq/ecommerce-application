@@ -1,22 +1,22 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { ROUTES } from './constants/constants';
 import { RedirectForAuthPerson, RedirectForNotAuthPerson } from './core/routes/protected-routes';
-import { useAuthStore } from './core/stores/use-auth-state';
+import { useAuthStore } from './core/stores/use-auth.ts';
 import { lazy, useEffect } from 'react';
-import { useToastStore } from '@/core/stores/toast.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { Toast } from '@components/toast/Toast.tsx';
 import Layout from './components/layout/Layout';
 
 const MainPage = lazy(() => import('@pages/main/Main'));
 const AboutPage = lazy(() => import('@pages/about/AboutUs'));
-const ProductList = lazy(() => import('@pages/products/product-list/ProductList'));
+const ProductList = lazy(() => import('@pages/products/list/ProductList'));
 const LoginPage = lazy(() => import('@pages/user/login/LoginPage'));
 const NotFoundPage = lazy(() => import('@pages/not-found/NotFoundPage'));
 const ProfilePage = lazy(() => import('@pages/user/profile/Profile'));
 const PasswordPage = lazy(() => import('@pages/user/profile/password/Password'));
-const RegistrationPage = lazy(() => import('@pages/user/registration/RegistrationPage'));
+const RegistrationPage = lazy(() => import('@pages/user/registration/Registration.tsx'));
 const Cart = lazy(() => import('@pages/cart/Cart'));
-const ProductDetailed = lazy(() => import('@pages/products/product-detailed/ProductDetailed.tsx'));
+const ProductDetailed = lazy(() => import('@pages/products/detailed/ProductDetailed.tsx'));
 
 function App() {
   const { initializationAuth } = useAuthStore();

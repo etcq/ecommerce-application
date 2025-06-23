@@ -1,4 +1,4 @@
-import formStyles from '@/components/form/registration/registration-form.module.scss';
+import formStyles from '@components/form/registration/registration.module.scss';
 import inputStyles from '@/components/form/input/input.module.scss';
 import Input from '@/components/form/input/Input';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';

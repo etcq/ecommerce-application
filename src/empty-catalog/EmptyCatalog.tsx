@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import styles from './empty-catalog.module.scss';
+import styles from './emptyCatalog.module.scss';
 import img from '@assets/images/empty-catalog/empty-catalog-sneaker.png';
 
 export default function EmptyCatalog(): JSX.Element {

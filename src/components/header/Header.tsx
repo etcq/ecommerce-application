@@ -7,9 +7,9 @@ import styles from './header.module.scss';
 import { ROUTES } from '@/constants/constants';
 import BurgerMenu from './burger-menu/BurgerMenu';
 import NavigationMenu from '@components/nav-menu/NavigationMenu.tsx';
-import { useHeaderState } from '@/core/stores/state-header.ts';
+import { useHeaderStore } from '@/core/stores/use-header.ts';
 import { Badge } from '@mui/material';
-import { useCartStore } from '@/core/stores/use-cart-state';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 import { getActiveCart } from '@/core/api/cart/get-active-cart';
 
 const menuLinks = [
@@ -19,7 +19,7 @@ const menuLinks = [
 ];
 
 export default function Header(): JSX.Element {
-  const { isLoginMenuOpened, toggleLoginMenuOpened, isDarkTheme } = useHeaderState();
+  const { isLoginMenuOpened, toggleLoginMenuOpened, isDarkTheme } = useHeaderStore();
   const lineItems = useCartStore((state) => state.lineItems);
 
   useEffect(() => {

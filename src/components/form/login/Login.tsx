@@ -1,16 +1,16 @@
-import styles from './loginForm.module.scss';
+import styles from './login.module.scss';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@components/form/input/Input.tsx';
 import Button from '@components/button/Button.tsx';
-import { useAuthStore } from '@/core/stores/use-auth-state.ts';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
 import * as React from 'react';
 import { loginFormSchema } from '@components/form/login/validation-scheme.ts';
 import { FormEvent } from 'react';
 import { NavigateFunction, NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 import { TLoginFormValues } from '@components/form/login/validation-scheme.ts';
-import { useToastStore } from '@/core/stores/toast.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { AuthMessages } from '@/constants/constants.ts';
 
 export const LoginForm: React.FC = () => {

@@ -1,8 +1,8 @@
 import { JSX } from 'react';
-import styles from './category-section.module.scss';
+import styles from './categorySection.module.scss';
 import { ROUTES } from '@/constants/constants.ts';
 import { useNavigate } from 'react-router';
-import scrollToTop from '@/core/utils/scrollToTop.ts';
+import scrollToTop from '@/core/utils/scroll-to-top.ts';
 
 export default function CategorySection(): JSX.Element {
   const navigate = useNavigate();

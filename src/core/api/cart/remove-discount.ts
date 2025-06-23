@@ -1,7 +1,7 @@
 import { ACTIONS } from '@/constants/constants.ts';
 import { Cart, ClientResponse, MyCartRemoveDiscountCodeAction } from '@commercetools/platform-sdk';
 import { getApiClientForUser } from '@/core/services/api-client-options.ts';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 
 export const removeDiscountCode = async (cartId: string, version: number, discountId: string): Promise<Cart> => {
   const userToken: string | undefined = tokenCache.get().refreshToken;

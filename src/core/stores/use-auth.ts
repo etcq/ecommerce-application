@@ -1,5 +1,5 @@
 import { create, UseBoundStore, StoreApi } from 'zustand';
-import { tokenCache, useTokenCacheStore } from '@/core/api/token/token-store.ts';
+import { tokenCache, useTokenCacheStore } from '@/core/stores/use-token.ts';
 import { ITokenCacheState } from '@/interfaces/interfaces.ts';
 import { loginCustomers } from '@/core/api/customers/login.ts';
 import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';

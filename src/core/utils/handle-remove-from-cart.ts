@@ -1,8 +1,8 @@
 import { CartMessages } from '@/constants/constants';
-import { useToastStore } from '@/core/stores/toast.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { removeLineItem } from '@/core/api/cart/remove-product.ts';
 import { Cart } from '@commercetools/platform-sdk';
-import { useCartStore } from '../stores/use-cart-state';
+import { useCartStore } from '../stores/use-cart.ts';
 
 interface IRemoveFN {
   cartId: string;

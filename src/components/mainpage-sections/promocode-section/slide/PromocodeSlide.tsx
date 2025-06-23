@@ -1,11 +1,11 @@
 import { JSX, useRef, useMemo } from 'react';
-import styles from './promocode-slide.module.scss';
+import styles from './promocodeSlide.module.scss';
 import { FaRegCopy } from 'react-icons/fa';
 import { IDiscountInfo } from '@/interfaces/interfaces.ts';
 import summerSneakerImgPath from '@assets/images/main-page/slider/summer-sneaker.jpg';
 import greenSneakersImgPath from '@assets/images/main-page/slider/green-sneakers.webp';
 import manySneakerImgPath from '@assets/images/main-page/slider/many-sneaker.webp';
-import { useToastStore } from '@/core/stores/toast';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import getSlideSetup from '@/core/utils/get-slide-setup.ts';
 
 export default function PromocodeSlide(props: IDiscountInfo): JSX.Element {

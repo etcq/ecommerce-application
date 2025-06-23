@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { Cart, DiscountCodeInfo } from '@commercetools/platform-sdk';
 import { LocalStorageKeys } from '@/constants/constants';
 import { getActiveCart } from '@/core/api/cart/get-active-cart.ts';
-import { addDiscountCode } from '@/core/api/cart/add-discount-code.ts';
+import { addDiscount } from '@/core/api/cart/add-discount.ts';
 import { removeDiscountCode } from '@/core/api/cart/remove-discount.ts';
 
 interface LineItem {
@@ -12,7 +12,7 @@ interface LineItem {
   quantity: number;
 }
 
-interface ICartStore {
+interface ICartState {
   currentCart: Cart | null;
   anonymousCartId: string;
   anonymousId?: string;
@@ -34,7 +34,7 @@ interface ICartStore {
   removeActiveDiscount: (cartId: string, version: number) => Promise<Cart>;
 }
 
-export const useCartStore = create<ICartStore>((set) => ({
+export const useCartStore = create<ICartState>((set) => ({
   currentCart: null,
   anonymousCartId: '',
   anonymousId: undefined,
@@ -101,7 +101,7 @@ export const useCartStore = create<ICartStore>((set) => ({
       version = updatedCart.version;
     }
 
-    const resultCart: Cart = await addDiscountCode(cartId, version, code);
+    const resultCart: Cart = await addDiscount(cartId, version, code);
     localStorage.setItem(LocalStorageKeys.CART_VERSION, resultCart.version.toString());
 
     set({
@@ -127,7 +127,7 @@ export const useCartStore = create<ICartStore>((set) => ({
     return updatedCart;
   },
   updateLineItemQuantity: (lineItemId: string, quantity: number): void =>
-    set((state: ICartStore) => ({
+    set((state: ICartState) => ({
       lineItems: state.lineItems.map((item) => (item.lineItemId === lineItemId ? { ...item, quantity } : item)),
     })),
 }));

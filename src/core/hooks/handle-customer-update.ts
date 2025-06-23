@@ -1,7 +1,7 @@
 import { CustomerUpdateAction, Address, Customer } from '@commercetools/platform-sdk';
 import { updateCustomer } from '@/core/api/customers/update';
 import { TUserFormFields } from '@/components/form/user/validation-scheme';
-import { useToastStore } from '@/core/stores/toast';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { UserUpdateMessages } from '@/constants/constants';
 
 export const useUserFormHandlers = (

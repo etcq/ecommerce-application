@@ -1,9 +1,9 @@
 import { ACTIONS } from '@/constants/constants.ts';
 import { Cart, ClientResponse, MyCartAddDiscountCodeAction } from '@commercetools/platform-sdk';
 import { getApiClientForUser } from '@/core/services/api-client-options.ts';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 
-export const addDiscountCode = async (cartId: string, version: number, code: string): Promise<Cart> => {
+export const addDiscount = async (cartId: string, version: number, code: string): Promise<Cart> => {
   const userToken: string | undefined = tokenCache.get().refreshToken;
   const discountData: MyCartAddDiscountCodeAction = {
     action: ACTIONS.ADD_DISCOUNT_CODE,

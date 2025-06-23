@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { TokenCache, TokenStore } from '@commercetools/sdk-client-v2';
-import { LocalStorageKeys } from '@/constants/constants';
+import { LocalStorageKeys } from '@/constants/constants.ts';
 import { ITokenCacheState } from '@/interfaces/interfaces.ts';
 
 export const useTokenCacheStore = create<ITokenCacheState>()(

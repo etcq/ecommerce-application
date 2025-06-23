@@ -1,14 +1,14 @@
 import { JSX, useEffect, useMemo, useState } from 'react';
 import { IPriceRange, IProductInfoForCard, TSortOrder } from '@/interfaces/interfaces.ts';
-import ProductCard from '@components/product-cards-list/product-card/ProductCard.tsx';
+import ProductCard from '@components/product-cards-list/card/ProductCard.tsx';
 import { getProductsForPage } from '@/core/api/products/get-products-list.ts';
 import getInfoForCard from '@/core/utils/get-info-for-card.ts';
 import { BASE_LIMIT_PER_PAGE, SEARCH_DEBOUNCE_TIME } from '@/constants/constants.ts';
-import styles from './product-cards-list.module.scss';
-import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import styles from './productCardsList.module.scss';
+import { useProductListStore } from '@/core/stores/use-product-list.ts';
 import { useProductFilterStore } from '@/core/stores/use-product-filter.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
-import ProductListControls from '@components/product-cards-list/product-list-controls/ProductListControls.tsx';
+import ProductListControls from '@components/product-cards-list/list-controls/ProductListControls.tsx';
 import Loading from '@components/loading/Loading.tsx';
 import Input from '@components/form/input/Input.tsx';
 import useDebounce from '@/core/hooks/debounce.ts';

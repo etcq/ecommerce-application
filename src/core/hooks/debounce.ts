@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import { useProductListStore } from '@/core/stores/use-product-list.ts';
 
 export default function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);

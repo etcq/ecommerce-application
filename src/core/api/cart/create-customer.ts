@@ -1,6 +1,6 @@
 import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.ts';
 import { Cart, ClientResponse } from '@commercetools/platform-sdk';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 
 export const createCustomerCart = async (): Promise<Cart> => {
   const token: string | undefined = tokenCache.get().refreshToken;

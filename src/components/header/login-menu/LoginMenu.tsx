@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router';
-import { useHeaderState } from '@/core/stores/state-header';
+import { useHeaderStore } from '@/core/stores/use-header.ts';
 import styles from './login-menu.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import Button from '@/components/button/Button';
 import { ROUTES } from '@/constants/constants';
-import { useAuthStore } from '@/core/stores/use-auth-state';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
 import editNameView from '@/core/utils/edit-name-view';
-import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 
 export default function LoginMenu(): React.JSX.Element {
-  const { isLoginMenuOpened, toggleLoginMenuOpened } = useHeaderState();
+  const { isLoginMenuOpened, toggleLoginMenuOpened } = useHeaderStore();
   const { isLoggedIn, logout, customer } = useAuthStore();
   const { clearCart } = useCartStore();
   const [isByeMessageShown, setByeMessageShown] = useState(false);

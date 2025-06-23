@@ -1,6 +1,6 @@
 import { withPasswordFlow } from '../middlewere/password-flow';
-import { useAuthStore } from '@/core/stores/use-auth-state';
-import { tokenCache } from '../token/token-store';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
+import { tokenCache } from '../../stores/use-token.ts';
 
 export const changePassword = async (currentPassword: string, newPassword: string) => {
   try {

@@ -1,6 +1,6 @@
 import styles from './item.module.scss';
 import { Minus, Plus, X } from 'lucide-react';
-import { useCartStore } from '@/core/stores/use-cart-state';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 import { changeProductQuantity } from '@/core/api/cart/quantity-product';
 
 import { GiConverseShoe } from 'react-icons/gi';

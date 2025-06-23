@@ -1,17 +1,17 @@
 import styles from './user.module.scss';
-import formStyles from '@/components/form/registration/registration-form.module.scss';
+import formStyles from '@components/form/registration/registration.module.scss';
 import Button from '@/components/button/Button';
 import Input from '../input/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { TUserFormFields, userFormSchema } from './validation-scheme';
-import { useAuthStore } from '@/core/stores/use-auth-state';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
 import React, { useEffect, useState } from 'react';
 import { Address } from '@commercetools/platform-sdk';
 import { UserUpdateMessages } from '@/constants/constants';
 import { NavLink } from 'react-router';
-import AddressModal from './address/address-modal/AddressModal';
-import AddressFormFields from './address/address-fields/AddressFields';
+import AddressModal from '@components/form/user/address/modal/AddressModal';
+import AddressFormFields from '@components/form/user/address/fields/AddressFields';
 import { useUserFormHandlers } from '@/core/hooks/handle-customer-update';
 
 const formatAddress = (address: Address) => {

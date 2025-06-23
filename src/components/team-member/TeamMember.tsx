@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { FaGithub } from 'react-icons/fa6';
-import style from './team-member.module.scss';
+import style from './teamMember.module.scss';
 import { ITeamMemberProps } from '@/interfaces/interfaces.ts';
 
 export default function TeamMember({ name, role, github, contribution, bio, children }: ITeamMemberProps): JSX.Element {

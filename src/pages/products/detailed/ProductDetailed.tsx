@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from 'react';
-import styles from './product-detailed.module.scss';
+import styles from './productDetailed.module.scss';
 import Button from '@components/button/Button.tsx';
 import PriceView from '@components/price-view/PriceView.tsx';
 import { useNavigate, useParams } from 'react-router';
@@ -16,10 +16,10 @@ import EmptyCatalog from '@/empty-catalog/EmptyCatalog.tsx';
 import ImageSlider from '@components/slider/Slider.tsx';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { createOrUpdateCart } from '@/core/services/create-or-update-cart.ts';
-import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 import { getVariant } from '@/core/utils/get-variant.ts';
 import { getActiveCart } from '@/core/api/cart/get-active-cart.ts';
-import CartButton from '@components/cartButton/CartButton.tsx';
+import CartButton from '@components/cart-button/CartButton.tsx';
 import handleRemoveFromCart from '@/core/utils/handle-remove-from-cart.ts';
 
 export default function ProductDetailed(): JSX.Element {

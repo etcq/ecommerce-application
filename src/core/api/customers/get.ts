@@ -1,6 +1,6 @@
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk';
 import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow';
-import { useTokenCacheStore } from '@/core/api/token/token-store';
+import { useTokenCacheStore } from '@/core/stores/use-token.ts';
 import { ClientResponse } from '@commercetools/ts-client';
 import { Customer } from '@commercetools/platform-sdk';
 

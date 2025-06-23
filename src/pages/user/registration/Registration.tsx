@@ -1,4 +1,4 @@
-import styles from './registration-page.module.scss';
+import styles from './registration.module.scss';
 import React from 'react';
 import RegistrationForm from '@/components/form/registration/Registration';
 

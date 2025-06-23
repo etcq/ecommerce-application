@@ -1,7 +1,7 @@
-import styles from './product-list.module.scss';
+import styles from './productList.module.scss';
 import { JSX } from 'react';
 import ProductCardsList from '@/components/product-cards-list/ProductCardsList';
-import { FilterPanel } from '@components/filter-panel/filter-panel.tsx';
+import { FilterPanel } from '@components/filter-panel/FilterPanel.tsx';
 import { Breadcrumbs } from '@components/breadcrubms/Breadcrumbs.tsx';
 import { handleBreadcrumbClick } from '@/core/utils/breadcrumb-handlers.ts';
 

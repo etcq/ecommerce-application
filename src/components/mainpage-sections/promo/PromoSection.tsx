@@ -1,14 +1,14 @@
 import { JSX, useEffect } from 'react';
-import styles from './promo-section.module.scss';
+import styles from './promoSection.module.scss';
 import promoVideo from '@assets/video/Promo-background.mp4';
 import promoImg from '@assets/images/main-page/promo/promo-poster.png';
-import { useHeaderState } from '@/core/stores/state-header.ts';
+import { useHeaderStore } from '@/core/stores/use-header.ts';
 import Button from '@components/button/Button.tsx';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants.ts';
 
 export default function PromoSection(): JSX.Element {
-  const { setIsDarkTheme } = useHeaderState();
+  const { setIsDarkTheme } = useHeaderStore();
   const navigate = useNavigate();
 
   useEffect(() => {

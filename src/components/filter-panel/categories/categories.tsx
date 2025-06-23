@@ -6,7 +6,7 @@ import { getCategories } from '@/core/api/products/get-categories.ts';
 import { useCategoryNavigationStore } from '@/core/stores/use-category-navigation.ts';
 import { useBreadcrumbStore } from '@/core/stores/use-breadcrumbs.ts';
 import { IBreadcrumbItem } from '@/interfaces/interfaces.ts';
-import { useProductListStore } from '@/core/stores/product-list-store.ts';
+import { useProductListStore } from '@/core/stores/use-product-list.ts';
 import getCategoryIdByName from '@/core/utils/get-category-id.ts';
 import { useLocation } from 'react-router';
 import { isLocationState } from '@/core/utils/type-guards.ts';
