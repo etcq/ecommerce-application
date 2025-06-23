@@ -33,8 +33,7 @@ $c-burger-button-secondary: $c-dark-hover;
 
     background-color: $c-burger-button-dark;
 
-    transition: background-color 0.5s ease-in-out;
-    transition:
+    transition: background-color 0.5s ease-in-out,
       transform 1s ease-in-out,
       opacity 1s ease-in-out;
   }
