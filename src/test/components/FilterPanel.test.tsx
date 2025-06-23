@@ -1,6 +1,6 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { FilterPanel } from '@components/filter-panel/filter-panel.tsx';
+import { FilterPanel } from '@components/filter-panel/FilterPanel.tsx';
 import { BrowserRouter } from 'react-router';
 
 const togglePriceRange = vi.fn();

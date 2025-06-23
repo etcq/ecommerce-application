@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { IPriceRange, TSortOrder } from '@/interfaces/interfaces.ts';
 
-interface FilterState {
+interface IFilterState {
   priceRanges: IPriceRange[];
   setPriceRanges: (ranges: IPriceRange[]) => void;
   togglePriceRange: (range: IPriceRange) => void;
@@ -15,7 +15,7 @@ interface FilterState {
   setDefault: () => void;
 }
 
-export const useProductFilterStore = create<FilterState>((set, get) => ({
+export const useProductFilterStore = create<IFilterState>((set, get) => ({
   priceRanges: [],
   setPriceRanges: (ranges: IPriceRange[]): void => set({ priceRanges: ranges }),
   togglePriceRange: (selectedRange: IPriceRange): void => {

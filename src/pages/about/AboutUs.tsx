@@ -1,9 +1,9 @@
-import style from './about-us.module.scss';
-import memberStyle from '@components/team-member/team-member.module.scss';
+import style from './aboutUs.module.scss';
+import memberStyle from '@components/team-member/teamMember.module.scss';
 import { JSX } from 'react';
 import TeamMember from '@components/team-member/TeamMember.tsx';
 import { ITeamMemberProps } from '@/interfaces/interfaces.ts';
-import logoImg from '@assets/images/about-us/Rsschool.png';
+import logoImg from '@assets/images/about-us/rsschool.png';
 
 const Anton: ITeamMemberProps = {
   name: 'Anton Sushnikov',
@@ -15,11 +15,11 @@ const Anton: ITeamMemberProps = {
 };
 
 const Siarhei: ITeamMemberProps = {
-  name: 'Sergei Buiko',
+  name: 'Siarhei Buiko',
   role: 'CommerceToolsGod',
   github: 'https://github.com/aqafresca',
   contribution: 'setup commerce tools api, product list page, login page, testing',
-  bio: `I’m Sergey, a Junior Frontend Developer. My journey started in a very different place—a world of physical education and logistics, but led me to something I’ve always been passionate about: technology.
+  bio: `I’m Siarhei, a Junior Frontend Developer. My journey started in a very different place—a world of physical education and logistics, but led me to something I’ve always been passionate about: technology.
   My background gave me important skills: discipline, organization, problem-solving. But there was always this spark inside me, this passion for technology. I knew that one day I would take that leap and it happened around one year ago when I joined RS School.
   Let's fast forward to today — I'm about to complete my frontend development course. I've learned how to write code in HTML, CSS, JavaScript, and TypeScript. After joining a team of like-minded enthusiasts, we weren't afraid to take on the challenge and built this final project using React. I'm incredibly proud of my team and of the knowledge and skills I've gained through the RS School program.
   For me now, coding is like solving puzzles—it’s challenging, but every solved problem brings satisfaction. As I’m focusing on frontend development, it lets me blend creativity with technology, transforming designs into interactive, real-world experiences. I also love the instant feedback of seeing how code directly affects what users see and interact with.`,

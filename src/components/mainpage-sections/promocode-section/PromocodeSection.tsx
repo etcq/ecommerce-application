@@ -1,9 +1,9 @@
-import styles from './promocode-section.module.scss';
+import styles from './promocodeSection.module.scss';
 import { JSX, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Pagination } from 'swiper/modules';
-import PromocodeSlide from './promocode-slide/PromocodeSlide';
+import PromocodeSlide from '@components/mainpage-sections/promocode-section/slide/PromocodeSlide';
 import { getDiscount } from '@/core/api/discount/get-discount.ts';
 import getDiscountsInfo from '@/core/utils/get-discounts-info.ts';
 import { IDiscountInfo } from '@/interfaces/interfaces.ts';

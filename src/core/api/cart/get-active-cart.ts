@@ -1,7 +1,7 @@
 import { withRefreshTokenFlow } from '@/core/api/middlewere/refresh-token-flow.ts';
 import { Cart, ClientResponse } from '@commercetools/platform-sdk';
 import { LocalStorageKeys } from '@/constants/constants.ts';
-import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 
 export const getActiveCart = async () => {
   const token: string | null = localStorage.getItem(LocalStorageKeys.TOKEN);

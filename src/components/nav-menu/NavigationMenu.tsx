@@ -1,8 +1,8 @@
 import { JSX } from 'react';
-import styles from './navigation-menu.module.scss';
+import styles from './navigationMenu.module.scss';
 import { NavLink } from 'react-router';
 import { IMenuLinks } from '@/interfaces/interfaces.ts';
-import scrollToTop from '@/core/utils/scrollToTop.ts';
+import scrollToTop from '@/core/utils/scroll-to-top.ts';
 
 interface INavProps {
   links: IMenuLinks[];

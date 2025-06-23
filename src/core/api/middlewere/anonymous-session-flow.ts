@@ -4,7 +4,7 @@ import {
   HttpMiddlewareOptions,
   AnonymousAuthMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 import { ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 export function withAnonymousSessionFlow(): ByProjectKeyRequestBuilder {

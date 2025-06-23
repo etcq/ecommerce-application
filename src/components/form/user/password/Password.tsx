@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import Input from '../../input/Input';
 import styles from './password.module.scss';
-import formStyles from '@/components/form/registration/registration-form.module.scss';
+import formStyles from '@components/form/registration/registration.module.scss';
 import { passwordFormSchema, TPasswordFormFields } from './validation-scheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@/components/button/Button';
 import React from 'react';
-import { useAuthStore } from '@/core/stores/use-auth-state';
-import { useToastStore } from '@/core/stores/toast';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
 import { NavLink, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
 import { changePassword } from '@/core/api/customers/password';

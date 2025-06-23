@@ -1,7 +1,7 @@
 import { addProductToCart } from '@/core/api/cart/add-product.ts';
-import { useCartStore } from '@/core/stores/use-cart-state.ts';
-import { useToastStore } from '@/core/stores/toast.ts';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { useCartStore } from '@/core/stores/use-cart.ts';
+import { useToastStore } from '@/core/stores/use-toast.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 import { CartMessages } from '@/constants/constants';
 
 export const handleAddProductToCart = async (cartId: string, version: number, productId: string, variantId: number) => {

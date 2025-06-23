@@ -1,0 +1,31 @@
+import { JSX } from 'react';
+import styles from './categorySection.module.scss';
+import { ROUTES } from '@/constants/constants.ts';
+import { useNavigate } from 'react-router';
+import scrollToTop from '@/core/utils/scroll-to-top.ts';
+
+export default function CategorySection(): JSX.Element {
+  const navigate = useNavigate();
+  const rootCategories = ['Man', 'Woman'];
+
+  return (
+    <section className={styles.categories}>
+      <h3>Shop by category</h3>
+      <div className={styles.categories__list}>
+        {rootCategories.map((category) => (
+          <div
+            className={styles['categories__list-item']}
+            key={category}
+            onClick={() => {
+              void navigate(ROUTES.PRODUCT_LIST, { state: { redirectCategory: category } });
+              scrollToTop();
+            }}
+            style={{ backgroundImage: `url(/categories/${category}.webp)` }}
+          >
+            <h4>{category}</h4>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

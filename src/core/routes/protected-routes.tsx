@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router';
-import { useAuthStore } from '../stores/use-auth-state';
+import { useAuthStore } from '../stores/use-auth.ts';
 import { ROUTES } from '@/constants/constants';
 
 export function RedirectForAuthPerson(): React.JSX.Element {

@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { FaCheck } from 'react-icons/fa';
-import styles from './color-picker.module.scss';
+import styles from './colorPicker.module.scss';
 
 interface ColorPickerProps {
   colors: string[];

@@ -1,6 +1,6 @@
 import styles from './loginPage.module.scss';
 import React from 'react';
-import { LoginForm } from '@components/form/login/login.tsx';
+import { LoginForm } from '@components/form/login/Login.tsx';
 import imgPath from '@assets/images/login/login-sneakers.jpg';
 
 export default function LoginPage(): React.JSX.Element {

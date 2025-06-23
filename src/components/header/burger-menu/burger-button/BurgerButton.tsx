@@ -1,12 +1,12 @@
-import styles from './burger-button.module.scss';
-import { useHeaderState } from '@/core/stores/state-header';
-interface BurgerButtonProps {
+import styles from './burgerButton.module.scss';
+import { useHeaderStore } from '@/core/stores/use-header.ts';
+interface IBurgerButtonProps {
   open: boolean;
   setOpened: (open: boolean) => void;
 }
 
-export default function BurgerButton(props: BurgerButtonProps): React.JSX.Element {
-  const { isDarkTheme } = useHeaderState();
+export default function BurgerButton(props: IBurgerButtonProps): React.JSX.Element {
+  const { isDarkTheme } = useHeaderStore();
 
   return (
     <div className={`${styles.wrapper} ${isDarkTheme ? styles['dark-theme'] : ''}`}>

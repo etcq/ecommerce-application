@@ -1,0 +1,89 @@
+@use '@assets/style/variables' as *;
+
+$c-burger-button-light: $c-light-main;
+$c-burger-button-dark: $c-dark-main;
+$c-burger-button-secondary: $c-dark-hover;
+
+.wrapper {
+  display: none;
+}
+
+.burger {
+  cursor: pointer;
+
+  position: absolute;
+  z-index: 10;
+  top: calc(50% - (25px / 2));
+  right: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  width: 25px;
+  height: 25px;
+
+  &-line {
+    position: relative;
+    transform-origin: 1px;
+
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+
+    background-color: $c-burger-button-dark;
+
+    transition: background-color 0.5s ease-in-out,
+      transform 1s ease-in-out,
+      opacity 1s ease-in-out;
+  }
+
+  &:hover {
+    .burger-line {
+      background-color: $c-burger-button-secondary;
+    }
+  }
+}
+
+.burger-open {
+  .burger-line {
+    &-top {
+      transform: rotate(45deg);
+    }
+
+    &-middle {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    &-bottom {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.dark-theme {
+  .burger > .burger-line {
+    background-color: $c-burger-button-light;
+  }
+
+  .burger-open {
+    .burger-line {
+      background-color: $c-burger-button-dark;
+    }
+  }
+
+  .burger {
+    &:hover {
+      .burger-line {
+        background-color: $c-burger-button-dark;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 699px) {
+  .wrapper {
+    display: block;
+  }
+}

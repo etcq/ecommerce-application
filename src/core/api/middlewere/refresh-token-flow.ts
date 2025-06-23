@@ -1,7 +1,7 @@
 import type { HttpMiddlewareOptions, RefreshAuthMiddlewareOptions } from '@commercetools/sdk-client-v2';
 import { ClientBuilder, Client } from '@commercetools/sdk-client-v2';
 import { ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 
 export function withRefreshTokenFlow(refreshToken: string): ByProjectKeyRequestBuilder {
   const projectKey = String(import.meta.env.VITE_CTP_PROJECT_KEY);

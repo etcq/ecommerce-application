@@ -1,7 +1,7 @@
 import Button from '@/components/button/Button';
 import { JSX } from 'react';
 import imgPath from '@assets/images/not-found/not-found.png';
-import styles from './not-found.module.scss';
+import styles from './notFound.module.scss';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/constants';
 

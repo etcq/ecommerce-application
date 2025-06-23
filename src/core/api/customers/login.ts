@@ -1,4 +1,4 @@
-import { tokenCache } from '@/core/api/token/token-store.ts';
+import { tokenCache } from '@/core/stores/use-token.ts';
 import { withPasswordFlow } from '@/core/api/middlewere/password-flow.ts';
 import { CartSignInModeEnum, LocalStorageKeys } from '@/constants/constants';
 import { ByProjectKeyRequestBuilder, CustomerSignInResult } from '@commercetools/platform-sdk';

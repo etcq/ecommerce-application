@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import BurgerButton from './burger-button/BurgerButton';
-import styles from './burger-menu.module.scss';
+import styles from './burgerMenu.module.scss';
 import { NavLink, Link } from 'react-router';
-import { useAuthStore } from '@/core/stores/use-auth-state';
-import { useCartStore } from '@/core/stores/use-cart-state.ts';
+import { useAuthStore } from '@/core/stores/use-auth.ts';
+import { useCartStore } from '@/core/stores/use-cart.ts';
 import { menuDefaultLinks, ROUTES } from '@/constants/constants';
 
 export default function BurgerMenu(): React.JSX.Element {
